@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% include ../assets/styles.ejs %>
+  </head>
+  
+  <% include ../partials/menu.ejs %>  
+
+  <body>
+    
+    <div class="mx-auto d-flex justify-content-center">
+      <div class="col">
+        <p class="d-flex justify-content-center">Vous pouvez commander des :</p>
+        <div class="card-deck">
+          <% include partials/cardCategorieArticles.ejs %>
+          <% include partials/cardCategorieArticles.ejs %>
+        </div>
+      </div>
+    </div>
+    
+  </body>
+  
+  
+  <% include ../assets/scripts.ejs %>
+</html>
