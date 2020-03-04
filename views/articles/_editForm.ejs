@@ -1,0 +1,34 @@
+<form action="/articles/update/<%= article.id %>" method="POST">
+    <div>
+        <label for="nom-article">Nom de l'article</label>
+        <input value="<%= article.nom %>" type="text" name="nom_article" id="nom-article">
+        
+    </div>
+    <div>
+        <label for="detail-article">detail de l'article</label>
+        <input value="<%= article.detail %>" type="text" name="detail_article" id="detail-article">
+
+    </div>
+    <div>
+        <label for="prix-article">prix de l'article</label>
+        <input value="<%= article.prix %>" type="text" name="prix_article" id="prix-article">
+
+    </div>
+    <div>
+        <label for="image-article">image de l'article</label>
+        <input value="<%= article.image %>" type="text" name="image_article" id="image-article">
+    </div>
+    <div>
+        <label for="categorie-article">categorie de l'article</label>
+        <select name="categorie_article" id="categorie-article">
+            <option <% if(article.categories_id == 2) { %> selected <% } %> value="1">categorie 1</option>
+            <option <% if(article.categories_id == 2) { %> selected <% } %>  value="2">categorie 2</option>
+        </select>
+
+    </div>
+
+    <div>
+        <button type="submit">Modifier</button>
+    </div>
+</form>
+

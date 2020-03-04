@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/acticles', articlesRouter);
+app.use('/articles', articlesRouter);
 app.use('/paniers', paniersRouter);
 app.use('/comments', commentsRouter);
 app.use('/categories/articles', categoriesArticles);

@@ -8,14 +8,21 @@ let controller = require("../controllers/articlesController");
  * Liste tout les articles
  * 
  */
-router.get('/articles', controller.list);
+router.get('/', controller.list);
+
+/**
+ * @request GET
+ * @controller add
+ * Afficher le formulaire de creation d'un article
+ */
+router.get('/add', controller.add);
 
 /**
  * @request POST
  * @controller create
  * Crée un nouvel article
  */
-router.post('/articles/create', controller.create);
+router.post('/create', controller.create);
 
 /**
  * @request GET
@@ -23,7 +30,7 @@ router.post('/articles/create', controller.create);
  * @param - id: number
  * Affiche la page pour éditer un article grâce à son id
  */
-router.get('/articles/edit/:id', controller.edit);
+router.get('/edit/:id', controller.edit);
 
 /**
  * @request PUT
@@ -31,7 +38,7 @@ router.get('/articles/edit/:id', controller.edit);
  * @param - id: number
  * Met à jour un article grâce à son id
  */
-router.put('/articles/update/:id', controller.update);
+router.post('/update/:id', controller.update);
 
 /**
  * @request DELETE
@@ -39,7 +46,7 @@ router.put('/articles/update/:id', controller.update);
  * @param - id: number
  * Supprime un article grâce à son id
  */
-router.delete('/articles/delete/:id', controller.delete);
+router.post('/delete/:id', controller.delete);
 
 /**
  * @request POST
@@ -47,7 +54,7 @@ router.delete('/articles/delete/:id', controller.delete);
  * @param - id: number; idUser: number
  * Ajoute un article au panier de l'utilisateur
  */
-router.post('/articles/:id/addToPanier/:idUser', controller.addToPanier);
+router.post('/:id/addToPanier/:idUser', controller.addToPanier);
 
 
 module.exports = router;
