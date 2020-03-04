@@ -1,22 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <% include ../assets/styles.ejs %>
-  </head>
-  
-  <% include ../partials/menu.ejs %>  
+<% include ../layouts/doctype.ejs %>
 
-  <body>
-    
-    <div class="mx-auto d-flex justify-content-center p-5">
-        <div class="card-deck">
-          <% include partials/cardCategorieArticles.ejs %>
-          <% include partials/cardCategorieArticles.ejs %>
-        </div>
-    </div>
-    
-  </body>
-  
-  <% include ../assets/scripts.ejs %>
+
+<div class="mx-auto d-flex justify-content-center p-5">
+  <div class="card-deck">
+    <% include partials/cardCategorieArticles.ejs %>
+    <% include partials/cardCategorieArticles.ejs %>
+  </div>
+</div>
+
+</body>
+
+<% include ../assets/scripts.ejs %>
 </html>
+
+<% include ../layouts/doctype_end.ejs %>

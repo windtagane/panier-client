@@ -8,7 +8,7 @@ let controller = require("../controllers/articlesController");
  * Liste tout les articles
  * 
  */
-router.get('/articles', controller.list);
+router.get('/', controller.list);
 
 /**
  * @request POST
