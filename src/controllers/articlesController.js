@@ -3,14 +3,10 @@ const Article = require('../models/article.js')
 
 articlesController.list = (req, res) => {
     Article.findAll().then(articles => {
-        // articles = JSON.stringify(articles, null, 2)
-        res.render('articles/index',{ // articles/index
-            
+        res.render('articles/index',{
             articles: articles,
             title: "Articles"
         })
-        // console.log(articles)
-        // console.log(JSON.stringify(articles, null, 2))
     })
 }
 articlesController.add = (req, res) => {

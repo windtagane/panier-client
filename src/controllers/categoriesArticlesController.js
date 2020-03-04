@@ -4,8 +4,9 @@ const Article = require('../models/article.js');
 
 categoriesArticlesController.list = (req, res) => { 
     Categorie.findAll().then(categories => {
-        res.render('categories/_index',{
-            categories: categories
+        res.render('acceuil/index',{ // categories/_index
+            categories: categories,
+            title: "Panier-client"
         });
     });
 };

@@ -1,9 +1,10 @@
 const indexController = {};
 
 indexController.index = (req, res) => {
-    res.render('acceuil/index', {
-        title: "Panier-client"
-    });
+    // res.render('acceuil/index', {
+    //     title: "Panier-client"
+    // });
+    res.redirect('/categories')
 }
 
 
