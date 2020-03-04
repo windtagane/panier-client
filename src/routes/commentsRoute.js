@@ -5,17 +5,17 @@ let controller = require("../controllers/commentsController");
 /**
  * @request GET
  * @controller list
- * Liste tout les commentaires
+ * Liste tout les commentaires d'un produit
  * 
  */
-router.get('/comments', controller.list);
+router.get('/comments/:acticleId', controller.list);
 
 /**
  * @request POST
  * @controller create
- * Crée un nouveau commentaires
+ * Crée un nouveau commentaires sur un produit
  */
-router.post('/comments/create', controller.create);
+router.post('/comments/:articleId/create', controller.create);
 
 /**
  * @request GET
