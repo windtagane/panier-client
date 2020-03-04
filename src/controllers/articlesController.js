@@ -12,24 +12,25 @@ articlesController.list = (req, res) => {
     })
 }
 articlesController.add = (req, res) => {
-    console.log('a')
     res.render('articles/_addForm')
 }
 articlesController.create = (req, res) => {
+    // console.log(req.body)
+
     Article.create({
-        nom: 'test',
-        detail: 'test',
-        prix: '12',
-        image: 'test',
-        categories_id: 1
-    })
-    console.log(req.body)
+        nom: req.body.nom_article,
+        detail: req.body.detail_article,
+        prix: req.body.prix_article,
+        image: req.body.image_article,
+        categories_id: Number(req.body.categorie_article)
+    }).then(res.redirect('/articles'))
+    // console.log(req.body)
 }
 articlesController.edit = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
 
-    }).then(article=> {
+    }).then(article => {
     console.log(article)
 
         res.render('articles/_editForm',{
@@ -38,7 +39,7 @@ articlesController.edit = (req, res) => {
     })
 }
 articlesController.update = (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     Article.findOne({
         where: {id: req.params.id}
     }).then(article => {
@@ -52,10 +53,17 @@ articlesController.update = (req, res) => {
             where:{
                 id:req.params.id
             }
-        }).then(res.redirect('/article'))
+        }).then(res.redirect('/articles'))
     })
 }
-articlesController.delete = (req, res) => {}
-articlesController.addToPanier = (req, res) => {}
+articlesController.delete = (req, res) => {
+    Article.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.redirect('/articles')
+    })
+}
 
 module.exports = articlesController;

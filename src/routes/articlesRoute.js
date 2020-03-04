@@ -46,15 +46,7 @@ router.post('/update/:id', controller.update);
  * @param - id: number
  * Supprime un article grâce à son id
  */
-router.post('/delete/:id', controller.delete);
-
-/**
- * @request POST
- * @controller addToPanier
- * @param - id: number; idUser: number
- * Ajoute un article au panier de l'utilisateur
- */
-router.post('/:id/addToPanier/:idUser', controller.addToPanier);
+router.get('/delete/:id', controller.delete);
 
 
 module.exports = router;

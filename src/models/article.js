@@ -13,7 +13,7 @@ const Article = sequelize.define('articles', {
 const categorie = require('./categorie.js');
 
 Article.belongsTo(categorie,{foreignKey: 'categories_id'});// l'article à une catégorie.
-categorie.hasMany(Article, {foreignKey: 'id'});// Une catégorie peut avoir plusieur articles.
+categorie.hasMany(Article, {foreignKey: 'categories_id'});// Une catégorie peut avoir plusieur articles.
 
 
 module.exports = Article;
