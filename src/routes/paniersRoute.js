@@ -1,21 +1,21 @@
 const router = require("express").Router();
 
-let controller = require("../controllers/productsController");
+let controller = require("../controllers/paniersController");
 
 /**
  * @request GET
  * @controller list
- * Liste tout les produits
+ * Liste tout les paniers
  * 
  */
-router.get('/products', controller.list);
+router.get('/paniers', controller.list);
 
 /**
  * @request POST
  * @controller create
- * Crée un nouveau produit
+ * Crée un nouveau panier
  */
-router.post('products/create', controller.create);
+router.post('/paniers/create/:utilisateurId', controller.create);
 
 /**
  * @request GET
@@ -23,7 +23,7 @@ router.post('products/create', controller.create);
  * @param - id: number
  * Affiche la page pour éditer un produit grâce à son id
  */
-router.get('/products/edit/:id', controller.edit);
+router.get('/paniers/edit/:id', controller.edit);
 
 /**
  * @request PUT
@@ -31,7 +31,7 @@ router.get('/products/edit/:id', controller.edit);
  * @param - id: number
  * Met à jour un produit grâce à son id
  */
-router.put('/products/update/:id', controller.update);
+router.put('/paniers/update/:id', controller.update);
 
 /**
  * @request DELETE
@@ -39,7 +39,7 @@ router.put('/products/update/:id', controller.update);
  * @param - id: number
  * Supprime un produit grâce à son id
  */
-router.delete('/products/delete/:id', controller.delete);
+router.delete('/paniers/delete/:id', controller.delete);
 
 
 module.exports = router;
