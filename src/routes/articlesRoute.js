@@ -49,5 +49,13 @@ router.delete('/articles/delete/:id', controller.delete);
  */
 router.post('/articles/:id/addToPanier/:idUser', controller.addToPanier);
 
+/**
+ * @request GET
+ * @controller details
+ * @param - idArticle: number
+ * Voir détail article
+ */
+router.get('/details', controller.details);
+
 
 module.exports = router;
