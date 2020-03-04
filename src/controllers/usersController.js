@@ -5,6 +5,5 @@ usersController.create = (req, res) => {}
 usersController.edit = (req, res) => {}
 usersController.update = (req, res) => {}
 usersController.delete = (req, res) => {}
-usersController.addToPanier = (req, res) => {}
 
 module.exports = usersController;

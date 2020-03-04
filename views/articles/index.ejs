@@ -1,10 +1,12 @@
 <% include ../layouts/doctype.ejs %>
 
 <div class="card-deck m-3">
-    <% include partials/cardArticles.ejs %>
-    <% include partials/cardArticles.ejs %>
-    <% include partials/cardArticles.ejs %>
-    <% include partials/cardArticles.ejs %>
-  </div>
+    <% articles.forEach(function(article){ %>
+      <div class="col-lg-4">
+        <%- include('partials/cardArticles', {article: article}); %>
+      </div>
+    <% }); %>
+</div>
+
 
 <% include ../layouts/doctype_end.ejs %>

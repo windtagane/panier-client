@@ -42,4 +42,12 @@ router.put('/paniers/update/:id', controller.update);
 router.delete('/paniers/delete/:id', controller.delete);
 
 
+/**
+ * @request POST
+ * @controller addToPanier
+ * @param - id: number; idUser: number
+ * Ajoute un article au panier de l'utilisateur
+ */
+router.post('/:id/addToPanier/:idArticle/:idUser', controller.addToPanier);
+
 module.exports = router;
