@@ -6,4 +6,23 @@ indexController.index = (req, res) => {
     });
 }
 
+
+//action redirige vers le vue login.ejs
+indexController.login = (req, res) => {
+    res.render('acceuil/login',{
+        title:"Login"
+
+    });
+    
+};
+
+indexController.signup = (req, res) => {
+    res.render('acceuil/signup',{
+        title:"Inscription"
+
+    });
+    
+};
+
+
 module.exports = indexController;
