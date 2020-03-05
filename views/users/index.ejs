@@ -1,0 +1,13 @@
+<% include ../layouts/doctype.ejs %>
+
+<% for(let i=0; i < users.length; i++) {%>
+    <div>id : <%= users[i].id %></div>
+    <div>nom <%= users[i].nom %></div>
+    <div>prenom :  <%= users[i].prenom %></div>
+    <div>address : <%= users[i].adresse %></div>
+    <div>email : <%= users[i].email %></div>
+    <div>telephone : <%= users[i].telephone %></div>
+    <br>
+<% } %>
+
+<% include ../layouts/doctype_end.ejs %>

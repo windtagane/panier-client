@@ -17,6 +17,7 @@ indexController.login = (req, res) => {
     
 };
 
+//redirige vers la vue signup
 indexController.signup = (req, res) => {
     res.render('acceuil/signup',{
         title:"Inscription"

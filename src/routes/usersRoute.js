@@ -8,14 +8,14 @@ let controller = require("../controllers/usersController");
  * Liste tout les utilisateurs
  * 
  */
-router.get('/users', controller.list);
+router.get('/', controller.list);
 
 /**
  * @request POST
  * @controller create
  * Crée un nouvel utilisateur
  */
-router.post('users/create', controller.create);
+router.post('/create', controller.create);
 
 /**
  * @request GET
@@ -23,7 +23,7 @@ router.post('users/create', controller.create);
  * @param - id: number
  * Affiche la page pour éditer un utilisateur grâce à son id
  */
-router.get('/users/edit/:id', controller.edit);
+router.get('/edit/:id', controller.edit);
 
 /**
  * @request PUT
@@ -31,7 +31,7 @@ router.get('/users/edit/:id', controller.edit);
  * @param - id: number
  * Met à jour un uilisateur grâce à son id
  */
-router.put('/users/update/:id', controller.update);
+router.post('/update/:id', controller.update);
 
 /**
  * @request DELETE
@@ -39,7 +39,7 @@ router.put('/users/update/:id', controller.update);
  * @param - id: number
  * Supprime un utilisateur grâce à son id
  */
-router.delete('/users/delete/:id', controller.delete);
+router.get('/delete/:id', controller.delete);
 
 
 module.exports = router;
