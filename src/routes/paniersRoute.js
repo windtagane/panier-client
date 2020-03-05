@@ -8,14 +8,14 @@ let controller = require("../controllers/paniersController");
  * Liste tout les paniers
  * 
  */
-router.get('/paniers', controller.list);
+router.get('/', controller.list);
 
 /**
  * @request POST
  * @controller create
  * Crée un nouveau panier
  */
-router.post('/paniers/create/:utilisateurId', controller.create);
+router.post('/create/:utilisateurId', controller.create);
 
 /**
  * @request GET
@@ -23,7 +23,7 @@ router.post('/paniers/create/:utilisateurId', controller.create);
  * @param - id: number
  * Affiche la page pour éditer un produit grâce à son id
  */
-router.get('/paniers/edit/:id', controller.edit);
+router.get('/edit/:id', controller.edit);
 
 /**
  * @request PUT
@@ -31,7 +31,7 @@ router.get('/paniers/edit/:id', controller.edit);
  * @param - id: number
  * Met à jour un produit grâce à son id
  */
-router.put('/paniers/update/:id', controller.update);
+router.put('/update/:id', controller.update);
 
 /**
  * @request DELETE
@@ -39,7 +39,7 @@ router.put('/paniers/update/:id', controller.update);
  * @param - id: number
  * Supprime un produit grâce à son id
  */
-router.delete('/paniers/delete/:id', controller.delete);
+router.delete('/delete/:id', controller.delete);
 
 
 /**

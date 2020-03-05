@@ -1,13 +1,17 @@
 const paniersControlleur = {};
 
 const Panier = require('../models/panier.js');
-const LignePanier = require('../models/articles_has_paniers.js');
+// const LignePanier = require('../models/articles_has_paniers.js');
+const Article = require('../models/article.js');
 
+Panier.belongsToMany(Article,{foreignKey: 'paniers_id', through: 'articles_has_paniers' }); // le panier appartien à un utilisateur.
+Article.belongsToMany(Panier,{foreignKey: 'articles_id', through: 'articles_has_paniers' }); // le panier appartien à un utilisateur.
 
 
 paniersControlleur.list = (req, res) => {
-    Panier.findAll().then(paniers => {
-        res.render('users/index', {
+    Panier.findAll({ include: [ { model: Article, require: true } ]}).then(paniers => {
+        // console.log(paniers)
+        res.render('paniers/index', {
             paniers: paniers,
             title: "Paniers"
         })
