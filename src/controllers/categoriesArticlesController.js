@@ -69,4 +69,21 @@ categoriesArticlesController.delete = (req, res) => {
     })
 }
 
+categoriesArticlesController.jsonList = (req, res) => {
+    Categorie.findAll().then(categories => {
+        try {
+            res.json({
+                statut: "OK",
+                data: categories,
+                message: ""
+            })
+        } catch (error) {
+            res.json({
+                statut: "KO",
+                message: error
+            })
+        }
+    })
+}
+
 module.exports = categoriesArticlesController;

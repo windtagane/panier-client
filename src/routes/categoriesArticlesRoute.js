@@ -23,7 +23,7 @@ router.get('/add', controller.add);
  * Liste tout les articles d'une catégorie
  * 
  */
-router.get('/:id', controller.view);
+router.get('/view/:id', controller.view);
 
 /**
  * @request POST
@@ -55,6 +55,8 @@ router.post('/update/:id', controller.update);
  * Supprime un catégorie grâce à son id
  */
 router.get('/delete/:id', controller.delete);
+
+router.get('/jsonList', controller.jsonList);
 
 
 module.exports = router;

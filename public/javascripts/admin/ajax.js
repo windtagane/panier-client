@@ -6,20 +6,24 @@ $(document).ready(function() {
         let btnArticles = $('#admin-btn-articles');
 
         btnUsers.on('click', function() {
+            addUsers();
             listUsers();
         })
 
         btnCategories.on('click', function() {
+            addCategories();
             listCategories();
         })
 
         btnArticles.on('click', function() {
+            addArticles();
             listArticles();
         })
     }
 
     function listUsers() {
-        $.get('/users/', function(users) {
+        $.get('users/jsonList', function(users) {
+            if (users.data > 1) {
             let tableHead = `
             <table class="table table-striped">
             <thead>
@@ -38,7 +42,7 @@ $(document).ready(function() {
             users.forEach((user, index) => {
                 let row = `
                 <tr>
-                    <th scope="row">${index}</th>
+                    <th scope="row">${index + 1}</th>
                     <td>${user.nom}</td>
                     <td>${user.mail}</td>
                     <td>${user.adresse}</td>
@@ -52,20 +56,104 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
+            }
+            if (users.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns utilisateurs n\'a été trouvé');
         })
+
     }
 
     function listCategories() {
-        $.get('/categories/articles', function(categories) {
+        $.get('categories/jsonList', function(categories) {
+            if (categories.data) {
             console.log(categories);
+            let tableHead = `
+            <table class="table table-striped">
+            <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Statut</th>
+            <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>`
+            let tableEnd = `</tbody></table>`
+            let rows = "";
+            categories.data.forEach((categorie, index) => {
+                let row = `
+                <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>${categorie.nom}</td>
+                    <td>${categorie.active}</td>
+                    <td>
+                        <a href="categories/edit/${categorie.id}" target="blank_" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
+                        <a href="categories/delete/${categorie.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
+                    </td>
+                </tr>`
+                rows += row;
+            });
+            let datatable = tableHead + rows + tableEnd;
+            $('#data-display').html(datatable);
+            }
+
+            if (categories.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucunes categories n\'a été trouvé');
         })
     }
 
     function listArticles() {
-        $.get('/articles', function(articles) {
-            console.log(articles);
+        $.get('articles/jsonList', function(articles) {
+            if (articles.data) {
+            let tableHead = `
+            <table class="table table-striped">
+            <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Détails</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Image</th>
+            <th scope="col">Catégorie ID</th>
+            <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>`
+            let tableEnd = `</tbody></table>`
+            let rows = "";
+            articles.data.forEach((article, index) => {
+                let row = `
+                <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>${article.nom}</td>
+                    <td>${article.detail}</td>
+                    <td>${article.prix}</td>
+                    <td>${article.image}</td>
+                    <td>${article.categories_id}</td>
+                    <td>
+                        <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
+                        <a href="articles/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
+                    </td>
+                </tr>`
+                rows += row;
+            });
+            let datatable = tableHead + rows + tableEnd;
+            $('#data-display').html(datatable);
+            }
+            if (articles.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns articles n\'a été trouvé');
+            
         })
     }
+
+    function addUsers() {
+        $('#panel-add').html('');
+    };
+    function addCategories() {
+        let btn = '<a href="/categories/add" target="blank_" class="btn btn-success">Ajouter une catégorie</a>';
+        $('#panel-add').html(btn);
+    };
+    function addArticles() {
+        let btn = '<a href="/articles/add" target="blank_" class="btn btn-success">Ajouter un article</a>';
+        $('#panel-add').html(btn);
+    };
 
     init();
 });
