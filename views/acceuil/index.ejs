@@ -2,14 +2,14 @@
 
 <div class="mx-auto d-flex justify-content-center p-5">
   <div class="card-deck">
-    <% include partials/cardCategorieArticles.ejs %>
-    <% include partials/cardCategorieArticles.ejs %>
+
+    <% categories.forEach(function(categorie){ %>
+        <%- include('partials/cardCategorieArticles', {categorie: categorie}); %>
+    <% }); %>
+
   </div>
 </div>
 
-</body>
 
-<% include ../assets/scripts.ejs %>
-</html>
 
 <% include ../layouts/doctype_end.ejs %>

@@ -1,0 +1,18 @@
+<form action="/categories/update/<%= categorie.id %>" method="POST">
+    <div>
+        <label for="nom-categorie">Nom de la categorie :</label>
+        <input value="<%= categorie.nom %>" type="text" name="nom_categorie" id="nom-categorie">
+        
+    </div>
+    <div>
+        <label for="active-categorie">Status :</label>
+        <select name="active_categorie" id="active-categorie">
+            <option <% if (categorie.active == 0) { %> selected <% } %> value="0">Inactive</option>
+            <option <% if (categorie.active == 1) { %> selected <% } %> value="1">Active</option>
+        </select>
+
+        <div>
+            <button type="submit">Modifier</button>
+        </div>
+    </div>
+</form>

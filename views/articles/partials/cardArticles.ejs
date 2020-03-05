@@ -3,9 +3,9 @@
 		<img src="https://via.placeholder.com/150" class="card-img-top" alt="<%= 'categorieArticleName' %>" />
 	</a>
 		<div class="card-body">
-			<h5 class="card-title"><%= "categorieArticleName" %></h5>
+			<h5 class="card-title"><%= article.nom %></h5>
 		<p class="card-text">
-			<%= "categorieArticlePrix" %>
+			<%= article.prix %> €
 			<form action="" method="post">
 				<label for="quantity">Quantité</label>
 				<input type="number" name="quantity" class="form-control mb-2" min="0">

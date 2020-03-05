@@ -5,41 +5,56 @@ let controller = require("../controllers/categoriesArticlesController");
 /**
  * @request GET
  * @controller list
- * Liste tout les articles
+ * Liste toute les catégories
  * 
  */
-router.get('/categories/articles', controller.list);
+router.get('/', controller.list);
+
+/**
+ * @request GET
+ * @controller add
+ * Affiche le formulaire de creation
+ */
+router.get('/add', controller.add);
+
+/**
+ * @request GET
+ * @controller list
+ * Liste tout les articles d'une catégorie
+ * 
+ */
+router.get('/:id', controller.view);
 
 /**
  * @request POST
  * @controller create
  * Crée un nouvel article
  */
-router.post('/categories/articles/create', controller.create);
+router.post('/create', controller.create);
 
 /**
  * @request GET
  * @controller edit
  * @param - id: number
- * Affiche la page pour éditer un article grâce à son id
+ * Affiche la page pour éditer un catégorie grâce à son id
  */
-router.get('/categories/articles/edit/:id', controller.edit);
+router.get('/edit/:id', controller.edit);
 
 /**
  * @request PUT
  * @controller update
  * @param - id: number
- * Met à jour un article grâce à son id
+ * Met à jour un catégorie grâce à son id
  */
-router.put('/categories/articles/update/:id', controller.update);
+router.post('/update/:id', controller.update);
 
 /**
  * @request DELETE
  * @controller delete
  * @param - id: number
- * Supprime un article grâce à son id
+ * Supprime un catégorie grâce à son id
  */
-router.delete('/categories/articles/delete/:id', controller.delete);
+router.get('/delete/:id', controller.delete);
 
 
 module.exports = router;
