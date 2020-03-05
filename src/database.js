@@ -1,5 +1,6 @@
+const DATABASE = require('./env.database');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('panier-client-db', 'root', 'pass', { // nom de la BDD, username, password
+const sequelize = new Sequelize(DATABASE.LOCAL.DBNAME, DATABASE.LOCAL.USERNAME, DATABASE.LOCAL.PASSWORD, { // nom de la BDD, username, password
 host: 'localhost',
 dialect: 'mysql',
 logging: false,//passer a true pour voir les différentes requêtes effectuées par l'ORM
