@@ -9,6 +9,23 @@ articlesController.list = (req, res) => {
         })
     })
 }
+
+articlesController.jsonList = (req, res) => {
+    Article.findAll().then(articles => {
+        try {
+            res.json({
+                statut: "OK",
+                data: articles,
+                message: ""
+            })
+        } catch (error) {
+            res.json({
+                statut: "KO",
+                message: error
+            })
+        }
+    })
+}
 articlesController.add = (req, res) => {
     res.render('articles/_addForm')
 }

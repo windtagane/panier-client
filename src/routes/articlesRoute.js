@@ -48,5 +48,7 @@ router.post('/update/:id', controller.update);
  */
 router.get('/delete/:id', controller.delete);
 
+router.get('/jsonList', controller.jsonList);
+
 
 module.exports = router;
