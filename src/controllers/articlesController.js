@@ -29,7 +29,7 @@ articlesController.edit = (req, res) => {
         where: {id: req.params.id}
 
     }).then(article => {
-    console.log(article)
+    // console.log(article)
 
         res.render('articles/_editForm',{
             article: article

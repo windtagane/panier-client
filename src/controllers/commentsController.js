@@ -13,8 +13,24 @@ commentsController.list = (req, res) => {
         });
     });
 }
-commentsController.create = (req, res) => {}
-commentsController.edit = (req, res) => {}
+commentsController.create = (req, res) => {
+    Comment.create({
+        description: req.body.description_comment,
+        utilisateur_id: req.body.user_comment,
+        article_id: req.body.article_comment
+    }).then(res.redirect('/'))
+}
+commentsController.edit = (req, res) => {
+    Comment.findOne({
+        where: {id: req.params.id}
+
+    }).then(comment => {
+        // console.log(user)
+            res.render('user/_editForm',{
+                comment: comment
+            })
+        })
+}
 commentsController.update = (req, res) => {}
 commentsController.delete = (req, res) => {}
 
