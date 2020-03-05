@@ -1,3 +1,8 @@
+body{
+    background-color: #fada9538 !important;
+}
+
 .login-card-light {
     background: linear-gradient(145deg, #eee, #fff);
+
 }
