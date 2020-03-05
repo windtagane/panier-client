@@ -34,7 +34,7 @@ usersController.edit = (req, res) => {
 usersController.update = (req, res) => {
     User.findOne({
         where: {id: req.params.id}
-    }).then(article => {
+    }).then(user => {
         User.update({
             nom: req.body.nom_user,
             prenom: req.body.prenom_user,

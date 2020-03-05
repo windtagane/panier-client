@@ -31,7 +31,29 @@ commentsController.edit = (req, res) => {
             })
         })
 }
-commentsController.update = (req, res) => {}
-commentsController.delete = (req, res) => {}
+commentsController.update = (req, res) => {
+    Comment.findOne({
+        where: {id: req.params.id}
+    }).then(comment => {
+        Comment.update({
+            description: req.body.description_comment,
+            utilisateur_id: req.body.user_comment,
+            articleComment_id: req.body.article_comment
+        }, {
+            where:{
+                id:req.params.id
+            }
+        }).then(res.redirect('/'))
+    })
+}
+commentsController.delete = (req, res) => {
+    Comment.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.redirect('/')
+    })
+}
 
 module.exports = commentsController;
