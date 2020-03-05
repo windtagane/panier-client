@@ -23,7 +23,7 @@ router.get('/add', controller.add);
  * Liste tout les articles d'une catégorie
  * 
  */
-router.get('/view/:id', controller.view);
+router.get('/:id', controller.view);
 
 /**
  * @request POST

@@ -1,7 +1,7 @@
 const articlesController = {};
 const Article = require('../models/article.js')
 
-articlesController.list = (req, res) => {
+articlesController.list = (req, res) => { // GET : /articles
     Article.findAll().then(articles => {
         res.render('articles/index',{
             articles: articles,
@@ -10,7 +10,7 @@ articlesController.list = (req, res) => {
     })
 }
 
-articlesController.jsonList = (req, res) => {
+articlesController.jsonList = (req, res) => { // GET : /articles/jsonList
     Article.findAll().then(articles => {
         try {
             res.json({
@@ -26,10 +26,10 @@ articlesController.jsonList = (req, res) => {
         }
     })
 }
-articlesController.add = (req, res) => {
+articlesController.add = (req, res) => { // GET : /articles/add
     res.render('articles/_addForm')
 }
-articlesController.create = (req, res) => {
+articlesController.create = (req, res) => { // POST : /articles/create
     // console.log(req.body)
 
     Article.create({
@@ -41,7 +41,7 @@ articlesController.create = (req, res) => {
     }).then(res.redirect('/articles'))
     // console.log(req.body)
 }
-articlesController.edit = (req, res) => {
+articlesController.edit = (req, res) => { // GET : /articles/edit/:id
     Article.findOne({
         where: {id: req.params.id}
 
@@ -53,7 +53,7 @@ articlesController.edit = (req, res) => {
         })
     })
 }
-articlesController.update = (req, res) => {
+articlesController.update = (req, res) => { // POST : /articles/update/:id
     // console.log(req.body)
     Article.findOne({
         where: {id: req.params.id}
@@ -71,7 +71,7 @@ articlesController.update = (req, res) => {
         }).then(res.redirect('/articles'))
     })
 }
-articlesController.delete = (req, res) => {
+articlesController.delete = (req, res) => {// GET : /articles/delete/:id
     Article.destroy({
         where: {
             id: req.params.id

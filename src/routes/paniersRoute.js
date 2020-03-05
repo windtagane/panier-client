@@ -48,6 +48,6 @@ router.delete('/delete/:id', controller.delete);
  * @param - id: number; idUser: number
  * Ajoute un article au panier de l'utilisateur
  */
-router.post('/:id/addToPanier/:idArticle/:idUser', controller.addToPanier);
+router.post('/:id/addToPanier/:idArticle', controller.addToPanier);
 
 module.exports = router;
