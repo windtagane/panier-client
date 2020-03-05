@@ -1,7 +1,7 @@
 const paniersControlleur = {};
 
 const Panier = require('../models/panier.js');
-// const LignePanier = require('../models/articles_has_paniers.js');
+const LignePanier = require('../models/articles_has_paniers.js');
 const Article = require('../models/article.js');
 
 Panier.belongsToMany(Article,{foreignKey: 'paniers_id', through: 'articles_has_paniers' }); // le panier appartien à un utilisateur.
@@ -56,6 +56,12 @@ paniersControlleur.delete = (req, res) => {
         res.redirect('/')
     })
 }
-paniersControlleur.addToPanier = (req, res) => {}
+paniersControlleur.addToPanier = (req, res) => {
+    LignePanier.create({
+        articles_id: req.body.article_id,
+        paniers_id: req.body.panier_id,
+        quantite: req.body.quantite
+    }).then(res.redirect('/'))
+}
 
 module.exports = paniersControlleur;
