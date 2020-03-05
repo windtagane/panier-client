@@ -59,4 +59,22 @@ usersController.delete = (req, res) => {
     })
 }
 
+usersController.jsonList = (req, res) => {
+    User.findAll()
+        .then(users => {
+            try {
+                res.json({
+                    statut: "OK",
+                    data: users,
+                    message: ""
+                })
+            } catch (error) {
+                res.json({
+                    statut: "KO",
+                    message: error
+                })
+            }
+        })
+}
+
 module.exports = usersController;

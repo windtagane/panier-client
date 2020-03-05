@@ -23,7 +23,7 @@ $(document).ready(function() {
 
     function listUsers() {
         $.get('users/jsonList', function(users) {
-            if(users.statut == "OK") {
+            if (users.data > 1) {
             let tableHead = `
             <table class="table table-striped">
             <thead>
@@ -56,14 +56,15 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
-        }
-
-        if (users.statut === 'KO') {$('#data-display').html('');}
+            }
+            if (users.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns utilisateurs n\'a été trouvé');
         })
+
     }
 
     function listCategories() {
         $.get('categories/jsonList', function(categories) {
+            if (categories.data) {
             console.log(categories);
             let tableHead = `
             <table class="table table-striped">
@@ -93,12 +94,15 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
+            }
+
+            if (categories.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucunes categories n\'a été trouvé');
         })
     }
 
     function listArticles() {
         $.get('articles/jsonList', function(articles) {
-            console.log(articles);
+            if (articles.data) {
             let tableHead = `
             <table class="table table-striped">
             <thead>
@@ -125,15 +129,17 @@ $(document).ready(function() {
                     <td>${article.image}</td>
                     <td>${article.categories_id}</td>
                     <td>
-                        <a href="article/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
-                        <a href="article/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
+                        <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
+                        <a href="articles/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
                     </td>
                 </tr>`
                 rows += row;
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
-        
+            }
+            if (articles.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns articles n\'a été trouvé');
+            
         })
     }
 
