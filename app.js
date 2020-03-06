@@ -32,8 +32,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(session({secret: "Your secret key"}));
 
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
+
+function checkSignIn(req, res, next){
+  if(req.session.user){
+     next();     //If session exists, proceed to page
+  } else {
+     var err = new Error("Not logged in!");
+     console.log(req.session.user);
+    //  next(err);  //Error, trying to access unauthorized page!
+    res.redirect('/')
+
+  }
+}
+
+app.use('/',indexRouter);
+app.use('/admin',checkSignIn, adminRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
 app.use('/paniers', paniersRouter);

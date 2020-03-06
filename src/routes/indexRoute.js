@@ -21,6 +21,15 @@ router.get('/', controller.index);
 router.get('/login',controller.login)
 
 /**
+ * @request POST
+ * @controller login
+ * Se connecter
+ * 
+ */
+
+router.post('/login',controller.ProcessLogin)
+
+/**
  * @request GET
  * @controller signup
  * Affiche la page inscription
