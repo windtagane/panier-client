@@ -1,0 +1,38 @@
+
+<div class="row">
+    <div class="col-4"></div>
+<div class="col-4">
+    <div class="login-card-light p-3 shadow-lg rounded"style="margin-top: 20%;">
+        <div class="pt-3">
+            <h2 class="text-danger"> Vôtre avis conte pour nous ? | Ecrire votre commantaire</h2>
+        </div>
+
+        <form class="mt-5" role="form" action="comments/article/create" method="POST">
+
+
+            <div class="form-group">
+                <input type="text" name="user_comment" class="form-control form-control-sm" placeholder="Nom">
+                
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="article_comment" class="form-control form-control-sm" placeholder="Article">
+                
+            </div>
+            <div class="form-group">
+                <textarea  type="text" name="description_comment" class="form-control" rows="3"placeholder="Votre avis..."></textarea>
+
+            </div>
+
+
+            <div class="mt-5">
+                <button class="btn btn-sm btn-danger col">
+                    Ajout d'un commantaire
+                </button>
+            </div>
+
+          
+        </form>
+    </div>
+</div>
+</div>

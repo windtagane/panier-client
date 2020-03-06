@@ -11,16 +11,16 @@
                    </div>
                    <div class="col-md-10">
                        <p>
-                           <a class="float-left"><strong><%=commentaires[i].id%> </strong></a>
+                           <a class="float-left"><strong><%=commentaires[i].utilisateurs_id%> </strong></a>
 
 
                        </p>
                        <div class="clearfix"></div>
-                       <p><%=commentaires[i].description%></p>
-                       <p><%=commentaires[i].utilisateurs_id%></p>
+                       <p>Id:<%=commentaires[i].id%><%=commentaires[i].description%></p>
                        <p>
-                           <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
-                           <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                           <a class="float-right btn btn-outline-primary ml-2" href="/edit/<%= commentaires[i].id %>"><i class="fa fa-pencil-alt"></i> Modifier</a>
+                           
+                           <a class="float-right btn text-white btn-danger" href="/delete/<%= commentaires[i].id %>"><i class="fa fa-trash-alt"></i> Supprimer</a>
                        </p>
                    </div>
                </div>

@@ -1,0 +1,29 @@
+
+<div class="row">
+    <div class="col-4"></div>
+<div class="col-4">
+    <div class="login-card-light p-3 shadow-lg rounded"style="margin-top: 20%;">
+        <div class="pt-3">
+            <h2 class="text-danger"> Vôtre avis conte pour nous ? | Ecrire votre commantaire</h2>
+        </div>
+
+        <form class="mt-5" role="form" action="comments/update/<%= comment.id %>" method="POST">
+
+           
+            <div class="form-group">
+                <textarea  type="text" value="<%= comment.description %>" name="description_comment" class="form-control" rows="3"placeholder="Votre avis..."></textarea>
+
+            </div>
+
+
+            <div class="mt-5">
+                <button class="btn btn-sm btn-danger col">
+                    Ajout d'un commantaire
+                </button>
+            </div>
+
+          
+        </form>
+    </div>
+</div>
+</div>
