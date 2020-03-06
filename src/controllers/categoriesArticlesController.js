@@ -2,7 +2,7 @@ const categoriesArticlesController = {};
 const Categorie = require('../models/categorie.js');
 const Article = require('../models/article.js');
 
-categoriesArticlesController.list = (req, res) => { 
+categoriesArticlesController.list = (req, res) => { // GET : /categories
     Categorie.findAll().then(categories => {
         res.render('acceuil/index',{ // categories/_index
             categories: categories,
@@ -10,24 +10,35 @@ categoriesArticlesController.list = (req, res) => {
         });
     });
 };
-categoriesArticlesController.view = (req, res) => {
+categoriesArticlesController.view = (req, res) => { // GET : /categories/:id
     // console.log(req.params.id)
     Categorie.findOne({
         where: {id: req.params.id}, include:[{model:Article}] // Inclut les articles d'une categorie
 
     }).then(categorie => {
         // console.log(categorie)
-        res.render('categories/_view',{
-            categorie: categorie
+        res.render('categories/show',{
+            categorie: categorie,
+            title: categorie.nom
         });
     });
 }
+
+/**
+ * @method GET
+ * @url /categories/add
+ */
 
 categoriesArticlesController.add = (req, res) => {
     res.render('categories/_addForm', {
         title: "Ajouter une catégorie"
     });
 }
+
+/**
+ * @method POST
+ * @url /categories/create
+ */
 categoriesArticlesController.create = (req, res) => {
     // console.log(req.body)
     Categorie.create({
@@ -35,7 +46,12 @@ categoriesArticlesController.create = (req, res) => {
         active: req.body.active_categorie,
     }).then(res.redirect('/categories'))
 }
-categoriesArticlesController.edit = (req, res) => {
+
+/**
+ * @method GET
+ * @url /categories/edit/:id
+ */
+categoriesArticlesController.edit = (req, res) => { 
     Categorie.findOne({
         where: {id: req.params.id}
     }).then(categorie => {
@@ -46,6 +62,11 @@ categoriesArticlesController.edit = (req, res) => {
             })
         })
 }
+
+/**
+ * @method POST
+ * @url /categories/update/:id
+ */
 categoriesArticlesController.update = (req, res) => {
     // console.log(req.body)
     Categorie.findOne({
@@ -62,6 +83,11 @@ categoriesArticlesController.update = (req, res) => {
         })
 
 }
+
+/**
+ * @method POST
+ * @url /categories/delete/:id
+ */
 categoriesArticlesController.delete = (req, res) => {
     Categorie.destroy({
         where: {
@@ -72,6 +98,10 @@ categoriesArticlesController.delete = (req, res) => {
     })
 }
 
+/**
+ * @method GET
+ * @url /categories/jsonList
+ */
 categoriesArticlesController.jsonList = (req, res) => {
     Categorie.findAll().then(categories => {
         try {

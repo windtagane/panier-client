@@ -1,6 +1,10 @@
 const articlesController = {};
 const Article = require('../models/article.js')
 
+/**
+ * @method GET
+ * @url /articles
+ */
 articlesController.list = (req, res) => {
     Article.findAll().then(articles => {
         res.render('articles/index',{
@@ -10,6 +14,10 @@ articlesController.list = (req, res) => {
     })
 }
 
+/**
+ * @method GET
+ * @url /articles/jsonList
+ */
 articlesController.jsonList = (req, res) => {
     Article.findAll().then(articles => {
         try {
@@ -40,6 +48,11 @@ articlesController.create = (req, res) => {
         categories_id: Number(req.body.categorie_article)
     }).then(res.redirect('/articles'))
 }
+
+/**
+ * @method GET
+ * @url /articles/edit/:id
+ */
 articlesController.edit = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
@@ -51,6 +64,11 @@ articlesController.edit = (req, res) => {
         })
     })
 }
+
+/**
+ * @method POST
+ * @url /articles/update/:id
+ */
 articlesController.update = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
@@ -68,6 +86,11 @@ articlesController.update = (req, res) => {
         }).then(res.redirect('/articles'))
     })
 }
+
+/**
+ * @method GET
+ * @url /articles/delete/:id
+ */
 articlesController.delete = (req, res) => {
     Article.destroy({
         where: {

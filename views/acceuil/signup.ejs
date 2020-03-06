@@ -9,41 +9,49 @@
             <h2 class="text-danger">Lancez-vous | Inscris toi</h2>
         </div>
 
-        <form class="mt-5" role="form" action="" method="POST"> 
+        <form class="mt-5" role="form" action="/users/create" method="POST"> 
             
             
             <div class="form-group">
                 <input type="text" 
-                    name="nom"
+                    name="nom_user"
                     class="form-control form-control-sm" 
                     placeholder="Votre nom">
             </div>
 
 
             <div class="form-group">
+                <input type="text" 
+                    name="prenom_user"
+                    class="form-control form-control-sm" 
+                    placeholder="Votre prenom">
+            </div>
+
+
+            <div class="form-group">
                 <input type="email" 
-                    name="mail"
+                    name="email_user"
                     class="form-control form-control-sm" 
                     placeholder="Email">
             </div>
 
             <div class="form-group">
                 <input type="password" 
-                    name="mdp"
+                    name="passord_user"
                     class="form-control form-control-sm" 
                     placeholder="Votre mot de passe">
             </div>
 
             <div class="form-group">
                 <input type="text" 
-                    name="adresse"
+                    name="adresse_user"
                     class="form-control form-control-sm" 
                     placeholder="Votre adresse de livraison">
             </div>
            
             <div class="form-group">
                 <input type="number" 
-                    name="telephone"
+                    name="telephone_user"
                     class="form-control form-control-sm" 
                     placeholder="Votre numéros de téléphone">
             </div>
