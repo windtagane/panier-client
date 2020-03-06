@@ -24,7 +24,9 @@ categoriesArticlesController.view = (req, res) => {
 }
 
 categoriesArticlesController.add = (req, res) => {
-    res.render('categories/_addForm');
+    res.render('categories/_addForm', {
+        title: "Ajouter une catégorie"
+    });
 }
 categoriesArticlesController.create = (req, res) => {
     // console.log(req.body)

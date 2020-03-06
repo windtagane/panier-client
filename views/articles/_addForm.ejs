@@ -1,34 +1,39 @@
-<form action="/articles/create" method="POST">
-    <div>
-        <label for="nom-article">Nom de l'article</label>
-        <input type="text" name="nom_article" id="nom-article">
-        
-    </div>
-    <div>
-        <label for="detail-article">detail de l'article</label>
-        <input type="text" name="detail_article" id="detail-article">
+<% include ../layouts/doctype.ejs %>
 
-    </div>
-    <div>
-        <label for="prix-article">prix de l'article</label>
-        <input type="text" name="prix_article" id="prix-article">
+<div class="card bg-light mb-3 mx-auto mt-5" style="max-width: 18rem">
+	<div class="card-header">
+		Ajouter un article
+	</div>
+	<div class="card-body">
+		<form action="create" method="POST">
+			<div class="form-group">
+				<label for="nom-article">Nom de l'article</label>
+				<input type="text" name="nom_article" class="form-control" id="nom-article" />
+			</div>
+			<div class="form-group">
+				<label for="detail-article">detail de l'article</label>
+				<input type="text" name="detail_article" class="form-control" id="detail-article" />
+			</div>
+			<div class="form-group"> 
+				<label for="prix-article">prix de l'article</label>
+				<input type="text" name="prix_article" class="form-control" id="prix-article" />
+			</div>
+			<div class="form-group">
+				<label for="image-article">image de l'article</label>
+				<input type="text" name="image_article" class="form-control" id="image-article" />
+			</div>
+			<div class="form-group">
+				<label for="categorie-article">categorie de l'article</label>
+				<select name="categorie_article" class="form-control" id="select-categories">
+				</select>
+			</div>
 
-    </div>
-    <div>
-        <label for="image-article">image de l'article</label>
-        <input type="text" name="image_article" id="image-article">
+			<div class="card-footer bg-transparent border-success justify-content-center d-flex">
+				<button type="submit" class="btn btn-success">Creer</button>
+			</div>
+		</form>
+	</div>
+</div>
+<% include ../layouts/doctype_end.ejs %>
 
-    </div>
-    <div>
-        <label for="categorie-article">categorie de l'article</label>
-        <select name="categorie_article" id="categorie-article">
-            <option value="1">cat1</option>
-            <option value="2">cat2</option>
-        </select>
-
-    </div>
-
-    <div>
-        <button type="submit">Creer</button>
-    </div>
-</form>
+<script src="/javascripts/categories/ajax.js"></script>

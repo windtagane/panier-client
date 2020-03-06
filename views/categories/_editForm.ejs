@@ -1,3 +1,5 @@
+<% include ../layouts/doctype.ejs %>
+
 <form action="/categories/update/<%= categorie.id %>" method="POST">
     <div>
         <label for="nom-categorie">Nom de la categorie :</label>
@@ -16,3 +18,5 @@
         </div>
     </div>
 </form>
+
+<% include ../layouts/doctype_end.ejs %>

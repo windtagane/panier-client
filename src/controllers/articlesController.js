@@ -27,11 +27,11 @@ articlesController.jsonList = (req, res) => {
     })
 }
 articlesController.add = (req, res) => {
-    res.render('articles/_addForm')
+    res.render('articles/_addForm', {
+        title: "Ajouter un article"
+    })
 }
 articlesController.create = (req, res) => {
-    // console.log(req.body)
-
     Article.create({
         nom: req.body.nom_article,
         detail: req.body.detail_article,
@@ -39,22 +39,19 @@ articlesController.create = (req, res) => {
         image: req.body.image_article,
         categories_id: Number(req.body.categorie_article)
     }).then(res.redirect('/articles'))
-    // console.log(req.body)
 }
 articlesController.edit = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
 
     }).then(article => {
-    // console.log(article)
-
         res.render('articles/_editForm',{
+            title: "Modifier un article",
             article: article
         })
     })
 }
 articlesController.update = (req, res) => {
-    // console.log(req.body)
     Article.findOne({
         where: {id: req.params.id}
     }).then(article => {
