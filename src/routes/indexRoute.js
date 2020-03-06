@@ -28,6 +28,14 @@ router.get('/login',controller.login)
  */
 router.get('/signup',controller.signup)
 
+/**
+ * @request POST
+ * @controller signup
+ * Inscription d'un nouveau utilisateur
+ * 
+ */
+router.post('/signup',controller.SaveSignup)
+
 
 
 module.exports = router;
