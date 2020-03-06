@@ -11,6 +11,7 @@ commentsController.list = (req, res) => { // GET : /comments/article/:id
         res.render('comments/_index',{
             commentaires: article.commentaires
         });
+        
     });
 }
 commentsController.create = (req, res) => { // POST : /comments/article/:id/create

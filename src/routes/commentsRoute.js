@@ -10,6 +10,7 @@ let controller = require("../controllers/commentsController");
  */
 router.get('/article/:id', controller.list);
 
+
 /**
  * @request POST
  * @controller create
