@@ -13,3 +13,11 @@ a {
   color: #00B7FF;
 }
 
+.input-xs {
+  height: 22px !important;
+  padding: 2px 5px !important;
+  font-size: 12px !important;
+  line-height: 1.5;
+  /* If Placeholder of the input is moved up, rem/modify this. */
+  border-radius: 3px;
+}

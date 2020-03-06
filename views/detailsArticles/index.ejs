@@ -19,16 +19,31 @@
     <div class="col-md-4">
         <div class="row">
             <h4>Article 1</h4>
+        </div>
+        <div class="row">
             <h5>Description</h5>
             <p class="text-justify">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Libero, at quisquam necessitatibus
                 exercitationem
                 doloremque velit dolor commodi quia! Eius cupiditate molestiae id aspernatur sunt unde totam pariatur
-                voluptate esse consequatur?
+                voluptate esse consequatur? <br>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae expedita sed quos a hic! Quam, neque
+                ipsum dicta laborum molestias non cupiditate pariatur quia! Temporibus repudiandae facilis ad alias
+                dolor.
+                <br> <br>
             </p>
         </div>
         <div class="row">
-
+            <form class="form-inline" action="addtocart" method="post">
+                <div class="form-group mb-2">
+                    <div class="col-xs-4">
+                        <input type="number" name="prix" id="prix" readonly class="form-control input-xs" value="49.99">
+                    </div>
+                    <label for="prix">€</label>
+                    <input type="number" class="form-control" id="quantité" name="quantité">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2">ajouter au panier</button>
+            </form>
         </div>
 
     </div>
