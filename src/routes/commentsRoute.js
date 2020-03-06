@@ -39,7 +39,7 @@ router.post('/update/:id', controller.update);
  * @param - id: number
  * Supprime un commentaire grâce à son id
  */
-router.get('s/delete/:id', controller.delete);
+router.get('/delete/:id', controller.delete);
 
 
 module.exports = router;

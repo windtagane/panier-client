@@ -3,15 +3,14 @@ const usersController = {};
 const User = require('../models/user.js');
 
 usersController.list = (req, res) => {
-    User.findAll().then(users => {
+    User.findAll().then(users => { // GET : /users
         res.render('users/index', {
             users: users,
             title: "Utilisateurs"
         })
     })
 }
-usersController.create = (req, res) => {
-   
+usersController.create = (req, res) => { // POST : /users/create
     User.create({
         nom: req.body.nom_user,
         prenom: req.body.prenom_user,
@@ -21,7 +20,7 @@ usersController.create = (req, res) => {
         telephone: req.body.telephone_user
     }).then(res.redirect('/'))
 }
-usersController.edit = (req, res) => {
+usersController.edit = (req, res) => { // GET : /users/edit/:id
     User.findOne({
         where: {id: req.params.id}
 
@@ -32,10 +31,10 @@ usersController.edit = (req, res) => {
         })
     })
 }
-usersController.update = (req, res) => {
+usersController.update = (req, res) => { // POST : users/update/:id
     User.findOne({
         where: {id: req.params.id}
-    }).then(article => {
+    }).then(user => {
         User.update({
             nom: req.body.nom_user,
             prenom: req.body.prenom_user,
@@ -50,7 +49,7 @@ usersController.update = (req, res) => {
         }).then(res.redirect('/'))
     })
 }
-usersController.delete = (req, res) => {
+usersController.delete = (req, res) => { // GET : users/delete/:id
     User.destroy({
         where: {
             id: req.params.id
@@ -58,6 +57,24 @@ usersController.delete = (req, res) => {
     }).then(() => {
         res.redirect('/')
     })
+}
+
+usersController.jsonList = (req, res) => { // GET : users/jsonList
+    User.findAll()
+        .then(users => { 
+            try {
+                res.json({
+                    statut: "OK",
+                    data: users,
+                    message: ""
+                })
+            } catch (error) {
+                res.json({
+                    statut: "KO",
+                    message: error
+                })
+            }
+        })
 }
 
 module.exports = usersController;

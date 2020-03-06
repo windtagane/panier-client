@@ -1,19 +1,30 @@
+<% include ../layouts/doctype.ejs %>
+
 <div>
-    <div>id :<%= categorie.id %> </div>
+    <h1><%= categorie.nom %></h1>
+    <!-- <div>id :<%= categorie.id %> </div>
     <div>nom : <%= categorie.nom %></div>
-    <div>activé : <%= categorie.active %></div>
-    <br>
+    <div>activé : <%= categorie.active %></div> -->
+    
 
     <% for(let i=0; i < categorie.articles.length; i++) {%>
-        <div>
+        <div class="card-deck m-3">
+            <div class="col-lg-4">
+                <%- include('../articles/partials/cardArticles', {article: categorie.articles[i]}); %>
+            </div>
+        </div>
+
+        <!-- <div>
             <div>id :<%=categorie.articles[i].id%> </div>
             <div> nom : <%=categorie.articles[i].nom%></div>
             <div>details : <%=categorie.articles[i].detail%></div>
             <div>prix : <%=categorie.articles[i].prix%></div>
             <div> image : <%=categorie.articles[i].image%> </div>
             <br>
-        </div>
+        </div> -->
                 
     <% } %>
     
 </div>
+
+<% include ../layouts/doctype_end.ejs %>
