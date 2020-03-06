@@ -11,6 +11,7 @@ usersController.list = (req, res) => {
     })
 }
 usersController.create = (req, res) => {
+   
     User.create({
         nom: req.body.nom_user,
         prenom: req.body.prenom_user,
