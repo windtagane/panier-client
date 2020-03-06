@@ -2,7 +2,12 @@ const categoriesArticlesController = {};
 const Categorie = require('../models/categorie.js');
 const Article = require('../models/article.js');
 
-categoriesArticlesController.list = (req, res) => { // GET : /categories
+/**
+ * @method GET
+ * @url /categories
+ */
+
+categoriesArticlesController.list = (req, res) => {
     Categorie.findAll().then(categories => {
         res.render('acceuil/index',{ // categories/_index
             categories: categories,
@@ -10,11 +15,15 @@ categoriesArticlesController.list = (req, res) => { // GET : /categories
         });
     });
 };
-categoriesArticlesController.view = (req, res) => { // GET : /categories/:id
+
+/**
+ * @method GET
+ * @url /categories/view/:id
+ */
+categoriesArticlesController.view = (req, res) => {
     // console.log(req.params.id)
     Categorie.findOne({
         where: {id: req.params.id}, include:[{model:Article}] // Inclut les articles d'une categorie
-
     }).then(categorie => {
         // console.log(categorie)
         res.render('categories/show',{
@@ -68,7 +77,6 @@ categoriesArticlesController.edit = (req, res) => {
  * @url /categories/update/:id
  */
 categoriesArticlesController.update = (req, res) => {
-    // console.log(req.body)
     Categorie.findOne({
         where: {id: req.params.id}
         }).then(categorie => {
