@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fileUpload = require('express-fileupload');
+
 
 var indexRouter = require('./src/routes/indexRoute');
 var adminRouter = require('./src/routes/adminRoute');
@@ -18,6 +20,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(fileUpload());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,5 +50,18 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+//Action upload du fichier image
+app.post('/uploads', function (req, res) {
+  console.log(req.files.image_article); //requette.files.nom du file 
+
+
+});
+app.use(fileUpload({
+  limits: {
+    fileSize: 50 * 1024 * 1024
+  },
+}));
 
 module.exports = app;
