@@ -1,10 +1,13 @@
 <% include ../layouts/doctype.ejs %>
 
-<div class="d-flex justify-content-center m-3">
+<div class="d-flex justify-content-around m-3">
     <div class="btn-group">
         <button class="btn btn-primary" id="admin-btn-users">Users</button>
         <button class="btn btn-primary" id="admin-btn-categories">Catégories</button>
         <button class="btn btn-primary" id="admin-btn-articles">Articles</button>
+    </div>
+    <div id="panel-add" class="">
+        <button disabled="disabled" class="btn btn-success btn-disabled">Ajouter</button>
     </div>
 </div>
 
@@ -15,3 +18,8 @@
 
 <% include ../layouts/doctype_end.ejs %>
 <script src="javascripts/admin/ajax.js"></script>
+
+<% include partials/articles/modal-create.ejs %>
+<% include partials/articles/modal-edit.ejs %>
+<% include partials/categories/modal-create.ejs %>
+<% include partials/categories/modal-edit.ejs %>

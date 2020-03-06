@@ -1,7 +1,11 @@
 const articlesController = {};
 const Article = require('../models/article.js')
 
-articlesController.list = (req, res) => { // GET : /articles
+/**
+ * @method GET
+ * @url /articles
+ */
+articlesController.list = (req, res) => {
     Article.findAll().then(articles => {
         res.render('articles/index',{
             articles: articles,
@@ -10,7 +14,11 @@ articlesController.list = (req, res) => { // GET : /articles
     })
 }
 
-articlesController.jsonList = (req, res) => { // GET : /articles/jsonList
+/**
+ * @method GET
+ * @url /articles/jsonList
+ */
+articlesController.jsonList = (req, res) => {
     Article.findAll().then(articles => {
         try {
             res.json({
@@ -26,12 +34,12 @@ articlesController.jsonList = (req, res) => { // GET : /articles/jsonList
         }
     })
 }
-articlesController.add = (req, res) => { // GET : /articles/add
-    res.render('articles/_addForm')
+articlesController.add = (req, res) => {
+    res.render('articles/_addForm', {
+        title: "Ajouter un article"
+    })
 }
-articlesController.create = (req, res) => { // POST : /articles/create
-    // console.log(req.body)
-
+articlesController.create = (req, res) => {
     Article.create({
         nom: req.body.nom_article,
         detail: req.body.detail_article,
@@ -39,22 +47,29 @@ articlesController.create = (req, res) => { // POST : /articles/create
         image: req.body.image_article,
         categories_id: Number(req.body.categorie_article)
     }).then(res.redirect('/articles'))
-    // console.log(req.body)
 }
-articlesController.edit = (req, res) => { // GET : /articles/edit/:id
+
+/**
+ * @method GET
+ * @url /articles/edit/:id
+ */
+articlesController.edit = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
 
     }).then(article => {
-    // console.log(article)
-
         res.render('articles/_editForm',{
+            title: "Modifier un article",
             article: article
         })
     })
 }
-articlesController.update = (req, res) => { // POST : /articles/update/:id
-    // console.log(req.body)
+
+/**
+ * @method POST
+ * @url /articles/update/:id
+ */
+articlesController.update = (req, res) => {
     Article.findOne({
         where: {id: req.params.id}
     }).then(article => {
@@ -71,7 +86,12 @@ articlesController.update = (req, res) => { // POST : /articles/update/:id
         }).then(res.redirect('/articles'))
     })
 }
-articlesController.delete = (req, res) => {// GET : /articles/delete/:id
+
+/**
+ * @method GET
+ * @url /articles/delete/:id
+ */
+articlesController.delete = (req, res) => {
     Article.destroy({
         where: {
             id: req.params.id

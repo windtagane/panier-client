@@ -65,7 +65,6 @@ $(document).ready(function() {
     function listCategories() {
         $.get('categories/jsonList', function(categories) {
             if (categories.data) {
-            console.log(categories);
             let tableHead = `
             <table class="table table-striped">
             <thead>
@@ -144,7 +143,8 @@ $(document).ready(function() {
     }
 
     function addUsers() {
-        $('#panel-add').html('');
+        let btn = '<a href="/users/add" target="blank_" class="btn btn-success disabled" disabled>Ajouter un utilisateur</a>';
+        $('#panel-add').html(btn);
     };
     function addCategories() {
         let btn = '<a href="/categories/add" target="blank_" class="btn btn-success">Ajouter une catégorie</a>';

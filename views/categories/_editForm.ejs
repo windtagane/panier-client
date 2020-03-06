@@ -1,18 +1,28 @@
+<% include ../layouts/doctype.ejs %>
+
+<div class="card bg-light mb-3 mx-auto mt-5" style="max-width: 18rem;">
+    <div class="card-header">
+        Modifier une catégorie
+    </div>
+    <div class="card-body">
 <form action="/categories/update/<%= categorie.id %>" method="POST">
-    <div>
+    <div class="form-group">
         <label for="nom-categorie">Nom de la categorie :</label>
-        <input value="<%= categorie.nom %>" type="text" name="nom_categorie" id="nom-categorie">
+        <input value="<%= categorie.nom %>" class="form-control" type="text" name="nom_categorie" id="nom-categorie">
         
     </div>
-    <div>
+    <div class="form-group">
         <label for="active-categorie">Status :</label>
-        <select name="active_categorie" id="active-categorie">
+        <select name="active_categorie" class="form-control" id="active-categorie">
             <option <% if (categorie.active == 0) { %> selected <% } %> value="0">Inactive</option>
             <option <% if (categorie.active == 1) { %> selected <% } %> value="1">Active</option>
         </select>
 
-        <div>
-            <button type="submit">Modifier</button>
+        <div class="card-footer bg-transparent border-success justify-content-center d-flex">
+            <button type="submit" class="btn btn-success">Modifier</button>
         </div>
     </div>
 </form>
+</div>
+
+<% include ../layouts/doctype_end.ejs %>
