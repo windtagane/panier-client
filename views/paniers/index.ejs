@@ -1,14 +1,5 @@
-<% for(let i=0; i < paniers.length; i++) {%> <!-- paniers -->
-    
-    <div>id : <%= paniers[i].id %></div>
-    <div>prix total : <%= paniers[i].prix_total %></div>
-    <div>Utilisateur id : <%= paniers[i].utilisateurs_id %></div>
-    <div>Articles : 
-        <% for(let ib=0; ib < paniers[i].articles.length; ib++) {%> <!-- articles d'un panier -->
-            <%=paniers[i].articles[ib].image%>
-            <%=paniers[i].articles[ib].nom%>
-            <%=paniers[i].articles[ib].prix%>
-        <% } %>
-    </div>
-            
-<% } %>
+<% include ../layouts/doctype.ejs %>
+
+<% include ./partials/articles_panier.ejs %>
+
+<% include ../layouts/doctype_end.ejs %>

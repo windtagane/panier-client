@@ -4,12 +4,12 @@
   <div class="card-deck">
 
     <% categories.forEach(function(categorie){ %>
-        <%- include('partials/cardCategorieArticles', {categorie: categorie}); %>
+       <% if (categorie.active == 1) { %>
+          <%- include('partials/cardCategorieArticles', {categorie: categorie}); %>
+       <% } %>
     <% }); %>
 
   </div>
 </div>
-
-
 
 <% include ../layouts/doctype_end.ejs %>
