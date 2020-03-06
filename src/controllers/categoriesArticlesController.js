@@ -41,6 +41,7 @@ categoriesArticlesController.edit = (req, res) => {
     }).then(categorie => {
         // console.log(categorie)
             res.render('categories/_editForm',{
+                title: "Modifier une catégorie",
                 categorie: categorie
             })
         })

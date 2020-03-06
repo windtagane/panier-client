@@ -49,7 +49,6 @@ $(document).ready(function() {
                     <td>${user.telephone}</td>
                     <td>
                         <a href="users/edit/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Edit</a>
-                        <a href="users/update/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Update</a>
                         <a href="users/delete/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Delete</a>
                     </td>
                 </tr>`
@@ -87,7 +86,6 @@ $(document).ready(function() {
                     <td>${categorie.active}</td>
                     <td>
                         <a href="categories/edit/${categorie.id}" target="blank_" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
-                        <a href="categories/update/${categorie.id}" target="blank_" class="btn btn-info btn-sm" data-id="${categorie.id}">Update</a>
                         <a href="categories/delete/${categorie.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
                     </td>
                 </tr>`
@@ -131,7 +129,6 @@ $(document).ready(function() {
                     <td>${article.categories_id}</td>
                     <td>
                         <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
-                        <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Update</a>
                         <a href="articles/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
                     </td>
                 </tr>`
