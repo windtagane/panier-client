@@ -1,71 +1,90 @@
 <% include ../layouts/doctype.ejs %>
 
 
-<div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-        <div class="login-card-light p-3 shadow-lg rounded" style="margin-top: 20%;">
-            <div class="pt-3">
-                <h2 class="text-danger">Inscris toi</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="login-card-light p-3 shadow-lg rounded"style="margin-top: 20%;">
+                <div class="pt-3">
+                    <h2 class="text-danger">Inscription</h2>
+                </div>
+        
+                <form id="signup-form" data-parsley-validate class="mt-5" role="form" action="/signup" method="POST"> 
+                    
+                    
+                    <div class="form-group">
+                        <input type="text" 
+                            name="nom_user"
+                            class="form-control form-control-sm"
+                            required 
+                            placeholder="Votre nom">
+                    </div>
+        
+        
+                    <div class="form-group">
+                        <input type="text" 
+                            name="prenom_user"
+                            class="form-control form-control-sm" 
+                            required 
+                            placeholder="Votre prenom">
+                    </div>
+        
+        
+                    <div class="form-group">
+                        <input type="email" 
+                            name="email_user"
+                            class="form-control form-control-sm" 
+                            required
+                            placeholder="Email"
+                            pattern="/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/gm">
+                    </div>
+        
+                    <div class="form-group">
+                        <input type="password" 
+                            name="passord_user"
+                            class="form-control form-control-sm" 
+                            required 
+                            placeholder="Votre mot de passe">
+                    </div>
+        
+                    <div class="form-group">
+                        <input type="text" 
+                            name="adresse_user"
+                            class="form-control form-control-sm" 
+                            required 
+                            placeholder="Votre adresse de livraison">
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" 
+                            name="telephone_user"
+                            class="form-control form-control-sm" 
+                            required 
+                            placeholder="Votre numéros de téléphone"
+                            pattern="/^[+]*[0-9]{1,4}[-\s\.\/0-9]*$/gm"> <!--+262 692 12 34 56 -->
+                    </div>
+        
+        
+        
+                    <div class="mt-5">
+                        <button id="signup-submit-btn" class="btn btn-sm btn-danger col">
+                            Inscription
+                        </button>
+                    </div>
+        
+                    
+                    
+                    <div class="mt-5">
+                        <p class="text-center">
+                            Vous avez déja un compte ?
+                            <a href="/login">Connecter-vous</a>
+                        </p>
+                    </div>
+                </form>
             </div>
-
-            <form class="mt-5" role="form" action="/users/create" method="POST">
-
-                <div class="form-row">
-                    <div class="col">
-                        <label>Votre nom</label>
-                        <input type="text" name="nom_user" class="form-control form-control-sm">
-                    </div>
-                    <div class="col">
-                        <label>Votre prenom</label>
-                        <input type="text" name="nom_user" c class="form-control form-control-sm">
-                    </div>
-                </div>
-
-
-
-
-                <label>Email</label>
-                <div class="form-group">
-                    <input type="email" name="email_user" class="form-control form-control-sm">
-                </div>
-
-                <label>Mot de passe</label>
-                <div class="form-group">
-                    <input type="password" name="passord_user" class="form-control form-control-sm">
-                </div>
-
-                <div class="form-row">
-                    <div class="col">
-
-
-                        <label>Votre adresse de livraison</label>
-                        <div class="form-group">
-                            <input type="text" name="adresse_user" class="form-control form-control-sm">
-                        </div>
-                    </div>
-                    <div class="col">
-
-                        <label>Votre numéro de téléphone</label>
-                        <div class="form-group">
-                            <input type="tel" name="telephone_user" class="form-control form-control-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-5">
-                    <button class="btn btn-sm btn-danger col">
-                        Inscription
-                    </button>
-                </div>
-
-                <div class="text-center mt-2">
-                    <a href="/login">Clique ici pour te connecter</a>
-                </div>
-
-
-            </form>
         </div>
-    </div>
+    </div> 
 </div>
 <% include ../layouts/doctype_end.ejs %>
+
+<script src="/javascripts/authentication/ajax.js"></script>

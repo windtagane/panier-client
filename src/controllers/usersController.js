@@ -26,7 +26,7 @@ usersController.edit = (req, res) => { // GET : /users/edit/:id
 
     }).then(user => {
     // console.log(user)
-        res.render('user/_editForm',{
+        res.render('users/_editForm',{
             user: user
         })
     })
