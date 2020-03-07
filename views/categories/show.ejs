@@ -1,20 +1,22 @@
 <% include ../layouts/doctype.ejs %>
 
-<div>
-    <h1><%= categorie.nom %></h1>
-    <!-- <div>id :<%= categorie.id %> </div>
+<section class="article">
+    <div class="container">
+
+        <h1><%= categorie.nom %></h1>
+        <!-- <div>id :<%= categorie.id %> </div>
     <div>nom : <%= categorie.nom %></div>
     <div>activé : <%= categorie.active %></div> -->
-    
 
-    <% for(let i=0; i < categorie.articles.length; i++) {%>
         <div class="card-deck m-3">
+
+            <% for(let i=0; i < categorie.articles.length; i++) {%>
             <div class="col-lg-4">
                 <%- include('../articles/partials/cardArticles', {article: categorie.articles[i]}); %>
             </div>
-        </div>
 
-        <!-- <div>
+
+            <!-- <div>
             <div>id :<%=categorie.articles[i].id%> </div>
             <div> nom : <%=categorie.articles[i].nom%></div>
             <div>details : <%=categorie.articles[i].detail%></div>
@@ -22,9 +24,14 @@
             <div> image : <%=categorie.articles[i].image%> </div>
             <br>
         </div> -->
-                
-    <% } %>
-    
-</div>
+
+            <% } %>
+        </div>
+
+
+
+
+    </div>
+</section>
 
 <% include ../layouts/doctype_end.ejs %>
