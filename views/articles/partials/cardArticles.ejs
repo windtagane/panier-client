@@ -1,7 +1,7 @@
 <div class="card text-center">
 
 	<h4 class="card-header">
-		<a href="#" class="text-dark"><%= article.nom %></a>
+		<a data-article-id="<%= article.id %>" href="#" class="text-dark"><%= article.nom %></a>
 	</h4>
 	<a href="">
 		<img class="card-img-top" src="/uploads/<%= article.image %>" class="card-img-top"
@@ -15,15 +15,18 @@
 
 			<div class="input-group input-group-sm mb-3">
 				<div class="input-group-prepend">
-					<form action="" method="post">
+					<form data-article-id="<%= article.id %>" action="" method="post">
 
 						<label class="input-group-text">Quantité</label>
 
 						<input type="number" name="quantity" class="form-control ">
-						<!-- Lien pour voir le detail de l'article -->
-						<a class="btn btn-warning w-100" role="button" href="">Ajouter au panier</a> 
-
-
+						<button data-article-id="<%= article.id %>" <% if (!locals.user.nom){ %>disabled<%}%> class="btn btn-warning w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
+						<% if (!locals.user.nom){ %>
+							<small>Conectez-vous pour ajouter des articles dans votre panier</small>
+						<%}%>
+						<% if (locals.user.id){ %>
+							<input value="<%= locals.user.id %>" type="hidden" name="user_id">
+						<%}%>
 				</div>
 
 				</form>
