@@ -40,7 +40,7 @@ articlesController.add = (req, res) => {
         title: "Ajouter un article"
     })
 }
-articlesController.create = (req, res) => {
+articlesController.create = async(req, res) => {
     console.log(req.body);
     console.log(req.files);
 
@@ -54,14 +54,13 @@ articlesController.create = (req, res) => {
 
         
     });
-    let sampleFile = req.files.image;
+    let sampleFile = req.files.image_article; // nom du champ image
 
-    sampleFile.mv(mainDir+'/public/uploads/'+sampleFile.name, function(err) {
-      if (err)
-      return res.status(500).send(err);
-  
+    // il faut que le dossier upload existe... ;)
+    const file = await sampleFile.mv(mainDir+'/public/uploads/'+sampleFile.name, function(err) { 
+      if (err) return res.status(500).send(err);
     })
-    .then(res.redirect('/articles'))
+    res.redirect('/articles') 
 }
 
 /**
