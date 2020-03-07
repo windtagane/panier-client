@@ -16,11 +16,15 @@ var categoriesArticles = require('./src/routes/categoriesArticlesRoute');
 
 var app = express();
 
+mainDir = __dirname;
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
 app.use(fileUpload());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -51,10 +55,9 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-
-//Action upload du fichier image
+//Route pour uploads image
 app.post('/uploads', function (req, res) {
-  console.log(req.files.image_article); //requette.files.nom du file 
+  console.log(req.files.image_article.name); //requette.files.nom du file 
 
 
 });
@@ -62,6 +65,10 @@ app.use(fileUpload({
   limits: {
     fileSize: 50 * 1024 * 1024
   },
+}));
+app.use(fileUpload({
+  useTempFiles: true,
+  tempFileDir: 'C:\tmp' //dossier temporaire
 }));
 
 module.exports = app;
