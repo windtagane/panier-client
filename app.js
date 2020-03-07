@@ -55,8 +55,8 @@ function checkSignIn(req, res, next){
 app.get('/*', function(req, res, next) {
   res.locals.user = {}
   if (req.session.user){
-    res.locals.user.nom = req.session.user.nom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
-    res.locals.user.role = req.session.user.role
+    res.locals.user.nom = req.session.user.prenom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
+    res.locals.user.role = req.session.user.role;
   }
   next();
 });
