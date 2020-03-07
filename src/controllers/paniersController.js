@@ -10,6 +10,7 @@ Panier.belongsToMany(Article,{foreignKey: 'paniers_id', through: 'articles_has_p
 Article.belongsToMany(Panier,{foreignKey: 'articles_id', through: 'articles_has_paniers' }); // le panier appartien à un utilisateur.
 User.hasMany(Panier,{foreignKey: 'utilisateurs_id'}) // Un utilisateur peut faire plusieurs panier
 Panier.belongsTo(User,{foreignKey: 'utilisateurs_id'}) // Un panier appartien à un seul utilisateur
+Panier.hasMany(LignePanier,{foreignKey:'paniers_id'}); // un panier peut avoir plusieur articles
 
 paniersControlleur.list = (req, res) => { // GET : /paniers
    // Panier.findAll({ include: [ { model: Article, require: true } ]}).then(paniers => { // inclus les articles d'un panier
@@ -25,7 +26,7 @@ paniersControlleur.show = async(req, res) => { // GET /paniers/:id
     if (!req.session.user.id || !req.params.id) return res.redirect('/');
     
     panier = await Panier.findOne({
-        where: {id: req.params.id,utilisateurs_id: req.session.user.id}
+        where: {id: req.params.id,utilisateurs_id: req.session.user.id},include:[{model: LignePanier}]
     })
     console.log(panier)
 
