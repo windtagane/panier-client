@@ -37,7 +37,7 @@ router.get('/edit/:id', controller.edit);
  * @request PUT
  * @controller update
  * @param - id: number
- * Met à jour un produit grâce à son id
+ * Met à jour un panier grâce à son id
  */
 router.put('/update/:id', controller.update);
 
@@ -45,7 +45,7 @@ router.put('/update/:id', controller.update);
  * @request DELETE
  * @controller delete
  * @param - id: number
- * Supprime un produit grâce à son id
+ * Supprime un panier grâce à son id
  */
 router.delete('/delete/:id', controller.delete);
 
@@ -53,9 +53,25 @@ router.delete('/delete/:id', controller.delete);
 /**
  * @request POST
  * @controller addToPanier
- * @param - id: number; idUser: number
+ * @param - id: number; idArticle: number
  * Ajoute un article au panier de l'utilisateur
  */
 router.post('/:id/addToPanier/:idArticle', controller.addToPanier);
+
+/**
+ * @request POST
+ * @controller removeToPanier
+ * @param - id: number; idArticle: number
+ * Enleve un article au panier de l'utilisateur
+ */
+router.post('/:id/removeToPanier/:idArticle', controller.removeToPanier);
+
+/**
+ * @request POST
+ * @controller editQuantity
+ * @param - id: number; idArticle: number
+ * Modifie la quantité d'un article dans le panier de l'utilisateur
+ */
+router.post('/:id/quantite/:idArticle', controller.editArticleQuantity);
 
 module.exports = router;

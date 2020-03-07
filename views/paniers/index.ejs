@@ -1,7 +1,19 @@
 <% include ../layouts/doctype.ejs %>
 
-<% include ./partials/articles_panier.ejs %>
+<%if (!locals.panier) { %> 
+    <h1>Votre panier est vide</h1>
+<%}%>
 
+<%if (locals.panier) { %>
+    <h1>Votre panier n° <span data-panier-id="<%=panier.id%>"><%=panier.id%></span></h1>
+    <% panier.articles_has_paniers.forEach(function(ligneArticle){ %>
+        <%- include('partials/articles_panier.ejs', {ligneArticle: ligneArticle}); %>
+    <% }); %>
+
+    <h2>Prix total: <%=panier.prixTotal%> €</h2>
+<%}%>
 
 
 <% include ../layouts/doctype_end.ejs %>
+
+<script src="/javascripts/panier/ajax.js"></script>

@@ -3,7 +3,10 @@ const Sequelize = require('sequelize');
 
 const LignePanier = sequelize.define('articles_has_paniers', {
     id: {type: Sequelize.INTEGER, autoIncrement:true, primaryKey:true },
-    quantite: {type: Sequelize.INTEGER(),allowNull:false},
+    quantite: {type: Sequelize.INTEGER,allowNull:false},
+    articles_id: {type: Sequelize.INTEGER,allowNull:false},
+    paniers_id: {type: Sequelize.INTEGER,allowNull:false}
+
     
 },
     {tableName: 'articles_has_paniers', timestamps: false, underscored: true}

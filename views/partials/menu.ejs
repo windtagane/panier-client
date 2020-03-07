@@ -20,7 +20,7 @@
           </li>
           <% if(locals.user.panier) { %> 
             <li class="nav-item">
-                <a href="/paniers/<%=locals.user.panier.id%>" class="nav-link">Mon panier</a>
+                <a href="/paniers/<%=locals.user.panier.id%>" class="nav-link mon-panier-link">Mon panier</a>
             </li>
           <%}%>
       
@@ -44,7 +44,7 @@
 
         <% if(locals.user.nom) { %> 
           <li class="nav-item">
-            <a href="#" class="nav-link font-weight-bold"><%=locals.user.nom%></a>
+            <a data-current-user-id="<%=user.id%>" href="#" class="nav-link font-weight-bold"><%=locals.user.nom%></a>
           </li>
           <li class="nav-item">
             <a href="/logout" class="nav-link">Déconnexion</a>

@@ -3,12 +3,12 @@
 		<img src="https://via.placeholder.com/150" class="card-img-top" alt="<%= 'categorieArticleName' %>" />
 	</a>
 		<div class="card-body">
-			<h5 class="card-title"><%= article.nom %></h5>
+			<h5 data-article-id="<%= article.id %>" class="card-title"><%= article.nom %></h5>
 		<p class="card-text">
 			<%= article.prix %> €
 			<form data-article-id="<%= article.id %>" action="" method="post">
 				<label for="quantity">Quantité</label>
-				<input type="number" name="quantity" class="form-control mb-2" min="0">
+				<input  type="number" name="quantity" class="form-control mb-2" min="0">
 
 				<button data-article-id="<%= article.id %>" <% if (!locals.user.nom){ %>disabled<%}%> class="btn btn-primary w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
 				<% if (!locals.user.nom){ %>
