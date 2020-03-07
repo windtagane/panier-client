@@ -1,5 +1,7 @@
 <% include ../layouts/doctype.ejs %>
 
+<section class="article">
+  <div class="container">
 <div class="card-deck m-3">
     <% articles.forEach(function(article){ %>
       <div class="col-lg-4">
@@ -7,6 +9,8 @@
       </div>
     <% }); %>
 </div>
+</div>
 
+</section>
 
 <% include ../layouts/doctype_end.ejs %>

@@ -1,16 +1,37 @@
-<div class="card">
-	<a href=""> 
-		<img src="uploads/<%= article.image %>" class="card-img-top" alt="uploads/<%= article.image %>" />
+<div class="card text-center">
+
+	<h4 class="card-header">
+		<a href="#" class="text-dark"><%= article.nom %></a>
+	</h4>
+	<a href="">
+		<img class="card-img-top" src="uploads/<%= article.image %>" class="card-img-top"
+			alt="uploads/<%= article.image %>" height="360" width="340" />
 	</a>
-		<div class="card-body">
-			<h5 class="card-title"><%= article.nom %></h5>
-		<p class="card-text">
-			<%= article.prix %> €
-			<form action="" method="post">
-				<label for="quantity">Quantité</label>
-				<input type="number" name="quantity" class="form-control mb-2" min="0">
-				<button class="btn btn-primary w-100" type="submit">Ajouter au panier</button>
-			</form>
-		</p>
+	<div class="card-body text-left">
+		<h5>Prix TTC:<div class="badge badge-danger float-right"><%= article.prix %> €</div>
+		</h5>
+		<div class="card-footer text-center">
+
+
+			<div class="input-group input-group-sm mb-3">
+				<div class="input-group-prepend">
+					<form action="" method="post">
+
+						<label class="input-group-text">Quantité</label>
+
+						<input type="number" name="quantity" class="form-control ">
+						<button class="btn btn-warning w-100" type="submit">Ajouter au panier</button>
+
+				</div>
+
+				</form>
+			</div>
+		</div>
+
+
+
+
+
 	</div>
+
 </div>
