@@ -11,11 +11,19 @@ let controller = require("../controllers/paniersController");
 router.get('/', controller.list);
 
 /**
+ * @request GET
+ * @controller show
+ * Le panier en cours non validé par l'untilisateur
+ * 
+ */
+router.get('/:id', controller.show);
+
+/**
  * @request POST
  * @controller create
  * Crée un nouveau panier
  */
-router.post('/create/:utilisateurId', controller.create);
+router.post('/create', controller.create);
 
 /**
  * @request GET

@@ -19,3 +19,4 @@ const Article = require('./article.js');
 // LignePanier.belongsTo(Article,{foreignKey: 'articles_id'}); // 1 ligne de panier concerne un article.
 // Article.hasMany(LignePanier, {foreignKey: 'articles_id'});// Un article peut avoir plusieur lignes panier.
 
+module.exports = LignePanier;
