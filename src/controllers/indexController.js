@@ -1,5 +1,7 @@
 const indexController = {};
 const User = require('../models/user.js');
+const Panier = require('../models/panier.js');
+
 var bcrypt = require("bcryptjs");
 
 indexController.index = (req, res) => { // GET : /
@@ -24,9 +26,16 @@ indexController.ProcessLogin = (req, res) => { // POST : /login
     }else{
         
         User.findOne({
-            where: {email: req.body.email_user}
+            where: {email: req.body.email_user},include:[{
+                model:Panier,
+                where:{
+                    valide: 0,
+                },
+                limit: 1
+            }]
     
         }).then(user => {
+            // console.log(user)
             if (!user)  
                 // return res.redirect('/login'); // l'email n'existe pas 
                 return res.json({res:"KO"});
@@ -43,9 +52,8 @@ indexController.ProcessLogin = (req, res) => { // POST : /login
 };
 
 indexController.logout = (req, res) => { // GET : /logout
-    req.session.destroy((err) => {
-        res.redirect('/') // will always fire after session is destroyed
-    })
+    req.session = null
+    res.redirect('/');
 }
 
 //redirige vers la vue signup
@@ -75,13 +83,13 @@ indexController.SaveSignup = (req, res) => { // POST : /signup
     User.findOne({
         where: {email: req.body.email_user}
 
-    }).then(user => {
+    }).then(async(user) => {
         if (user) {
             return res.json({res: "KO", message:"Cet addresse email éxiste déja, connectez-vous"});
         }
         if (!user){
             let salt = bcrypt.genSaltSync(10);
-            let newUser = {
+            const newUser = await User.create({
                 nom: req.body.nom_user,
                 prenom: req.body.prenom_user,
                 adresse: req.body.adresse_user,
@@ -90,22 +98,14 @@ indexController.SaveSignup = (req, res) => { // POST : /signup
                 telephone: req.body.telephone_user,
                 salt: salt,
                 role: 0
-            };
-            User.create({
-                nom: req.body.nom_user,
-                prenom: req.body.prenom_user,
-                adresse: req.body.adresse_user,
-                email: req.body.email_user,
-                password: bcrypt.hashSync(req.body.passord_user, salt),
-                telephone: req.body.telephone_user,
-                salt: salt,
-                role: 0
-            }).then(()=>{
-                req.session.user = newUser;
-                // res.redirect('/')
-                res.status("200");
-                res.json({res:"OK"});
             })
+            
+            req.session.user = newUser;
+            // console.log(newUser);
+            // res.redirect('/')
+            res.status("200");
+            res.json({res:"OK"});
+            
         }
     })
         

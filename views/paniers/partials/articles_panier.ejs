@@ -1,25 +1,29 @@
+
+
 <div class="row bg-white m-2">
-        <div class="card-img-right">
-            <img src="https://via.placeholder.com/150" alt="">
+        <div class="card-img-right col-2">
+            <img class="w-100" src="<%if (locals.ligneArticle) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
         </div>
-        <div class="card-body p-2 d-flex justify-content-around">
+        <div class="card-body p-2 d-flex justify-content-around col">
             <div class="col">
                 <div class="row">
                     <div class="card-title">
-                        <h5>_article.nom</h5>
+                        <h5><%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%></h5>
                     </div>
                     <div class="button-delete">
-                        <button>supprimer</button>
+                        <button data-article-id="<%=ligneArticle.id%>" class="delete-article-in-panier">supprimer</button>
                     </div>
                 </div>
                 <div class="card-text">
-                    _article.prix
+                    <%if (locals.ligneArticle) { %> <%=ligneArticle.article.prix%> €<%}else{%> _article.prix<%}%>
                 </div>
             </div>
             <div class="col">
                <div class="form-group">
                    <label for="">Quantité</label>
-                   <input class="from-control" type="number">
+                   <input data-article-id="<%=ligneArticle.id%>" value=<%if (locals.ligneArticle) { %> <%= ligneArticle.quantite %><%}%> class="from-control quantite-input" type="number">
+                   <button data-article-id="<%=ligneArticle.id%>" class="edit-quantity-btn">Modifier la quantité</button>
+
                </div>
             </div>
         </div>
