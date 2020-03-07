@@ -21,6 +21,15 @@ router.get('/', controller.index);
 router.get('/login',controller.login)
 
 /**
+ * @request GET
+ * @controller logout
+ * Se déconnecter
+ * 
+ */
+
+router.get('/logout',controller.logout)
+
+/**
  * @request POST
  * @controller login
  * Se connecter

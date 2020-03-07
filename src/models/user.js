@@ -11,7 +11,8 @@ const User = sequelize.define('utilisateurs', {
     email: {type: Sequelize.STRING(45),allowNull:false},
     password: {type: Sequelize.STRING(),allowNull:false},
     telephone: {type: Sequelize.STRING(45),allowNull:false},
-    salt: {type: Sequelize.STRING(),allowNull:false}
+    salt: {type: Sequelize.STRING(),allowNull:false},
+    role: {type: Sequelize.INTEGER(), allowNull:false}
 
 
 },

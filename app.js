@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 const fileUpload = require('express-fileupload');
 
-
 var indexRouter = require('./src/routes/indexRoute');
 var adminRouter = require('./src/routes/adminRoute');
 var usersRouter = require('./src/routes/usersRoute');
@@ -29,9 +28,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); 
-app.use(session({secret: "Your secret key"}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(session({
+  secret: "Your secret key",
+  // cookie: { secure: true },
+  resave: false,
+  saveUninitialized: true
+}));
 
 function checkSignIn(req, res, next){
   if(req.session.user){
@@ -41,9 +45,22 @@ function checkSignIn(req, res, next){
      console.log(req.session.user);
     //  next(err);  //Error, trying to access unauthorized page!
     res.redirect('/')
-
   }
 }
+
+/**
+ * @MidleWare
+ * UTILISATEUR CONNECTÉ
+ */
+app.get('/*', function(req, res, next) {
+  res.locals.user = {}
+  if (req.session.user){
+    res.locals.user.nom = req.session.user.nom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
+    res.locals.user.role = req.session.user.role
+  }
+  next();
+});
+
 
 app.use('/',indexRouter);
 app.use('/admin',checkSignIn, adminRouter);

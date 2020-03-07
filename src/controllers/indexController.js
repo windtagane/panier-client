@@ -16,9 +16,9 @@ indexController.login = (req, res) => { // GET : /login
         title:"Login"
     });
 };
-//action redirige vers le vue login.ejs
+//action connexion
 indexController.ProcessLogin = (req, res) => { // POST : /login
-    if(!req.body.email_user || !req.body.passord_user){
+    if(!req.body.email_user || !req.body.password_user){
             res.status("400");
             res.send("Invalid details!");
     }else{
@@ -27,20 +27,26 @@ indexController.ProcessLogin = (req, res) => { // POST : /login
             where: {email: req.body.email_user}
     
         }).then(user => {
-            if (user.email === req.body.email_user && bcrypt.compareSync(req.body.passord_user, user.password)){
-                
-                console.log('good login')
+            if (!user)  
+                // return res.redirect('/login'); // l'email n'existe pas 
+                return res.json({res:"KO"});
+            if (user.email === req.body.email_user && bcrypt.compareSync(req.body.password_user, user.password)) {
                 req.session.user = user;
-                res.redirect('/');
-            }else{
-                console.log(bcrypt.compareSync(req.body.passord_user, user.password))
-                console.log(user.password)
-                console.log(req.body.passord_user)
-                console.log('bad login')
+                // res.redirect('/'); // identifiants OK
+                res.json({res:"OK"});
+            }else{ 
+                // res.redirect('/login'); // mauvais identifiant
+                res.json({res:"KO"});
             }
         })
     }
 };
+
+indexController.logout = (req, res) => { // GET : /logout
+    req.session.destroy((err) => {
+        res.redirect('/') // will always fire after session is destroyed
+    })
+}
 
 //redirige vers la vue signup
 indexController.signup = (req, res) => { // GET : /signup
@@ -59,46 +65,50 @@ indexController.SaveSignup = (req, res) => { // POST : /signup
         !req.body.adresse_user  ||
         !req.body.telephone_user    ){
 
-            res.status("400");
-            res.send("Invalid details!");
-    }else {
-        User.findOne({
-            where: {email: req.body.email_user}
-    
-        }).then(user => {
-            if (user) {
-                res.render('acceuil/signup', {
-                    message: "Cet addresse email éxiste déja, connectez-vous.",
-                    title:"Inscription"});
-            }
-            if (!user){
-                console.log('user not exist')
-                let salt = bcrypt.genSaltSync(10);
-                let newUser = {
-                    nom: req.body.nom_user,
-                    prenom: req.body.prenom_user,
-                    adresse: req.body.adresse_user,
-                    email: req.body.email_user,
-                    password: bcrypt.hashSync(req.body.passord_user, salt),
-                    telephone: req.body.telephone_user,
-                    salt: salt
-                };
-                User.create({
-                    nom: req.body.nom_user,
-                    prenom: req.body.prenom_user,
-                    adresse: req.body.adresse_user,
-                    email: req.body.email_user,
-                    password: bcrypt.hashSync(req.body.passord_user, salt),
-                    telephone: req.body.telephone_user,
-                    salt: salt
-                }).then(()=>{
-                    req.session.user = newUser;
-                    res.redirect('/')
-                })
-            }
-        })
-        
+            // res.status("400");
+            res.json({res:"KO",message:"Données manquante"});
     }
+    const regEx = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; // match valid email, exemple user@gmail.com => OK
+    if (regEx.test(req.body.email_user) === false){
+        return res.json({res:"KO", message:"Email invalide"});
+    }
+    User.findOne({
+        where: {email: req.body.email_user}
+
+    }).then(user => {
+        if (user) {
+            return res.json({res: "KO", message:"Cet addresse email éxiste déja, connectez-vous"});
+        }
+        if (!user){
+            let salt = bcrypt.genSaltSync(10);
+            let newUser = {
+                nom: req.body.nom_user,
+                prenom: req.body.prenom_user,
+                adresse: req.body.adresse_user,
+                email: req.body.email_user,
+                password: bcrypt.hashSync(req.body.passord_user, salt),
+                telephone: req.body.telephone_user,
+                salt: salt,
+                role: 0
+            };
+            User.create({
+                nom: req.body.nom_user,
+                prenom: req.body.prenom_user,
+                adresse: req.body.adresse_user,
+                email: req.body.email_user,
+                password: bcrypt.hashSync(req.body.passord_user, salt),
+                telephone: req.body.telephone_user,
+                salt: salt,
+                role: 0
+            }).then(()=>{
+                req.session.user = newUser;
+                // res.redirect('/')
+                res.status("200");
+                res.json({res:"OK"});
+            })
+        }
+    })
+        
     
 };
 
