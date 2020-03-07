@@ -22,11 +22,37 @@ router.get('/login',controller.login)
 
 /**
  * @request GET
+ * @controller logout
+ * Se déconnecter
+ * 
+ */
+
+router.get('/logout',controller.logout)
+
+/**
+ * @request POST
+ * @controller login
+ * Se connecter
+ * 
+ */
+
+router.post('/login',controller.ProcessLogin)
+
+/**
+ * @request GET
  * @controller signup
  * Affiche la page inscription
  * 
  */
 router.get('/signup',controller.signup)
+
+/**
+ * @request POST
+ * @controller signup
+ * Inscription d'un nouveau utilisateur
+ * 
+ */
+router.post('/signup',controller.SaveSignup)
 
 
 

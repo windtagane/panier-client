@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
+var session = require('express-session');
 const fileUpload = require('express-fileupload');
-
 
 var indexRouter = require('./src/routes/indexRoute');
 var adminRouter = require('./src/routes/adminRoute');
@@ -26,9 +27,43 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', indexRouter);
-app.use('/admin', adminRouter);
+app.use(session({
+  secret: "Your secret key",
+  // cookie: { secure: true },
+  resave: false,
+  saveUninitialized: true
+}));
+
+function checkSignIn(req, res, next){
+  if(req.session.user){
+     next();     //If session exists, proceed to page
+  } else {
+     var err = new Error("Not logged in!");
+     console.log(req.session.user);
+    //  next(err);  //Error, trying to access unauthorized page!
+    res.redirect('/')
+  }
+}
+
+/**
+ * @MidleWare
+ * UTILISATEUR CONNECTÉ
+ */
+app.get('/*', function(req, res, next) {
+  res.locals.user = {}
+  if (req.session.user){
+    res.locals.user.nom = req.session.user.nom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
+    res.locals.user.role = req.session.user.role
+  }
+  next();
+});
+
+
+app.use('/',indexRouter);
+app.use('/admin',checkSignIn, adminRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
 app.use('/paniers', paniersRouter);
