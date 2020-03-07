@@ -3,8 +3,8 @@
 
 <div class="jumbotron jumbotron-fluid text-white" id="header-jumbotron">
   <div class="container">
-    <h1 class="display-4">Fluid jumbotron</h1>
-    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    <h1 class="display-4">Boutique vêtements et bijoux</h1>
+    <p class="lead">Fabrication artisanale, produit local</p>
   </div>
 </div>
 
@@ -17,9 +17,9 @@
   <div class="card-deck">
 
     <% categories.forEach(function(categorie){ %>
-       <% if (categorie.active == 1) { %>
-          <%- include('partials/cardCategorieArticles', {categorie: categorie}); %>
-       <% } %>
+    <% if (categorie.active == 1) { %>
+    <%- include('partials/cardCategorieArticles', {categorie: categorie}); %>
+    <% } %>
     <% }); %>
 
   </div>

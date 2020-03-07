@@ -4,7 +4,7 @@
 		<a href="#" class="text-dark"><%= article.nom %></a>
 	</h4>
 	<a href="">
-		<img class="card-img-top" src="uploads/<%= article.image %>" class="card-img-top"
+		<img class="card-img-top" src="/uploads/<%= article.image %>" class="card-img-top"
 			alt="uploads/<%= article.image %>" height="360" width="340" />
 	</a>
 	<div class="card-body text-left">
@@ -20,7 +20,9 @@
 						<label class="input-group-text">Quantité</label>
 
 						<input type="number" name="quantity" class="form-control ">
-						<button class="btn btn-warning w-100" type="submit">Ajouter au panier</button>
+						<!-- Lien pour voir le detail de l'article -->
+						<a class="btn btn-warning w-100" role="button" href="">Ajouter au panier</a> 
+
 
 				</div>
 
