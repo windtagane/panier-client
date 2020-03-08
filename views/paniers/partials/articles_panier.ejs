@@ -1,31 +1,28 @@
+<div data-article-id="<%=ligneArticle.id%>" class="row bg-white m-2 p-3 rounded ligne-panier-panel">
 
-
-<div class="row bg-white m-2">
-        <div class="card-img-right col-2">
-            <img class="w-100" src="<%if (locals.ligneArticle) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
+    <div class="card-img-right col-6 col-sm-2">
+        <img class="w-100" src="<%if (locals.ligneArticle) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
+    </div>
+    
+    <div class="col-5">
+        <div class="card-title">
+            <h5><%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%></h5>
         </div>
-        <div class="card-body p-2 d-flex justify-content-around col">
-            <div class="col">
-                <div class="row">
-                    <div class="card-title">
-                        <h5><%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%></h5>
-                    </div>
-                    <div class="button-delete">
-                        <button data-article-id="<%=ligneArticle.id%>" class="delete-article-in-panier">supprimer</button>
-                    </div>
-                </div>
-                <div class="card-text">
-                    <%if (locals.ligneArticle) { %> <%=ligneArticle.article.prix%> €<%}else{%> _article.prix<%}%>
-                </div>
-            </div>
-            <div class="col">
-               <div class="form-group">
-                   <label for="">Quantité</label>
-                   <input data-article-id="<%=ligneArticle.id%>" value=<%if (locals.ligneArticle) { %> <%= ligneArticle.quantite %><%}%> class="from-control quantite-input" type="number">
-                   <button data-article-id="<%=ligneArticle.id%>" class="edit-quantity-btn">Modifier la quantité</button>
-
-               </div>
-            </div>
+        <div class="card-text">
+            <%if (locals.ligneArticle) { %> <%=ligneArticle.article.prix%> €<%}else{%> _article.prix<%}%>
         </div>
     </div>
+    
+    <div class="col col-sm-4">
+        <div class="form-group m-0">
+            <label>Quantité : 
+                <input aria-label="Quantité" data-article-id="<%=ligneArticle.id%>" value=<%if (locals.ligneArticle) { %> <%= ligneArticle.quantite %><%}%> class="quantite-input form-control d-inline-block" min='0' type="number">
+            </label>
+        </div>
+    </div>
+
+    <div class="col-1 button-delete text-right">
+        <button aria-label="Enlever du panier" data-article-id="<%=ligneArticle.id%>" class="delete-article-in-panier fa fa-times text-danger bg-transparent border-0"></button>
+    </div>
+
 </div>

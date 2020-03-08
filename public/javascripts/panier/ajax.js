@@ -1,7 +1,8 @@
 $(document).ready(()=> {
     $('.btn-add-panier-submit').on('click', e => addToPanier(e));
     $('.delete-article-in-panier').on('click', e => removeToPanier(e));
-    $('.edit-quantity-btn').on('click', e => modifyArticleQuantity(e));
+    $('.quantite-input').on('change', e => modifyArticleQuantity(e));
+
 });
 
 const addToPanier = e => {
@@ -36,6 +37,8 @@ const addToPanier = e => {
 
 const removeToPanier = e => {
     e.preventDefault();
+    let confirmation = confirm("Vous êtes sûr de retirer cet article de votre panier ?");
+    if (confirmation == false) return false;
     let articleId = $(e.currentTarget).data('articleId');
     const panierId = $('[data-panier-id]').data('panierId');
     data = {
@@ -44,9 +47,12 @@ const removeToPanier = e => {
     $.post(`/paniers/${panierId}/removeToPanier/${articleId}`, data, result => {
         // console.log(result)
         
-        if (result.res === "OK") window.location.reload();
+        if (result.res === "OK"){
+            $(`.ligne-panier-panel[data-article-id="${articleId}"]`).hide('slow',function(){$(this).remove()});
+            $('#prix-total').text(result.newTotal);
+        } 
 
-        return alert(result.message);
+        if (result.res === "KO") return alert(result.message);
     })
 
 
@@ -61,9 +67,11 @@ const modifyArticleQuantity = e => {
         quantite: $(`.quantite-input[data-article-id='${articleId}']`).val()
     }
     $.post(`/paniers/${panierId}/quantite/${articleId}`, data, result => {
-        console.log(result);
-        if (result.res === "OK") window.location.reload();
-        return alert(result.message);
+        // console.log(result);
+        if (result.res === "OK") return $('#prix-total').text(result.newTotal);
+            
+        if (result.res === "KO") return alert(result.message);
+        
     })
 
 }

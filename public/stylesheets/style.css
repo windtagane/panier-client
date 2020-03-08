@@ -16,3 +16,41 @@ a {
   background-color: #2A90AB;
 }
 
+/***** PANIER *******/
+.quantite-input{
+  width: 50px;
+}
+
+.panel-prix-total{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  left: 0;
+}
+
+
+@media screen and (max-width: 767px) {
+  .panel-prix-total{
+    position: initial;
+    position: fixed;
+    right: 0;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+    top: initial;
+    
+  }
+
+  .panel-liste-articles{
+    padding-bottom: 100px;
+  }
+
+  .button-delete{
+    position: absolute;
+    right: 40px;
+  }
+  .order-btn{
+    width: 100%;
+    border-radius: 0;
+  }
+}

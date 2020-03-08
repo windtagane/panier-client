@@ -149,7 +149,7 @@ paniersControlleur.removeToPanier = async(req, res) => { // POST : /paniers/:id/
     });
 
 
-    res.json({res:"OK",message:"Votre article a été enlevé du panier"})
+    res.json({res:"OK",message:"Votre article a été enlevé du panier",newTotal})
 }
 
 paniersControlleur.editArticleQuantity = async(req,res) => {// POST : /paniers/:id/quantite/:idArticle
@@ -184,7 +184,7 @@ paniersControlleur.editArticleQuantity = async(req,res) => {// POST : /paniers/:
 
 
 
-    res.json({res:"OK",message:"La quantité à été mise a jour"})
+    res.json({res:"OK",message:"La quantité à été mise a jour",newTotal})
 }
 
 module.exports = paniersControlleur;

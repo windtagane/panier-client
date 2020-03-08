@@ -1,16 +1,44 @@
 <% include ../layouts/doctype.ejs %>
+<div class="container-fluid">
+    <h1>Mon panier</h1>
+    
+</div>
 
-<%if (!locals.panier) { %> 
-    <h1>Votre panier est vide</h1>
-<%}%>
 
 <%if (locals.panier) { %>
-    <h1>Votre panier n° <span data-panier-id="<%=panier.id%>"><%=panier.id%></span></h1>
-    <% panier.articles_has_paniers.forEach(function(ligneArticle){ %>
-        <%- include('partials/articles_panier.ejs', {ligneArticle: ligneArticle}); %>
-    <% }); %>
+    <div class="container-fluid">
+        <h4>Panier n° <span data-panier-id="<%=panier.id%>"><%=panier.id%></span></h4>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 panel-liste-articles">
+                <% panier.articles_has_paniers.forEach(function(ligneArticle){ %>
+                    <%- include('partials/articles_panier.ejs', {ligneArticle: ligneArticle}); %>
+                <% }); %>
+            </div>
+            <div class="col-md-4 position-relative">
+                <div class="row bg-white m-2 px-sm-3 py-3 rounded panel-prix-total">
+                    
+                        <div class="col">
+                            <h3>Prix total:</h2>
+                        </div>
+                        <div class="col-auto">
+                            <h3><span id="prix-total"><%=panier.prixTotal%></span> €</h2>
+                        </div>
 
-    <h2>Prix total: <%=panier.prixTotal%> €</h2>
+                        <div class="col-12 d-flex align-items-end justify-content-center p-0"><button class="btn btn-success order-btn font-weight-bold"><i class="fas fa-credit-card mr-2"></i>Commander</button></div>
+                    
+                </div>
+    
+            </div>
+    
+        </div>
+        
+    </div>
+    
+
+<%}else{%>
+    <h4>Le panier est vide</h4>
 <%}%>
 
 
