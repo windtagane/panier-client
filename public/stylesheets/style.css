@@ -29,6 +29,10 @@ a {
   left: 0;
 }
 
+.card-img-right{
+  min-height: 80px;
+}
+
 
 @media screen and (max-width: 767px) {
   .panel-prix-total{
