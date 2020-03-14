@@ -55,6 +55,20 @@ articlesController.jsonList = (req, res) => {
         }
     })
 }
+articlesController.detail = async(req,res) => {
+    console.log(req.params.id)
+
+    article = await Article.findOne({
+        where: {id: req.params.id}});
+    if (!article) return res.redirect('/');
+
+    res.render('articles/detail', {
+        title: `${article.nom}, details`,
+        article
+    })
+
+    
+}
 articlesController.add = (req, res) => {
     res.render('articles/_addForm', {
         title: "Ajouter un article"

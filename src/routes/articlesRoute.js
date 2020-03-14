@@ -12,6 +12,14 @@ router.get('/', controller.list);
 
 /**
  * @request GET
+ * @controller list
+ * Detail d'un article
+ * 
+ */
+router.get('/detail/:id', controller.detail);
+
+/**
+ * @request GET
  * @controller add
  * Afficher le formulaire de creation d'un article
  */
