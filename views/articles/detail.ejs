@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-6">
                 <h1><%= article.nom %></h1>
-                <div class="h5">Reference n° : <%= article.id %></div> 
+                <div class="h5">Réference n° : <%= article.id %></div> 
                 <div class="h5">Prix : <span class=" h4 font-weight-bold"><%= article.prix %></span> €</div> 
             </div>
 
@@ -21,7 +21,45 @@
 
             <div class="col-md-12">
                 <span class="h5">Commentaires :</span> 
-                <div id="commentaire"></div>
+                <div class="mt-2" id="commentaire">
+                    <% article.commentaires.forEach(function(commentaire){ %>
+                        <div data-commentaire-id="<%= commentaire.id %>" class="row">
+                            <div class="col-12 mb-2">
+                                <span class="font-weight-bold h5"><i class="fas fa-user mr-2"></i><%= commentaire.utilisateur.prenom %> :</span>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="bg-white w-100 rounded p-2">
+                                    <div>
+                                        <i class="fa fa-quote-left text-secondary" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-12">
+                                        <% if (commentaire.utilisateur.id == user.id ) { %> <% } %>
+                                        <%= commentaire.description %>
+                                        <% if (commentaire.utilisateur.id == user.id || user.role == 1 ) { %> 
+                                            <button class="btn btn-sm btn-warning"><i class="far fa-edit"></i>Editer</button>
+                                        <% } %>
+                                        
+                                    </div>
+                                    <div class="text-right">
+                                        <i class="fa fa-quote-right text-secondary" aria-hidden="true"></i>
+                                    </div>
+    
+                                </div>
+
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <div class="col-12 mt-4">
+                <form action="/articles/comments/<%= article.id %>" method="POST">
+                    <span class="h5">Ajouter un commentaire :</span>
+                    <textarea name="nouveau_comentaire" id="nouveau-comentaire" rows="5" class="w-100"></textarea>
+                    <div class="text-right">
+                        <button type="submit" data-article-id="<%= article.id %>" class="btn-success btn">Ajouter</button>
+                    </div>
+                </form>
             </div>
         </div>
     </section>

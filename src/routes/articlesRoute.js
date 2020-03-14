@@ -33,6 +33,14 @@ router.get('/add', controller.add);
 router.post('/create', controller.create);
 
 /**
+ * @request POST
+ * @controller addComment
+ * @param - id: number
+ * Crée un nouveau commentaire sur article
+ */
+router.post('/comments/:id', controller.addComment);
+
+/**
  * @request GET
  * @controller edit
  * @param - id: number

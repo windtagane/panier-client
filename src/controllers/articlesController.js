@@ -1,6 +1,8 @@
 const articlesController = {};
 const paginate = require('express-paginate');
 const Article = require('../models/article.js');
+const Comment = require('../models/comment.js');
+const User = require('../models/user.js');
 const mainDir = __dirname;
 
 /**
@@ -55,12 +57,18 @@ articlesController.jsonList = (req, res) => {
         }
     })
 }
+
 articlesController.detail = async(req,res) => {
-    console.log(req.params.id)
 
     article = await Article.findOne({
-        where: {id: req.params.id}});
+        where: {id: req.params.id},
+        include:[{model:Comment,
+        include:[{model:User}]},
+        ]
+    });
     if (!article) return res.redirect('/');
+
+    console.log(article.commentaires)
 
     res.render('articles/detail', {
         title: `${article.nom}, details`,
@@ -155,6 +163,15 @@ articlesController.delete = (req, res) => {
     }).then(() => {
         res.redirect('/articles')
     })
+}
+
+articlesController.addComment = async (req,res) => {
+    await Comment.create({
+        description: req.body.nouveau_comentaire,
+        utilisateurs_id: req.session.user.id,
+        articles_id: req.params.id
+    });
+    res.redirect(`/articles/detail/${req.params.id}`)
 }
 
 module.exports = articlesController;

@@ -6,6 +6,8 @@ const Sequelize = require('sequelize');
 const Comment = sequelize.define('commentaires', {
     id: {type: Sequelize.INTEGER, autoIncrement:true, primaryKey:true },
     description: {type: Sequelize.STRING(255),allowNull:false},
+    utilisateurs_id: {type: Sequelize.INTEGER,allowNull:false},
+    articles_id: {type: Sequelize.INTEGER,allowNull:false}
     
 },
     {tableName: 'commentaires', timestamps: false, underscored: true}
