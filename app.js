@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(paginate.middleware(5, 50));
+app.use(paginate.middleware(6, 50));
 app.use(function(req, res, next) {
     res.locals.query = req.query;
     res.locals.page   = req.originalUrl.split('page=')[1];
