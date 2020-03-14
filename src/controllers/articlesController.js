@@ -1,18 +1,36 @@
 const articlesController = {};
-
+const paginate = require('express-paginate');
 const Article = require('../models/article.js')
 
 /**
  * @method GET
  * @url /articles
  */
-articlesController.list = (req, res) => {
-    Article.findAll().then(articles => {
-        res.render('articles/index',{
-            articles: articles,
-            title: "Articles"
-        })
-    })
+articlesController.list = async (req, res,next) => {
+
+    Article.findAndCountAll({limit: req.query.limit, offset: req.skip})
+    .then(results => {
+        const itemCount = results.count;
+        const pageCount = Math.ceil(results.count / req.query.limit);
+        res.render('articles/index', {
+          articles: results.rows,
+          pageCount,
+          itemCount,
+          pages: paginate.getArrayPages(req)(3, pageCount, req.query.page),
+          title: "Articles"
+        });
+    }).catch(err => next(err))
+
+
+
+
+
+    // Article.findAll().then(articles => {
+    //     res.render('articles/index',{
+    //         articles: articles,
+    //         title: "Articles"
+    //     })
+    // })
 }
 
 /**
