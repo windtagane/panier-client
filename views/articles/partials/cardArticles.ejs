@@ -1,26 +1,26 @@
-<div class="card text-center">
+<div data-article-id="<%= article.id %>" class="card text-center">
 
 	<h4 class="card-header">
 		<a data-article-id="<%= article.id %>" href="#" class="text-dark"><%= article.nom %></a>
 	</h4>
 	<a href="">
-		<img class="card-img-top" src="/uploads/<%= article.image %>" class="card-img-top"
+		<img class="card-img-top" src="/uploads/<%= article.image %>" alt="<%= article.image %>" class="card-img-top"
 			alt="uploads/<%= article.image %>" height="360" width="340" />
 	</a>
 	<div class="card-body text-left">
-		<h5>Prix TTC:<div class="badge badge-danger float-right"><%= article.prix %> €</div>
+		<h5>Prix TTC:<div  class="badge badge-danger float-right "><span class="prix-article" data-article-id="<%= article.id %>"><%= article.prix %></span> €</div>
 		</h5>
 		<div class="card-footer text-center">
 
 
-			<div class="input-group input-group-sm mb-3">
+			<div class="input-group input-group-sm mb-3 d-flex justify-content-center">
 				<div class="input-group-prepend">
 					<form data-article-id="<%= article.id %>" action="" method="post">
 
 						<label class="input-group-text">Quantité</label>
 
 						<input type="number" name="quantity" class="form-control ">
-						<button data-article-id="<%= article.id %>" <% if (!locals.user.nom){ %>disabled<%}%> class="btn btn-warning w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
+						<button data-article-id="<%= article.id %>" data-article-prix="<%= article.prix %>" data-article-image="<%= article.image %>" data-article-nom="<%= article.nom %>" <% if (!locals.user.nom){ %>disabled<%}%> class="btn btn-warning w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
 						<% if (!locals.user.nom){ %>
 							<small>Conectez-vous pour ajouter des articles dans votre panier</small>
 						<%}%>

@@ -1,0 +1,33 @@
+<% include ../layouts/doctype.ejs %>
+<div class="container-fluid">
+    <h1>Mes commandes</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <%if (commandes.length) { %>
+                <% commandes.forEach(function(commande){ %>
+                    <div class="row bg-white m-2 p-3 rounded ligne-panier-panel">
+                        <div class="col-md-5">
+                            N° :<%=commande.id %>
+                        </div>
+                        <div class="col-md-5">
+                            Montant : <%=commande.prixTotal %> €
+                        </div>
+                        <div class="col-md-2">
+                            <a href="/paniers/commande/<%=commande.id %>">Voir</a>
+                        </div>
+                    </div>
+
+                <% }); %>
+            <%} else {%>
+            <h2>Vous n'avez pas encore de commande</h2>
+        </div>
+        <% } %>
+    </div>
+</div>
+    
+
+
+<% include ../layouts/doctype_end.ejs %>

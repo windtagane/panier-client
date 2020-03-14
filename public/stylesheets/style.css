@@ -15,10 +15,15 @@ a {
 #header-jumbotron{
   background-color: #2A90AB;
 }
+/******CARD-ARTICLE*****/
+div#card-article.col-lg-4{
+  margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 /***** PANIER *******/
 .quantite-input{
-  width: 50px;
+  width: 60px;
 }
 
 .panel-prix-total{

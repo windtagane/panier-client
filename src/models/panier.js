@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 const Panier = sequelize.define('paniers', {
     id: {type: Sequelize.INTEGER, autoIncrement:true, primaryKey:true },
-    prixTotal: {type: Sequelize.DECIMAL(),allowNull:false},
+    prixTotal: {type: Sequelize.FLOAT(),allowNull:false},
     utilisateurs_id: {type: Sequelize.DECIMAL(), allowNull:false},
     valide: {type: Sequelize.BOOLEAN(), allowNull: false}
     

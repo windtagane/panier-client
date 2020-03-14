@@ -26,16 +26,10 @@ indexController.ProcessLogin = (req, res) => { // POST : /login
     }else{
         
         User.findOne({
-            where: {email: req.body.email_user},include:[{
-                model:Panier,
-                where:{
-                    valide: 0,
-                },
-                limit: 1
-            }]
-    
+            where: {email: req.body.email_user}
+
         }).then(user => {
-            // console.log(user)
+
             if (!user)  
                 // return res.redirect('/login'); // l'email n'existe pas 
                 return res.json({res:"KO"});
