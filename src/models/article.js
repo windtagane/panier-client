@@ -5,7 +5,7 @@ const Article = sequelize.define('articles', {
     id: {type: Sequelize.INTEGER, autoIncrement:true, primaryKey:true },
     nom: {type: Sequelize.STRING(45),allowNull:false},
     detail: {type: Sequelize.STRING(200),allowNull:false},
-    prix: {type: Sequelize.DECIMAL(),allowNull:false},
+    prix: {type: Sequelize.FLOAT(),allowNull:false},
     image: {type: Sequelize.STRING(),allowNull:false},
 },
     {tableName: 'articles', timestamps: false, underscored: true}

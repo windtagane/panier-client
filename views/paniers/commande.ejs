@@ -1,0 +1,60 @@
+<% include ../layouts/doctype.ejs %>
+<div class="container-fluid">
+    <h1>Ma commande</h1>
+</div>
+
+<%if (locals.commande) { %>
+    <div class="container-fluid">
+        <h4>Commande n° <span data-panier-id="<%=commande.id%>"><%=commande.id%></span></h4>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 panel-liste-articles">
+                <% commande.articles_has_paniers.forEach(function(ligneArticle){ %>
+
+                    <div class="row bg-white m-2 p-3 rounded ligne-panier-panel">
+
+                        <div class="card-img-right col-6 col-sm-2">
+                            <img class="w-100" src="<%if (ligneArticle.article.image) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
+                        </div>
+                        
+                        <div class="col-5">
+                            <div class="card-title">
+                                <h5><%if (ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%></h5>
+                            </div>
+                            <div class="card-text">
+                                <%if (ligneArticle) { %> <%=ligneArticle.article.prix%> €<%}else{%> _article.prix<%}%>
+                            </div>
+                        </div>
+                        
+                        <div class="col col-sm-4">
+                            <div class="form-group m-0">
+                                <span>Quantité : <%= ligneArticle.quantite %></label>
+                            </div>
+                        </div>
+                    
+                    </div>
+
+                <% }); %>
+            </div>
+            <div class="col-md-4 position-relative">
+                <div class="row bg-white m-2 px-sm-3 py-3 rounded panel-prix-total">
+                    
+                    <div class="col">
+                        <h3>Prix total:</h2>
+                    </div>
+                    <div class="col-auto">
+                        <h3><span id="prix-total"><%=commande.prixTotal%></span> €</h2>
+                    </div>
+                        
+                </div>
+    
+            </div>
+    
+        </div>
+        
+    </div>
+<% } %>
+
+<% include ../layouts/doctype_end.ejs %>

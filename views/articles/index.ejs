@@ -1,12 +1,29 @@
 <% include ../layouts/doctype.ejs %>
 
-<div class="card-deck m-3">
-    <% articles.forEach(function(article){ %>
-      <div class="col-lg-4">
-        <%- include('partials/cardArticles', {article: article}); %>
-      </div>
-    <% }); %>
-</div>
+<section class="article">
+  <div class="container">
+    <div class="card-deck m-3">
+        <% articles.forEach(function(article){ %>
+          <div id="card-articles"class="col-lg-4"style="margin-top: 20px;
+      margin-bottom: 20px;">
+            <%- include('partials/cardArticles', {article: article}); %>
+          </div>
+        <% }); %>
+    </div>
+  </div>
 
+
+  <!-- Pagination -->
+
+  <div class="text-center">
+    <nav aria-label="Page navigation example" style="display: inline-block;">
+       <ul class="pagination ">
+          <%for(let i =1; i <= pageCount;  i++ ) {  %>
+          <li class="page-item"><a  class="page-link border-0 <% if ((page == i) || (!page && i==1) || (page < 0 && i==1) ) { %>bg-primary text-white<% } %>" href="/articles?page=<%=i%>"><%=i%></a></li>
+          <% } %>
+       </ul>
+    </nav>
+ </div>
+</section>
 
 <% include ../layouts/doctype_end.ejs %>

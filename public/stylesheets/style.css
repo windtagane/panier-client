@@ -6,10 +6,60 @@
 
 body {
   font: 14px "Nunito", "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #F7F6EE;
+  background-color: #FADA95	;
 }
 
 a {
   color: #00B7FF;
 }
+#header-jumbotron{
+  background-color: #2A90AB;
+}
+/******CARD-ARTICLE*****/
+div#card-article.col-lg-4{
+  margin-top: 20px;
+    margin-bottom: 20px;
+}
 
+/***** PANIER *******/
+.quantite-input{
+  width: 60px;
+}
+
+.panel-prix-total{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+  left: 0;
+}
+
+.card-img-right{
+  min-height: 80px;
+}
+
+
+@media screen and (max-width: 767px) {
+  .panel-prix-total{
+    position: initial;
+    position: fixed;
+    right: 0;
+    margin: 0 !important;
+    padding-bottom: 0 !important;
+    top: initial;
+    
+  }
+
+  .panel-liste-articles{
+    padding-bottom: 100px;
+  }
+
+  .button-delete{
+    position: absolute;
+    right: 40px;
+  }
+  .order-btn{
+    width: 100%;
+    border-radius: 0;
+  }
+}

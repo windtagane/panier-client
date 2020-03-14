@@ -15,6 +15,7 @@ var articlesRouter = require('./src/routes/articlesRoute');
 var commentsRouter = require('./src/routes/commentsRoute');
 var paniersRouter = require('./src/routes/paniersRoute');
 var categoriesArticles = require('./src/routes/categoriesArticlesRoute');
+const paginate = require('express-paginate');
 
 var app = express();
 
@@ -30,6 +31,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(paginate.middleware(5, 50));
+app.use(function(req, res, next) {
+    res.locals.query = req.query;
+    res.locals.page   = req.originalUrl.split('page=')[1];
+    next();
+ });
 
 // app.use(session({
 //   secret: "Your secret key",
@@ -67,7 +74,6 @@ app.get('/*', function(req, res, next) {
     res.locals.user.nom = req.session.user.prenom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
     res.locals.user.role = req.session.user.role;
     res.locals.user.id = req.session.user.id;
-    res.locals.user.panier = req.session.user.paniers[0]; // le panier en cours, non validé
   }
   next();
 });
@@ -106,11 +112,11 @@ app.post('/uploads', function (req, res) {
 
 
 });
-app.use(fileUpload({
-  limits: {
-    fileSize: 50 * 1024 * 1024
-  },
-}));
+// app.use(fileUpload({
+//   limits: {
+//     fileSize: 50 * 1024 * 1024
+//   },
+// }));
 
 
 
