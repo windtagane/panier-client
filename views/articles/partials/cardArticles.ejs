@@ -39,16 +39,16 @@
 
 							</div>
 							<div class="col-md-6 d-flex align-items-end">
-								<button data-article-id="<%= article.id %>" data-article-prix="<%= article.prix %>" data-article-image="<%= article.image %>" data-article-nom="<%= article.nom %>" <% if (!locals.user.nom){ %>disabled<%}%> class="btn btn-warning w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
+								<button data-article-id="<%= article.id %>" data-article-prix="<%= article.prix %>" data-article-image="<%= article.image %>" data-article-nom="<%= article.nom %>" class="btn btn-warning w-100 btn-add-panier-submit" type="submit">Ajouter au panier</button>
 
 							</div>
 
 							
 						</div>
 						
-						<% if (!locals.user.nom){ %>
+						<!-- <% if (!locals.user.nom){ %>
 							<small>Conectez-vous pour ajouter des articles dans votre panier</small>
-						<%}%>
+						<%}%> -->
 						<% if (locals.user.id){ %>
 							<input value="<%= locals.user.id %>" type="hidden" name="user_id">
 						<%}%>

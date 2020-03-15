@@ -4,11 +4,12 @@ $(document).ready(()=> {
     $('.btn-add-panier-submit').on('click', e => addToLocalPanier(e));
     $('.btn-number').click(e => changeBtnNumber(e));
 });
+const userId = $("[data-current-user-id]").data('currentUserId') || 'guest';
+
 
 const addToLocalPanier = e =>{
     e.preventDefault();
     const articleId = $(e.currentTarget).data('articleId');
-    const userId = $("[data-current-user-id]").data('currentUserId');
     let quantite = Number($(`form[data-article-id="${articleId}"] input[name=quantity]`).val());
     let prixArticle = Number($(e.currentTarget).data('articlePrix'));
     let nomArticle = $(e.currentTarget).data('articleNom');
@@ -53,7 +54,6 @@ const removeToPanier = e => {
     if (confirmation == false) return false;
 
     let articleId = $(e.currentTarget).data('articleId');
-    const userId = $("[data-current-user-id]").data('currentUserId');
     let localPanier = JSON.parse(localStorage.getItem(`localPanier-${userId}`));
 
 
@@ -77,7 +77,6 @@ const modifyArticleQuantity = e => {
     e.preventDefault();
 
     let articleId = $(e.currentTarget).data('articleId');
-    const userId = $("[data-current-user-id]").data('currentUserId');
 
     let quantite = $(`.quantite-input[data-article-id='${articleId}']`).val();
     if (quantite < 1) quantite = 1;

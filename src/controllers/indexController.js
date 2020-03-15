@@ -98,7 +98,7 @@ indexController.SaveSignup = (req, res) => { // POST : /signup
             // console.log(newUser);
             // res.redirect('/')
             res.status("200");
-            res.json({res:"OK"});
+            res.json({res:"OK",userId:newUser.id});
             
         }
     })

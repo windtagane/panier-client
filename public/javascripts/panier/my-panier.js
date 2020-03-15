@@ -3,7 +3,6 @@ $(document).ready(()=> {
 });
 
 const showPanier = () =>{
-    const userId = $("[data-current-user-id]").data('currentUserId');
     panier = (localStorage.getItem(`localPanier-${userId}`));
     data = {panier};
     $.post('/paniers/dataPanier',data, result => {
@@ -16,7 +15,7 @@ const showPanier = () =>{
 }
 
 const orderFromPanier = () => {
-    const userId = $("[data-current-user-id]").data('currentUserId');
+    if (userId == 'guest') return window.location.href = '/signup';
     localPanier = JSON.parse(localStorage.getItem(`localPanier-${userId}`));
     data = {};
     Object.keys(localPanier.articles).forEach(article =>{
