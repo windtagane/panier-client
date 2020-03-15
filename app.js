@@ -82,6 +82,17 @@ app.get('/*', function(req, res, next) {
   next();
 });
 
+/**
+ * @MidleWare
+ * CATEGORIES
+ */
+app.get('/*', async function(req, res, next) {
+  const Categorie = require('./src/models/categorie.js');
+  const categories = await Categorie.findAll({attributes:['id','nom','active'],raw:true});
+  res.locals.categories = categories;
+  next();
+});
+
 
 
 

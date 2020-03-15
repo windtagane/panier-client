@@ -2,6 +2,7 @@ $(document).ready(()=> {
     $('.delete-article-in-panier').on('click', e => removeToPanier(e));
     $('.quantite-input').on('change', e => modifyArticleQuantity(e));
     $('.btn-add-panier-submit').on('click', e => addToLocalPanier(e));
+    $('.btn-number').click(e => changeBtnNumber(e));
 });
 
 const addToLocalPanier = e =>{
@@ -92,5 +93,26 @@ const modifyArticleQuantity = e => {
     localPanier.prixTotal += prixArticle * quantite;
     $('#prix-total').text(localPanier.prixTotal);
     localStorage.setItem(`localPanier-${userId}`, JSON.stringify(localPanier)); // on enregistre dans le local storage
+
+}
+
+const changeBtnNumber = e => {
+    fieldName = $(e.currentTarget).data('field');
+    type = $(e.currentTarget).data('type');
+    const input = $(`input[data-field="${fieldName}"]`);
+    const currentVal = parseInt(input.val());
+    if (!Number(currentVal)) return input.val(1);
+
+    if(type == 'plus') {
+        if(currentVal < input.attr('max')) input.val(currentVal + 1).change();
+        if(parseInt(input.val()) == input.attr('max')) $(e.currentTarget).attr('disabled', true);
+        $(`.btn-number[data-field="${fieldName}"][data-type="minus"]`).attr('disabled', false);
+    }
+
+    if(type == 'minus') {
+        if(currentVal > input.attr('min')) input.val(currentVal - 1).change();
+        if(parseInt(input.val()) == input.attr('min')) $(e.currentTarget).attr('disabled', true);
+        $(`.btn-number[data-field="${fieldName}"][data-type="plus"]`).attr('disabled', false);
+    }
 
 }

@@ -2,7 +2,7 @@
 
 <section class="article">
   <div class="container">
-    <div class="card-deck m-3">
+    <div class="card-deck my-3">
         <% articles.forEach(function(article){ %>
           <div id="card-articles"class="col-lg-4"style="margin-top: 20px;
       margin-bottom: 20px;">
@@ -25,4 +25,8 @@
  </div>
 </section>
 
+
 <% include ../layouts/doctype_end.ejs %>
+
+<script src="/javascripts/panier/my-panier.js"></script>
+<script src="/javascripts/panier/ajax.js"></script>

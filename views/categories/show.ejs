@@ -7,27 +7,19 @@
         <!-- <div>id :<%= categorie.id %> </div>
     <div>nom : <%= categorie.nom %></div>
     <div>activé : <%= categorie.active %></div> -->
-
-    <div class="card-deck m-3">
-        <% for(let i=0; i < categorie.articles.length; i++) {%>
-                <div class="col-lg-4">
+        <% if (categorie.articles.length) { %>
+        <div class="card-deck my-3">
+            <% for(let i=0; i < categorie.articles.length; i++) {%>
+                <div class="col-lg-4 px-0">
                     <%- include('../articles/partials/cardArticles', {article: categorie.articles[i]}); %>
-                </div>
-
-            <!-- <div>
-                <div>id :<%=categorie.articles[i].id%> </div>
-                <div> nom : <%=categorie.articles[i].nom%></div>
-                <div>details : <%=categorie.articles[i].detail%></div>
-                <div>prix : <%=categorie.articles[i].prix%></div>
-                <div> image : <%=categorie.articles[i].image%> </div>
-                <br>
-            </div> -->
-                    
+                </div>              
+            <% } %>
+        </div>
+        <% } else {%>
+        <h2>Il n'y a pas d'article actuellement dans cette catégorie</h1> 
         <% } %>
-    </div>
-
     
-</div>
+    </div>
 
 <% include ../layouts/doctype_end.ejs %>
 

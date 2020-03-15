@@ -30,7 +30,10 @@
                         
                         <div class="col col-sm-4">
                             <div class="form-group m-0">
-                                <span>Quantité : <%= ligneArticle.quantite %></label>
+                                <div>Quantité : <%= ligneArticle.quantite %></div>
+                                <% if (ligneArticle.article && ligneArticle.quantite) { %>
+                                    <div>Sous-total article: <%= ligneArticle.article.prix * ligneArticle.quantite %> €</div>
+                                <% } %>
                             </div>
                         </div>
                     

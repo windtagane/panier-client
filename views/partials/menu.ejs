@@ -13,8 +13,13 @@
                 Catégorie            
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Vêtement</a>
-              <a class="dropdown-item" href="#">Bijoux</a>
+              <% if(locals.categories) { %>
+                <% categories.forEach(function(categorie){ %>
+                  <% if(categorie.active) { %>
+                    <a class="dropdown-item" href="/categories/view/<%= categorie.id %>"><%= categorie.nom %></a>
+                  <%}%>
+                <% }) %>
+              <%}%>
               <!-- <a class="dropdown-item" href="#">Autre Catégorie</a> -->
             </div>
           </li>
