@@ -134,6 +134,13 @@ paniersControlleur.update = (req, res) => { // POST : /paniers/update/:id
     })
 }
 paniersControlleur.delete = (req, res) => { // GET : /paniers/delete:id
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+
     Panier.destroy({
         where: {
             id: req.params.id

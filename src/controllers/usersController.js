@@ -50,6 +50,13 @@ usersController.update = (req, res) => { // POST : users/update/:id
     })
 }
 usersController.delete = (req, res) => { // GET : users/delete/:id
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+
     User.destroy({
         where: {
             id: req.params.id

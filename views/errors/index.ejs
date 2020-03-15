@@ -1,0 +1,10 @@
+<% include ../layouts/doctype.ejs %>
+<div class="w100 d-flex align-items-center justify-content-center flex-column" style="height: 100vh;">
+    <div class="text-center bordered">
+        <div class="display-1"><% if (error.status) { %><%= error.status %><%}else{%>404<% } %></div>
+        <div class="h1"><% if (error.message) { %><%= error.message %><%}else{%>Page Introuvable<% } %></div>
+        <a class="btn btn-success mt-4" href="/">Retour à l'accueil</a>
+    </div>
+</div>
+
+<% include ../layouts/doctype_end.ejs %>

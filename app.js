@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-// var session = require('express-session');
 const fileUpload = require('express-fileupload');
 var cookieSession = require('cookie-session')
 
@@ -42,12 +41,6 @@ app.use(function(req, res, next) {
     next();
  });
 
-// app.use(session({
-//   secret: "Your secret key",
-//   // cookie: { secure: true },
-//   resave: false,
-//   saveUninitialized: true
-// }));
 
 app.use(cookieSession({
   name: 'boutique-panier-client',
@@ -57,16 +50,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
-function checkSignIn(req, res, next){
-  if(req.session.user){
-     next();     //If session exists, proceed to page
-  } else {
-     var err = new Error("Not logged in!");
-    //  console.log(req.session.user);
-    //  next(err);  //Error, trying to access unauthorized page!
-    res.redirect('/')
-  }
-}
 
 /**
  * @MidleWare
@@ -97,13 +80,20 @@ app.get('/*', async function(req, res, next) {
 
 
 app.use('/',indexRouter);
-app.use('/admin',checkSignIn, adminRouter);
+app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
 app.use('/paniers', paniersRouter);
 app.use('/comments', commentsRouter);
 app.use('/categories', categoriesArticles);
 
+app.get('*', function(req, res) {
+  error = {status: '404',message: 'Ressource non trouvée'}
+  res.status(404).render('errors/index', {
+    title:'Ressource non trouvée',
+    error
+  });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

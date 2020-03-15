@@ -134,6 +134,13 @@ articlesController.update = async(req, res) => {
  * @url /articles/delete/:id
  */
 articlesController.delete = (req, res) => {
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+
     Article.destroy({
         where: {
             id: req.params.id
