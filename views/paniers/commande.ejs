@@ -16,15 +16,15 @@
                     <div class="row bg-white m-2 p-3 rounded ligne-panier-panel">
 
                         <div class="card-img-right col-6 col-sm-2">
-                            <img class="w-100" src="<%if (ligneArticle.article.image) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
+                            <img class="w-100" src="<%if (ligneArticle.article) { %>/uploads/<%=ligneArticle.article.image%> <%}else{%> https://via.placeholder.com/150<%}%>" alt="<%if (locals.ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%>">
                         </div>
                         
                         <div class="col-5">
                             <div class="card-title">
-                                <h5><%if (ligneArticle) { %> <%=ligneArticle.article.nom%> <%}else{%> _article.nom<%}%></h5>
+                                <h5><%if (ligneArticle.article) { %> <%=ligneArticle.article.nom%> <%}else{%>Cet article n'est plus proposé<%}%></h5>
                             </div>
                             <div class="card-text">
-                                <%if (ligneArticle) { %> <%=ligneArticle.article.prix%> €<%}else{%> _article.prix<%}%>
+                                <%if (ligneArticle.article) { %> <%=ligneArticle.article.prix%> €<%}else{%><%}%>
                             </div>
                         </div>
                         

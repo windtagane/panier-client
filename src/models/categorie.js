@@ -7,7 +7,7 @@ const Categorie = sequelize.define('categories', {
     active: {type: Sequelize.BOOLEAN(),allowNull:false},
     
 },
-    {tableName: 'categories', timestamps: false, underscored: true}
+    {tableName: 'categories', underscored: true, paranoid: true}
 );
 
 const article = require('./article.js');

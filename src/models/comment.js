@@ -8,7 +8,7 @@ const Comment = sequelize.define('commentaires', {
     description: {type: Sequelize.STRING(255),allowNull:false},
     
 },
-    {tableName: 'commentaires', timestamps: false, underscored: true}
+    {tableName: 'commentaires', underscored: true, paranoid: true}
 );
 
 const User = require('./user.js');

@@ -8,7 +8,7 @@ const Panier = sequelize.define('paniers', {
     valide: {type: Sequelize.BOOLEAN(), allowNull: false}
     
 },
-    {tableName: 'paniers', timestamps: false, underscored: true}
+    {tableName: 'paniers', underscored: true, paranoid: true}
 );
 
 const User = require('./user.js');
