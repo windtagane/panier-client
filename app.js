@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 var cookieSession = require('cookie-session')
 
+require("dotenv").config();
+
 var indexRouter = require('./src/routes/indexRoute');
 var adminRouter = require('./src/routes/adminRoute');
 var usersRouter = require('./src/routes/usersRoute');
