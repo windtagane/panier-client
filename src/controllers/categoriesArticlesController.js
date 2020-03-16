@@ -97,6 +97,13 @@ categoriesArticlesController.update = (req, res) => {
  * @url /categories/delete/:id
  */
 categoriesArticlesController.delete = (req, res) => {
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+    
     Categorie.destroy({
         where: {
             id: req.params.id

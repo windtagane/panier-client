@@ -25,24 +25,55 @@ paniersControlleur.list = (req, res) => { // GET : /paniers
   //  })
 }
 
-paniersControlleur.show = async(req, res) => { // GET /paniers/:id
-    if (!req.session.user.id || !req.params.id) return res.redirect('/');
-    
-    panier = await Panier.findOne({
-        where: {id: req.params.id,utilisateurs_id: req.session.user.id},
-        include:[{
-            model: LignePanier,
-            include:[{
-                model:Article
-            }]
-        }]
-    })
-    // console.log(panier)
-
+paniersControlleur.myPanier = async(req, res) => {
     res.render('paniers/index',{
-        panier: panier,
         title: "Mon panier"
     })
+}
+
+paniersControlleur.dataPanier = async(req,res)=>{
+    if (req.body.panier) panier = JSON.parse(req.body.panier);
+    if (!req.body.panier) panier = null;
+
+    const ejs = require('ejs');
+    const viewPanier = require('../../views/paniers/data.js').data;
+
+    const compiled = ejs.compile(viewPanier);
+    const html = compiled({panier});
+    res.send(Buffer.from(html,'utf8')); // SEND DATA HTML 
+}
+
+paniersControlleur.confirmation = async(req,res) => {
+    articles = JSON.parse(req.body.panier);
+    let panierPrixTotal = 0;
+
+    panier = await Panier.create({
+        prixTotal: panierPrixTotal, 
+        utilisateurs_id: req.session.user.id,
+        valide:1});
+
+    Object.keys(articles).forEach(async key => {
+        let articleId = articles[key].id;
+        let articleQuantite = articles[key].quantite;
+
+        let article = await Article.findOne({
+            where: {id:articleId}});
+        if (!article || articleQuantite < 1) return res.json({res: "KO",message: "Données invalide"})
+
+        await LignePanier.create({
+            articles_id: articleId,
+            paniers_id: await panier.id,
+            quantite: articleQuantite});
+
+        panierPrixTotal += Number(article.prix) * Number(articleQuantite);
+
+        await Panier.update({ prixTotal: panierPrixTotal }, {
+            where: {
+              id: panier.id
+            }});
+    });
+
+    res.json({res:'OK',message:'Commande éffectuée'});
 }
 
 paniersControlleur.create = async (req, res) => { // POST : /paniers/create
@@ -70,14 +101,12 @@ paniersControlleur.create = async (req, res) => { // POST : /paniers/create
         }
     });
 
-    const lignePanier = await LignePanier.create({
+    await LignePanier.create({
         articles_id: req.body.article_id,
         paniers_id: await panier.id,
         quantite: req.body.quantite});
     
-    
     res.status("200");
-    req.session.user.paniers[0] = panier;
     res.json({res:'OK',panier_id:panier.id});
 
 }
@@ -86,7 +115,6 @@ paniersControlleur.edit = (req, res) => { // GET : /paniers/edit/:id
         where: {id: req.params.id}
 
     }).then(panier => {
-        // console.log(user)
             res.render('panier/_editForm',{
                 panier: panier
             })
@@ -106,6 +134,13 @@ paniersControlleur.update = (req, res) => { // POST : /paniers/update/:id
     })
 }
 paniersControlleur.delete = (req, res) => { // GET : /paniers/delete:id
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+
     Panier.destroy({
         where: {
             id: req.params.id
@@ -182,9 +217,43 @@ paniersControlleur.editArticleQuantity = async(req,res) => {// POST : /paniers/:
         }
     });
 
-
-
     res.json({res:"OK",message:"La quantité à été mise a jour",newTotal})
 }
+paniersControlleur.commandes = async(req,res) => { // GET /paniers/commandes
+    commandes = await Panier.findAll({
+        where: {utilisateurs_id: req.session.user.id},
+        include:[{
+            model: LignePanier,
+            include:[{
+                model:Article
+            }]
+        }]
+    });
+
+    res.render('paniers/commandes',{
+        commandes: commandes,
+        title: "Mes commande"
+    });
+}
+
+paniersControlleur.commande = async(req,res) => { // GET /paniers/commandes/:id
+    commande = await Panier.findOne({
+        where: {id: req.params.id,utilisateurs_id: req.session.user.id},
+        include:[{
+            model: LignePanier,
+            include:[{
+                model:Article
+            }]
+        }]
+    });
+
+    if (!commande) res.redirect('/');
+    
+    res.render('paniers/commande',{
+        commande: commande,
+        title: "Ma commande"
+    });
+}
+
 
 module.exports = paniersControlleur;

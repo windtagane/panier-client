@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-// var session = require('express-session');
 const fileUpload = require('express-fileupload');
 var cookieSession = require('cookie-session')
 
@@ -17,6 +16,7 @@ var articlesRouter = require('./src/routes/articlesRoute');
 var commentsRouter = require('./src/routes/commentsRoute');
 var paniersRouter = require('./src/routes/paniersRoute');
 var categoriesArticles = require('./src/routes/categoriesArticlesRoute');
+const paginate = require('express-paginate');
 
 var app = express();
 
@@ -36,13 +36,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(paginate.middleware(6, 50));
+app.use(function(req, res, next) {
+    res.locals.query = req.query;
+    res.locals.page   = req.originalUrl.split('page=')[1];
+    next();
+ });
 
-// app.use(session({
-//   secret: "Your secret key",
-//   // cookie: { secure: true },
-//   resave: false,
-//   saveUninitialized: true
-// }));
 
 app.use(cookieSession({
   name: 'boutique-panier-client',
@@ -52,16 +52,6 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 
-function checkSignIn(req, res, next){
-  if(req.session.user){
-     next();     //If session exists, proceed to page
-  } else {
-     var err = new Error("Not logged in!");
-    //  console.log(req.session.user);
-    //  next(err);  //Error, trying to access unauthorized page!
-    res.redirect('/')
-  }
-}
 
 /**
  * @MidleWare
@@ -73,8 +63,18 @@ app.get('/*', function(req, res, next) {
     res.locals.user.nom = req.session.user.prenom; // nom de l'utilisateur connecté (dans le menu) accessible pour toutes les vues
     res.locals.user.role = req.session.user.role;
     res.locals.user.id = req.session.user.id;
-    res.locals.user.panier = req.session.user.paniers[0]; // le panier en cours, non validé
   }
+  next();
+});
+
+/**
+ * @MidleWare
+ * CATEGORIES
+ */
+app.get('/*', async function(req, res, next) {
+  const Categorie = require('./src/models/categorie.js');
+  const categories = await Categorie.findAll({attributes:['id','nom','active'],raw:true});
+  res.locals.categories = categories;
   next();
 });
 
@@ -82,13 +82,20 @@ app.get('/*', function(req, res, next) {
 
 
 app.use('/',indexRouter);
-app.use('/admin',checkSignIn, adminRouter);
+app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
 app.use('/articles', articlesRouter);
 app.use('/paniers', paniersRouter);
 app.use('/comments', commentsRouter);
 app.use('/categories', categoriesArticles);
 
+app.get('*', function(req, res) {
+  error = {status: '404',message: 'Ressource non trouvée'}
+  res.status(404).render('errors/index', {
+    title:'Ressource non trouvée',
+    error
+  });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -111,15 +118,11 @@ app.post('/uploads', function (req, res) {
 
 
 });
-app.use(fileUpload({
-  limits: {
-    fileSize: 50 * 1024 * 1024
-  },
-}));
-app.use(fileUpload({
-  useTempFiles: true,
-  tempFileDir: 'C:\tmp' //dossier temporaire
-}));
+// app.use(fileUpload({
+//   limits: {
+//     fileSize: 50 * 1024 * 1024
+//   },
+// }));
 
 
 

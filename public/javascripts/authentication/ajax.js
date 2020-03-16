@@ -19,7 +19,7 @@ const login = e => {
 }
 
 const signup = e => {
-    e.preventDefault();
+    e.preventDefault(); 
     if ($('#signup-form').parsley().validate() !== true) return false
     let data = {}
     $('#signup-form input').each((i,el)=>{
@@ -30,7 +30,15 @@ const signup = e => {
     $.post('/signup', data, result => {
         if (result.res === 'KO') return alert(result.message);
 
-        if (result.res === 'OK') window.location.href = '/';
+        if (result.res === 'OK'){
+            if (localStorage.getItem('localPanier-guest')) {
+                guestPanier = localStorage.getItem('localPanier-guest');
+                localStorage.setItem(`localPanier-${result.userId}`, guestPanier);
+                localStorage.removeItem('localPanier-guest');
+                return window.location.href = '/paniers/mon-panier';
+            }
+            window.location.href = '/';
+        } 
     })
 
 }
