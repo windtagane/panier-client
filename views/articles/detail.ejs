@@ -36,7 +36,10 @@
                                         <% if (commentaire.utilisateur.id == user.id ) { %> <% } %>
                                         <%= commentaire.description %>
                                         <% if (commentaire.utilisateur.id == user.id || user.role == 1 ) { %> 
-                                            <button class="btn btn-sm btn-warning"><i class="far fa-edit"></i>Editer</button>
+                                            <a href="/articles/comments/edit/<%= commentaire.id %>" type="button" class="btn btn-sm btn-warning"><i class="far fa-edit"></i>Editer</a>
+                                            <a href="/articles/comments/delete/<%= commentaire.id %>" type="button" class="btn btn-sm btn-danger"><i class="fas fa-times-circle"></i></a>
+
+                                            
                                         <% } %>
                                         
                                     </div>

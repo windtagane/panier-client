@@ -165,6 +165,12 @@ articlesController.delete = (req, res) => {
     })
 }
 
+
+
+
+
+
+///////////////////////////////////////////////////
 articlesController.addComment = async (req,res) => {
     await Comment.create({
         description: req.body.nouveau_comentaire,
@@ -173,5 +179,51 @@ articlesController.addComment = async (req,res) => {
     });
     res.redirect(`/articles/detail/${req.params.id}`)
 }
+
+articlesController.editComment = (req, res) => {
+    Comment.findOne({
+        where: {id: req.params.id}
+
+    })
+    .then(article => {
+        console.log(article)
+        res.render('articles/edit_comment',{
+            title: "Modifier un commentaire",
+            article: article
+        })
+    })
+}
+
+
+articlesController.updateComment  = async(req, res) => {
+    await Comment.findOne({
+        where: {id: req.params.id}});
+
+    updateComment = {
+        description: req.body.nouveau_comentaire,
+       
+    };
+    
+    await Comment.update(updateComment, {
+        where:{
+            id:req.params.id
+        }
+    });
+
+    res.redirect(`/articles/detail/${req.params.id}`)
+    
+}
+
+articlesController.deleteComment = (req, res) => {
+    Comment.destroy({
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        res.redirect(`/articles/detail/${req.params.id}`)
+    })
+}
+/////////////////////////////////////////////////////
+
 
 module.exports = articlesController;
