@@ -22,6 +22,7 @@ $(document).ready(function() {
     }
 
     function listUsers() {
+        if (getUrlVars()["tab"] !== "users") history.replaceState('', 'Users', '/admin?tab=users'); // (@data , @title of page, @new route)
         $.get('users/jsonList', function(users) {
             if (users.data) {
             let tableHead = `
@@ -65,6 +66,7 @@ $(document).ready(function() {
     }
 
     function listCategories() {
+        if (getUrlVars()["tab"] !== "categories") history.replaceState('', 'Categories', '/admin?tab=categories'); // (@data , @title of page, @new route)
         $.get('categories/jsonList', function(categories) {
             if (categories.data) {
             let tableHead = `
@@ -102,6 +104,7 @@ $(document).ready(function() {
     }
 
     function listArticles() {
+        if (getUrlVars()["tab"] !== "articles") history.replaceState('', 'Articles', '/admin?tab=articles'); // (@data , @title of page, @new route)
         $.get('articles/jsonList', function(articles) {
             if (articles.data) {
             let tableHead = `
@@ -156,6 +159,21 @@ $(document).ready(function() {
         let btn = '<a href="/articles/add" target="blank_" class="btn btn-success">Ajouter un article</a>';
         $('#panel-add').html(btn);
     };
-
+    
+    
+    
     init();
+    if (tab == "articles") $('#admin-btn-articles').click();
+    if (tab == "users") $('#admin-btn-users').click();
+    if (tab == "categories") $('#admin-btn-categories').click();
+
 });
+const tab = getUrlVars()["tab"];
+
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}

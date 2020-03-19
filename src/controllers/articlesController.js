@@ -78,7 +78,7 @@ articlesController.create = async(req, res) => {
         image : sampleFile.name,
     });
 
-    res.redirect('/articles');
+    res.redirect('/admin?tab=articles');
 }
 
 /**
@@ -125,7 +125,7 @@ articlesController.update = async(req, res) => {
         }
     });
 
-    res.redirect('/articles')
+    res.redirect('/admin?tab=articles')
     
 }
 
@@ -146,7 +146,7 @@ articlesController.delete = (req, res) => {
             id: req.params.id
         }
     }).then(() => {
-        res.redirect('/articles')
+        res.redirect('/admin?tab=articles')
     })
 }
 
