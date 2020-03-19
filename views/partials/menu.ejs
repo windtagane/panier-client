@@ -23,13 +23,18 @@
               <!-- <a class="dropdown-item" href="#">Autre Catégorie</a> -->
             </div>
           </li>
-          <% if(locals.user.panier) { %> 
-            <li class="nav-item">
-                <a href="/paniers/<%=locals.user.panier.id%>" class="nav-link mon-panier-link">Mon panier</a>
-            </li>
-          <%}%>
+          
           <li class="nav-item">
-            <a href="/paniers/mon-panier" class="nav-link mon-panier-link">Mon panier</a>
+            <a href="/paniers/mon-panier" class="nav-link mon-panier-link mr-2">Mon panier
+              <div class="position-relative float-right">
+                <span class="fas h3  m-0 fa-shopping-cart"></span>
+                
+                <span id="panier-badge" class="badge badge-danger position-absolute"></span>
+
+              </div>
+
+              
+            </a>
           </li>
           
           <li class="nav-item">

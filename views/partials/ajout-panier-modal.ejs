@@ -1,0 +1,93 @@
+<style>
+    #right-panier-modal .modal-dialog{
+        margin: unset;
+        position: absolute;
+        right: -1px;
+        top: -2px;
+        bottom: 0;
+    }
+    #right-panier-modal .modal-content{
+        min-height: 100%;
+        width: 100vw;
+    }
+    #right-panier-modal .modal-header{
+        width: 100vw;
+        max-width: 500px;
+    }
+
+
+    .fade .modal-dialog {
+        transition: transform .5s ease-out !important;
+        transform: translate(100%, 0) !important;
+        opacity: 1;
+    }
+
+    .modal.show .modal-dialog{
+        transform: translate(0, 0) !important;
+        opacity: 1;
+    }
+
+
+
+    #right-panier-modal .panel-prix-total{
+        position: initial;
+        right: 0;
+        margin: 1px !important;
+        padding-bottom: 0 !important;
+        top: initial;
+        padding: 0 !important;
+        max-width: 500px;
+  }
+
+  #right-panier-modal .display-prix-modal{
+        position: -webkit-sticky!important;
+        position: sticky;
+        bottom: 0;
+        padding: 0;
+  }
+
+  #right-panier-modal .panel-liste-articles{
+      padding-bottom: 100px;
+      max-width: 500px;
+      min-height: 100vh;
+      min-width: 500px;
+    }
+    
+    #right-panier-modal .border-secondary{
+      border-color: #cecece!important;
+    }
+
+  #right-panier-modal .button-delete{
+      position: initial;
+  }
+  #right-panier-modal .order-btn{
+      width: 100%;
+      border-radius: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    #right-panier-modal .panel-liste-articles{
+      min-width: unset;
+    }
+  }
+</style>
+
+
+
+
+
+  <div class="modal fade" id="right-panier-modal" tabindex="-1" role="dialog" aria-labelledby="right-panier-modal-label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="right-panier-modal-label">Mon panier</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body px-0 pb-0">
+            <div id="panier-modal-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
