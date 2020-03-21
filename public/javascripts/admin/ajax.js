@@ -5,9 +5,11 @@ $(document).ready(function() {
         let btnCategories = $('#admin-btn-categories');
         let btnArticles = $('#admin-btn-articles');
 
+
         btnUsers.on('click', function() {
             addUsers();
             listUsers();
+
         })
 
         btnCategories.on('click', function() {
@@ -19,6 +21,8 @@ $(document).ready(function() {
             addArticles();
             listArticles();
         })
+
+        $('#v-pills-home-tab').on('click', () => history.replaceState('', 'Admin', '/admin'))// (@data , @title of page, @new route)
     }
 
     function listUsers() {
@@ -26,7 +30,7 @@ $(document).ready(function() {
         $.get('users/jsonList', function(users) {
             if (users.data) {
             let tableHead = `
-            <table class="table table-striped">
+            <table class="table table-responsive table-striped">
             <thead>
             <tr>
             <th scope="col">#</th>
@@ -44,13 +48,13 @@ $(document).ready(function() {
             users.data.forEach((user, index) => {
                 let row = `
                 <tr>
-                    <th scope="row">${index + 1}</th>
+                    <td scope="row">${index + 1}</td>
                     <td>${user.nom}</td>
                     <td>${user.prenom}</td>
                     <td>${user.email}</td>
                     <td>${user.adresse}</td>
                     <td>${user.telephone}</td>
-                    <td>
+                    <td class="col">
                         <a href="users/edit/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Edit</a>
                         <a href="users/delete/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Delete</a>
                     </td>
@@ -59,8 +63,10 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
+            tableResponsiveTitle();
             }
             if (users.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns utilisateurs n\'a été trouvé');
+
         })
 
     }
@@ -70,7 +76,7 @@ $(document).ready(function() {
         $.get('categories/jsonList', function(categories) {
             if (categories.data) {
             let tableHead = `
-            <table class="table table-striped">
+            <table class="table table-responsive table-striped">
             <thead>
             <tr>
             <th scope="col">#</th>
@@ -85,10 +91,10 @@ $(document).ready(function() {
             categories.data.forEach((categorie, index) => {
                 let row = `
                 <tr>
-                    <th scope="row">${index + 1}</th>
+                    <td scope="row">${index + 1}</td>
                     <td>${categorie.nom}</td>
                     <td>${categorie.active}</td>
-                    <td>
+                    <td class="col">
                         <a href="categories/edit/${categorie.id}" target="blank_" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
                         <a href="categories/delete/${categorie.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
                     </td>
@@ -97,6 +103,7 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
+            tableResponsiveTitle();
             }
 
             if (categories.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucunes categories n\'a été trouvé');
@@ -108,7 +115,7 @@ $(document).ready(function() {
         $.get('articles/jsonList', function(articles) {
             if (articles.data) {
             let tableHead = `
-            <table class="table table-striped">
+            <table class="table table-responsive table-striped">
             <thead>
             <tr>
             <th scope="col">#</th>
@@ -126,13 +133,13 @@ $(document).ready(function() {
             articles.data.forEach((article, index) => {
                 let row = `
                 <tr>
-                    <th scope="row">${index + 1}</th>
+                    <td scope="row">${index + 1}</td>
                     <td>${article.nom}</td>
                     <td>${article.detail}</td>
                     <td>${article.prix}</td>
                     <td>${article.image}</td>
                     <td>${article.categories_id}</td>
-                    <td>
+                    <td class="col">
                         <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
                         <a href="articles/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
                     </td>
@@ -141,6 +148,7 @@ $(document).ready(function() {
             });
             let datatable = tableHead + rows + tableEnd;
             $('#data-display').html(datatable);
+            tableResponsiveTitle();
             }
             if (articles.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns articles n\'a été trouvé');
             
@@ -163,9 +171,12 @@ $(document).ready(function() {
     
     
     init();
+    
     if (tab == "articles") $('#admin-btn-articles').click();
     if (tab == "users") $('#admin-btn-users').click();
     if (tab == "categories") $('#admin-btn-categories').click();
+    tableResponsiveTitle()
+    getStats()
 
 });
 const tab = getUrlVars()["tab"];
@@ -176,4 +187,22 @@ function getUrlVars() {
         vars[key] = value;
     });
     return vars;
+}
+
+function tableResponsiveTitle() {
+
+    $('.table-responsive').each( (i,table) => {
+        let labels = Array.from($(table).find('th')).map( th => $(th).text());
+        $(table).find('td').each( (i, td) => $(td).attr('data-label', labels[i % labels.length]))
+    })
+}
+
+function getStats(){
+    $.get('/admin/stats', (stats) => {
+        console.log(stats);
+        $(".nb-articles").text(stats.nbArticles);
+        $(".nb-users").text(stats.nbUsers);
+        $(".nb-commandes").text(stats.nbCommandes);
+        $(".sum-all-commandes").text(stats.sumAllCommandes.toFixed(2) + ' €');
+    })
 }

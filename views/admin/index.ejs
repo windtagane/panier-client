@@ -1,19 +1,107 @@
 <% include ../layouts/doctype.ejs %>
 
-<div class="d-flex justify-content-around m-3">
-    <div class="btn-group">
-        <button class="btn btn-primary" id="admin-btn-users">Users</button>
-        <button class="btn btn-primary" id="admin-btn-categories">Catégories</button>
-        <button class="btn btn-primary" id="admin-btn-articles">Articles</button>
-    </div>
-    <div id="panel-add" class="">
-        <button disabled="disabled" class="btn btn-success btn-disabled">Ajouter</button>
+<div id="admin-container" class="container-fluid p-0">
+    <div class="row no-gutters">
+        <div class="col-sm-2 bg-dark vertical-admin-bar-container">
+            <div class="nav flex-sm-column nav-pills pt-2 pt-sm-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a title="Accueil" class="nav-link text-light" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-home"></i><span class="d-none d-md-inline ml-2">Accueil</span></a>
+                <a title="Utilisateurs" class="nav-item nav-link text-light" id="admin-btn-users" data-toggle="pill" href="#v-pills-sections" role="tab" aria-controls="v-pills-sections" aria-selected="false"><i class="fas fa-users"></i><span class="d-none d-md-inline ml-2">Utilisateurs</span></a>
+                <a title="Catégories" class="nav-item nav-link text-light" id="admin-btn-categories" data-toggle="pill" href="#v-pills-sections" role="tab" aria-controls="v-pills-sections" aria-selected="false"><i class="fas fa-th-large"></i><span class="d-none d-md-inline ml-2">Catégories</span></a>
+                <a title="Articles" class="nav-item nav-link text-light" id="admin-btn-articles" data-toggle="pill" href="#v-pills-sections" role="tab" aria-controls="v-pills-sections" aria-selected="false"><i class="fas fa-tshirt"></i><span class="d-none d-md-inline ml-2">Articles</span></a>
+            </div>
+                
+        </div>
+        <div id="vertical-admin-content" class="col-sm-10 bg-white pt-1">
+
+            
+            <div class="tab-pane fade active show" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                
+                <div class="jumbotron">
+                    <h1 id="hour-display" class="display-3"></h1>
+                    <p class="lead text-center">Bievenue <%=user.nom%></p>
+                    <hr class="my-2">
+                    
+                    <div class="container">
+                        <p class="h2">Statistiques :</p>
+        
+                        <div class="row">
+                            <div class="col-md-4 pb-4">
+                                <div class="card bg-light text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Articles</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-text nb-articles">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4  pb-4">
+                                <div class="card bg-light text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Utilisateurs</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-text nb-users">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4  pb-4">
+                                <div class="card bg-light text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Commandes passées</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-text nb-commandes">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4  pb-4">
+                                <div class="card bg-light text-center">
+                                    <div class="card-header">
+                                        <h6 class="card-title">Somme des commandes</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <h3 class="card-text sum-all-commandes">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            
+                            
+                           
+                            
+                        </div>
+                        
+                        
+                        
+                    </div>
+
+                    <div class="container mt-4">
+                        <p class="lead text-right">
+                            <a class="btn btn-primary btn-lg" href="/" role="button">Retour à l'accueil</a>
+                        </p>
+                        
+                    </div>
+                </div>
+                
+
+
+
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-sections" role="tabpanel" aria-labelledby="v-pills-sections-tab">
+                <div class="d-flex justify-content-center p-3">
+                    <div id="panel-add" class="">
+                        <button disabled="disabled" class="btn btn-success btn-disabled">Ajouter</button>
+                    </div>
+                </div>
+                <div id="data-display"></div>
+            </div>
+
+        </div>
     </div>
 </div>
-
-<div id="panel-add" class="d-flex justify-content-center m-2"></div>
-
-<div id="data-display"></div>
 
 
 <% include ../layouts/doctype_end.ejs %>
