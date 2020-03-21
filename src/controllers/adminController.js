@@ -31,18 +31,6 @@ adminController.stats = async(req, res) => {
     stats.sumAllCommandes = await Panier.sum('prixTotal');
 
     res.json(stats);
-
-
-
-
-
-
-    console.log(stats)
-
-    res.render('admin/index', {
-        title: "Administation"
-    })
-
 }
 
 module.exports = adminController;
