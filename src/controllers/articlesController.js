@@ -175,7 +175,10 @@ articlesController.delete = async(req, res) => {
             where: {image: imageName.image},raw:true});
 
         if (imageTimesUsed == 1) { // Si il est utiliser une fois on peut le supprimer
-            fs.unlink(`public/uploads/${imageName.image}`, (err) => {if (err) throw err});
+            fs.exists(`public/uploads/${imageName.image}`,(exists)=> {
+                if (exists) fs.unlink(`public/uploads/${imageName.image}`, (err) => {if (err) throw err});
+            })
+            
         }
     }
 
