@@ -201,7 +201,8 @@ articlesController.updateComment  = async(req, res) => {
 
     updateComment = {
         description: req.body.nouveau_comentaire,
-       
+        
+   
     };
     
     await Comment.update(updateComment, {
@@ -209,8 +210,8 @@ articlesController.updateComment  = async(req, res) => {
             id:req.params.id
         }
     });
-
-    res.redirect(`/articles/detail/${req.params.id}`)
+console.log(req.params.id)  
+  res.redirect(`/articles/detail/${req.params.id}`)
     
 }
 
