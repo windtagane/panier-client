@@ -1,20 +1,36 @@
-const sequelize = require('../database.js').sequelize;
-const Sequelize = require('sequelize');
+const sequelize = require("../database.js").sequelize;
+const Sequelize = require("sequelize");
 
-const LignePanier = sequelize.define('articles_has_paniers', {
-    id: {type: Sequelize.INTEGER, autoIncrement:true, primaryKey:true },
-    quantite: {type: Sequelize.INTEGER,allowNull:false},
-    articles_id: {type: Sequelize.INTEGER,allowNull:false},
-    paniers_id: {type: Sequelize.INTEGER,allowNull:false}
-
-    
-},
-    {tableName: 'articles_has_paniers', timestamps: false, underscored: true}
+const LignePanier = sequelize.define(
+	"articles_has_paniers",
+	{
+		id: {
+			type: Sequelize.INTEGER,
+			autoIncrement: true,
+			primaryKey: true
+		},
+		quantite: {
+			type: Sequelize.INTEGER,
+			allowNull: false
+		},
+		articles_id: {
+			type: Sequelize.INTEGER,
+			allowNull: false
+		},
+		paniers_id: {
+			type: Sequelize.INTEGER,
+			allowNull: false
+		}
+	},
+    { 
+        tableName: "articles_has_paniers", 
+        timestamps: false, 
+        underscored: true 
+    }
 );
 
-const Panier = require('./panier.js');
-const Article = require('./article.js');
-
+const Panier = require("./panier.js");
+const Article = require("./article.js");
 
 // LignePanier.belongsTo(Panier,{foreignKey: 'paniers_id'}); // 1 ligne de panier appartien à un Panier.
 // Panier.hasMany(LignePanier, {foreignKey: 'paniers_id'});// Une panier peut avoir plusieur lignes panier.
