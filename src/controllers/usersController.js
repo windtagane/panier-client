@@ -62,7 +62,7 @@ usersController.delete = (req, res) => { // GET : users/delete/:id
             id: req.params.id
         }
     }).then(() => {
-        res.redirect('/')
+        res.redirect('/admin?tab=users')
     })
 }
 

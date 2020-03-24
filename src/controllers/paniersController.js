@@ -37,8 +37,9 @@ paniersControlleur.dataPanier = async(req,res)=>{
 
     const ejs = require('ejs');
     const viewPanier = require('../../views/paniers/data.js').data;
+    const modalPanier = require('../../views/paniers/dataModal.js').data;
 
-    const compiled = ejs.compile(viewPanier);
+    const compiled = ejs.compile(req.body.modal == 'true' ? modalPanier : viewPanier);
     const html = compiled({panier});
     res.send(Buffer.from(html,'utf8')); // SEND DATA HTML 
 }

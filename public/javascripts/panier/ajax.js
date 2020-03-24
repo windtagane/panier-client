@@ -3,6 +3,7 @@ $(document).ready(()=> {
     $('.quantite-input').on('change', e => modifyArticleQuantity(e));
     $('.btn-add-panier-submit').on('click', e => addToLocalPanier(e));
     $('.btn-number').click(e => changeBtnNumber(e));
+    
 });
 const userId = $("[data-current-user-id]").data('currentUserId') || 'guest';
 
@@ -37,6 +38,8 @@ const addToLocalPanier = e =>{
     localPanier.articles[articleId] = article;
     localPanier.prixTotal += prixArticle * quantite;
     localStorage.setItem(`localPanier-${userId}`, JSON.stringify(localPanier)); // on enregistre dans le local storage
+    showPanier(true);
+    $('#right-panier-modal').modal();
 }
 
 function Article(id, quantite, prix, nom, image) {
@@ -64,9 +67,8 @@ const removeToPanier = e => {
 
     $(`.ligne-panier-panel[data-article-id="${articleId}"]`).hide('slow',function(){$(this).remove()});
     $('#prix-total').text(localPanier.prixTotal);
-
-    console.log(localPanier.articles);
-    console.log(Object.keys(localPanier.articles).length)
+    
+    $('#panier-badge').text($('#panier-badge').text() - 1) 
     if (!Object.keys(localPanier.articles).length){
         localStorage.removeItem(`localPanier-${userId}`);
         $('#panier').html('<h2 class="col">Le panier est vide</h2>');

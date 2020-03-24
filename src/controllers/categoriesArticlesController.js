@@ -53,7 +53,7 @@ categoriesArticlesController.create = (req, res) => {
     Categorie.create({
         nom: req.body.nom_categorie,
         active: req.body.active_categorie,
-    }).then(res.redirect('/categories'))
+    }).then(res.redirect('/admin?tab=categories'))
 }
 
 /**
@@ -87,7 +87,7 @@ categoriesArticlesController.update = (req, res) => {
                 where:{
                     id:req.params.id
                 }
-            }).then(res.redirect('/categories'))
+            }).then(res.redirect('/admin?tab=categories'))
         })
 
 }
@@ -109,7 +109,7 @@ categoriesArticlesController.delete = (req, res) => {
             id: req.params.id
         }
     }).then(() => {
-        res.redirect('/categories')
+        res.redirect('/admin?tab=categories')
     })
 }
 
