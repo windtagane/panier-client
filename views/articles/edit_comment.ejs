@@ -7,9 +7,9 @@
         
 
             <div class="col-12 mt-4">
-                <form action="/articles/comments/update/<%= article.id %>" method="POST">
+                <form action="/articles/comments/update/<%= comment.id %>/<%=article.id %>" method="POST">
                     <span class="h5">Modifier votre commentaire :</span>
-                    <textarea name="nouveau_comentaire" value="<%= article.description %>"id="nouveau-comentaire" placeholder="<%= article.description %>" rows="5" class="w-100"></textarea>
+                    <textarea name="nouveau_comentaire" value="<%= comment.description %>"id="nouveau-comentaire" placeholder="<%= comment.description %>" rows="5" class="w-100"></textarea>
                     <div class="text-right">
                         <button type="submit" class="btn btn-sm btn-warning"><i class="far fa-edit"></i>Editer</button>
 

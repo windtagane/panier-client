@@ -46,7 +46,7 @@ router.post('/comments/:id', controller.addComment);
  * @param - id: number
  * Affiche le commentaire à modifier sur article
  */
-router.get('/comments/edit/:id', controller.editComment);
+router.get('/comments/edit/:idcomment/:idarticle', controller.editComment);
 
 /**
  * @request POST
@@ -54,7 +54,7 @@ router.get('/comments/edit/:id', controller.editComment);
  * @param - id: number
  * Modifie le commentaire à selectionner sur article
  */
- router.post('/comments/update/:id', controller.updateComment);
+ router.post('/comments/update/:idcomment/:idarticle', controller.updateComment);
 
 
 /**
@@ -63,7 +63,7 @@ router.get('/comments/edit/:id', controller.editComment);
  * @param - id: number
  * Supprime un commantaire grâce à son id
  */
-router.get('/comments/delete/:id', controller.deleteComment);
+router.get('/comments/delete/:idcomment/:idarticle', controller.deleteComment);
 
 
 

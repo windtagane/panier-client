@@ -182,22 +182,26 @@ articlesController.addComment = async (req,res) => {
 
 articlesController.editComment = (req, res) => {
     Comment.findOne({
-        where: {id: req.params.id}
+        where: {id: req.params.idcomment}
 
     })
-    .then(article => {
-        console.log(article)
+    .then(comment => {
+        console.log(comment.id)
         res.render('articles/edit_comment',{
             title: "Modifier un commentaire",
-            article: article
+            comment: comment,
+            idarticle:req.params.idarticle
         })
     })
 }
 
 
 articlesController.updateComment  = async(req, res) => {
+    
+    console.log(req.params.idcomment);
     await Comment.findOne({
-        where: {id: req.params.id}});
+        
+        where: {id: req.params.idcomment}});
 
     updateComment = {
         description: req.body.nouveau_comentaire,
@@ -207,21 +211,21 @@ articlesController.updateComment  = async(req, res) => {
     
     await Comment.update(updateComment, {
         where:{
-            id:req.params.id
+            id:req.params.idcomment
         }
     });
-console.log(req.params.id)  
-  res.redirect(`/articles/detail/${req.params.id}`)
+console.log(req.params.idarticle)  
+  res.redirect(`/articles/detail/${req.params.idarticle}`)
     
 }
 
 articlesController.deleteComment = (req, res) => {
     Comment.destroy({
         where: {
-            id: req.params.id
+            id: req.params.idcomment
         }
     }).then(() => {
-        res.redirect(`/articles/detail/${req.params.id}`)
+        res.redirect(`/articles/detail/${req.params.idarticle}`)
     })
 }
 /////////////////////////////////////////////////////
