@@ -1,7 +1,7 @@
 <div data-article-id="<%= article.id %>" class="card text-center m-2 article-card">
 
 	<h4 class="card-header">
-		<a data-article-id="<%= article.id %>" href="#" class="text-dark"><%= article.nom %></a>
+		<a data-article-id="<%= article.id %>" href="/articles/detail/<%= article.id %>" class="text-dark"><%= article.nom %></a>
 	</h4>
 	<a href="">
 		<img class="card-img-top" src="/uploads/<%= article.image %>" alt="<%= article.image %>" class="card-img-top"
