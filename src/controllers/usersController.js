@@ -27,26 +27,30 @@ usersController.edit = (req, res) => { // GET : /users/edit/:id
     }).then(user => {
     // console.log(user)
         res.render('users/_editForm',{
-            user: user
+            user: user,
+            title: 'Modifier un utilisateur'
         })
     })
 }
 usersController.update = (req, res) => { // POST : users/update/:id
+    console.log(req.body)
     User.findOne({
         where: {id: req.params.id}
     }).then(user => {
+        
         User.update({
             nom: req.body.nom_user,
             prenom: req.body.prenom_user,
             adresse: req.body.adresse_user,
             email: req.body.email_user,
             password: req.body.passord_user,
-            telephone: req.body.telephone_user
+            telephone: req.body.telephone_user,
+            role: req.body.role_user
         }, {
             where:{
                 id:req.params.id
             }
-        }).then(res.redirect('/'))
+        }).then(res.redirect('/admin?tab=users'))
     })
 }
 usersController.delete = (req, res) => { // GET : users/delete/:id

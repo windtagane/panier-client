@@ -45,6 +45,8 @@ $(document).ready(function() {
             <tbody>`
             let tableEnd = `</tbody></table>`
             let rows = "";
+            const currentUserId = $('[data-current-user-id]').data('currentUserId')
+
             users.data.forEach((user, index) => {
                 let row = `
                 <tr>
@@ -55,8 +57,8 @@ $(document).ready(function() {
                     <td>${user.adresse}</td>
                     <td>${user.telephone}</td>
                     <td class="col">
-                        <a href="users/edit/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Edit</a>
-                        <a href="users/delete/${user.id}" target="blank_" class="btn btn-primary btn-sm" data-id="${user.id}">Delete</a>
+                        <a href="/users/edit/${user.id}" class="btn btn-primary btn-sm" data-id="${user.id}">Edit</a>
+                        ${currentUserId != user.id ? `<a href="/users/delete/${user.id}"  class="btn btn-primary btn-sm" data-id="${user.id}">Delete</a>` : ``}
                     </td>
                 </tr>`
                 rows += row;
@@ -95,8 +97,8 @@ $(document).ready(function() {
                     <td>${categorie.nom}</td>
                     <td>${categorie.active}</td>
                     <td class="col">
-                        <a href="categories/edit/${categorie.id}" target="blank_" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
-                        <a href="categories/delete/${categorie.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
+                        <a href="/categories/edit/${categorie.id}" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
+                        <a href="/categories/delete/${categorie.id}" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
                     </td>
                 </tr>`
                 rows += row;
@@ -140,8 +142,8 @@ $(document).ready(function() {
                     <td>${article.image}</td>
                     <td>${article.categories_id}</td>
                     <td class="col">
-                        <a href="articles/edit/${article.id}" target="blank_" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
-                        <a href="articles/delete/${article.id}" target="blank_" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
+                        <a href="/articles/edit/${article.id}" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
+                        <a href="/articles/delete/${article.id}" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
                     </td>
                 </tr>`
                 rows += row;
