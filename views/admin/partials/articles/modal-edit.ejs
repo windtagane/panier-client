@@ -1,4 +1,4 @@
-<div id="modal-edit-articles" style="display: none;">
+<div class="modal" id="modal-edit-articles" style="display: none;">
 	<div>
 		<label for="nom-article">Nom de l'article</label>
 		<input value="" type="text" name="nom_article" id="nom-article" />
@@ -17,10 +17,13 @@
 	</div>
 	<div>
 		<label for="categorie-article">Catégorie de l'article</label>
-		<select name="categorie_article" id="categorie-article"> </select>
+		<select name="categorie_article" id="categorie-article">
+			<option value="" disabled selected>Veuillez choisir une catégorie</option>
+		</select>
 	</div>
 
 	<div>
-		<button type="submit">Modifier</button>
+		<button class="btn btn-success" id="btn-edit-article">Modifier</button>
+		<button class="btn btn-secondary" id="btn-cancel-edit-article">Annuler</button>
 	</div>
 </div>

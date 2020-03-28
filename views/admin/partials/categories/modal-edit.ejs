@@ -1,14 +1,36 @@
-<div id="modal-edit-categories" style="display: none;">
-	<div>
-		<label for="nom-categorie">Nom de la categorie :</label>
-		<input value="" type="text" name="nom_categorie" id="nom-categorie" />
-	</div>
-	<div>
-		<label for="active-categorie">Status :</label>
-		<select name="active_categorie" id="active-categorie"> </select>
+<div class="modal" id="modal-edit-categories" style="display: none;">
+	<div class="modal-dialog" role="document">
 
-		<div>
-			<button type="submit">Modifier</button>
+	  	<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="">Ajouter une catégorie</h5>
+				<button type="button" class="close btn-cancel-edit-categorie" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">
+				<input type="number" name="categorie_id" id="categorie_id_edit" hidden>
+				<form id="form-edit-categorie" method="POST" action="">
+					<div class="form-group">
+						<label for="nom-categorie">Nom de la categorie :</label>
+						<input type="text" class="form-control" name="nom_categorie" id="nom-categorie" />
+					</div>
+					<div class="form-group">
+						<label for="active-categorie">Statut :</label>
+						<select name="active_categorie" class="form-control" id="active-categorie">
+							<option value="0">Inactif</option>
+							<option value="1">Actif</option>
+						</select>
+					</div>
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary btn-cancel-edit-categorie" data-dismiss="modal">Close</button>
+				<button type="button" id="btn-edit-categorie" class="btn btn-primary">Save changes</button>
+			</div>
+
 		</div>
 	</div>
 </div>

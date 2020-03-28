@@ -104,10 +104,14 @@
 </div>
 
 
-<% include ../layouts/doctype_end.ejs %>
-<script src="javascripts/admin/ajax.js"></script>
-
-<!-- <% include partials/articles/modal-create.ejs %>
+<% include partials/articles/modal-create.ejs %>
 <% include partials/articles/modal-edit.ejs %>
+<% include partials/articles/modal-delete.ejs %>
 <% include partials/categories/modal-create.ejs %>
-<% include partials/categories/modal-edit.ejs %> -->
+<% include partials/categories/modal-edit.ejs %>
+<% include partials/categories/modal-delete.ejs %>
+<% include partials/alerts/success.ejs %>
+<% include partials/alerts/error.ejs %>
+
+<% include ../layouts/doctype_end.ejs %>
+<script type="module" src="javascripts/admin/AdminPanelAjax.js"></script>

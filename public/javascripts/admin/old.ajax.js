@@ -12,11 +12,30 @@ $(document).ready(function() {
 
         })
 
+        //$("#btn-edit-user").on("click", function() {})
+
         btnCategories.on('click', function() {
             addCategories();
             listCategories();
         })
 
+        $("#btn-show-create-categorie").on("click", function() {
+         
+        });
+        $("#btn-cancel-create-categorie").on("click", function() { });
+        $("#btn-create-categorie").on("click", function() { });
+
+        $("#btn-show-edit-categorie").on("click", function() {
+            console.log("okoko")
+            $("#modal-create-categories").show();
+        });
+        $("#btn-cancel-edit-categorie").on("click", function() { });
+        $("#btn-edit-categorie").on("click", function() { });
+
+        $("#btn-show-delete-categorie").on("click", function() { });
+        $("#btn-cancel-delete-categorie").on("click", function() { });
+        $("#btn-delete-categorie").on("click", function() { });
+        
         btnArticles.on('click', function() {
             addArticles();
             listArticles();
@@ -58,6 +77,7 @@ $(document).ready(function() {
                     <td>${user.telephone}</td>
                     <td class="col">
                         <a href="/users/edit/${user.id}" class="btn btn-primary btn-sm" data-id="${user.id}">Edit</a>
+                        <button class="btn btn-primary btn-sm" id="btn-show-edit-categorie" data-id="${user.id}">Modifier</button>
                         ${currentUserId != user.id ? `<a href="/users/delete/${user.id}"  class="btn btn-primary btn-sm" data-id="${user.id}">Delete</a>` : ``}
                     </td>
                 </tr>`
@@ -97,6 +117,7 @@ $(document).ready(function() {
                     <td>${categorie.nom}</td>
                     <td>${categorie.active}</td>
                     <td class="col">
+                        <button class="btn btn-primary btn-sm" id="btn-show-edit-categorie" data-id="${categorie.id}">Modifier</button>
                         <a href="/categories/edit/${categorie.id}" class="btn btn-info btn-sm" data-id="${categorie.id}">Edit</a>
                         <a href="/categories/delete/${categorie.id}" class="btn btn-danger btn-sm" data-id="${categorie.id}">Delete</a>
                     </td>

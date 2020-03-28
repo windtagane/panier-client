@@ -78,9 +78,6 @@ app.get('/*', async function(req, res, next) {
   next();
 });
 
-
-
-
 app.use('/',indexRouter);
 app.use('/admin', adminRouter);
 app.use('/users', usersRouter);
