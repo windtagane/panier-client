@@ -1,0 +1,23 @@
+<% include ../layouts/doctype.ejs %>
+<div class="container">
+    <section class="article mt-5">
+        
+        <div class="row">
+            
+        
+
+            <div class="col-12 mt-4">
+                <form action="/articles/comments/update/<%= comment.id %>/<%=article.id %>" method="POST">
+                    <span class="h5">Modifier votre commentaire :</span>
+                    <textarea name="nouveau_comentaire" value="<%= comment.description %>"id="nouveau-comentaire" placeholder="<%= comment.description %>" rows="5" class="w-100"></textarea>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-sm btn-warning"><i class="far fa-edit"></i>Editer</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+
+<% include ../layouts/doctype_end.ejs %>

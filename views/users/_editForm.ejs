@@ -1,0 +1,48 @@
+<% include ../layouts/doctype.ejs %>
+
+<div class="card bg-light mb-3 mx-auto mt-5" style="max-width: 18rem;">
+    <div class="card-header">
+        Modifier un utilisateur
+    </div>
+    <div class="card-body">
+<form action="/users/update/<%= user.id %>" method="POST">
+    <div class="form-group">
+        <label for="nom-user">Nom  :</label>
+        <input value="<%= user.nom %>" class="form-control" type="text" name="nom_user" id="nom-user">
+        
+    </div>
+    <div class="form-group">
+        <label for="prenom-user">Prénom  :</label>
+        <input value="<%= user.prenom %>" class="form-control" type="text" name="prenom_user" id="prenom-user">
+        
+    </div>
+    <div class="form-group">
+        <label for="adresse-user">Adresse  :</label>
+        <input value="<%= user.adresse %>" class="form-control" type="text" name="adresse_user" id="adresse-user">
+        
+    </div>
+    <div class="form-group">
+        <label for="email-user">Email  :</label>
+        <input value="<%= user.email %>" class="form-control" type="text" name="email_user" id="email-user">
+        
+    </div>
+    <div class="form-group">
+        <label for="telephone-user">Téléphone  :</label>
+        <input value="<%= user.telephone %>" class="form-control" type="text" name="telephone_user" id="telephone-user">
+        
+    </div>
+    <div class="form-group">
+        <label for="role-user">Role :</label>
+        <select name="role_user" class="form-control" id="role-user">
+            <option <% if (user.role == 0) { %> selected <% } %> value="0">Utilisateur</option>
+            <option <% if (user.role == 1) { %> selected <% } %> value="1">Administrateur</option>
+        </select>
+
+        <div class="card-footer bg-transparent border-success justify-content-center d-flex">
+            <button type="submit" class="btn btn-success">Modifier</button>
+        </div>
+    </div>
+</form>
+</div>
+
+<% include ../layouts/doctype_end.ejs %>
