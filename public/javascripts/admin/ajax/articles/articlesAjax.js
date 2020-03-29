@@ -2,13 +2,16 @@ export default class Article {
 
     init() {
         let me = this;
-        console.log("new Article loaded")
         
         let btnArticles = $('#admin-btn-articles');
         let btnCreateArticle = $('#btn-create-article');
         let btnShowCreateArticle = $('#btn-show-create-article');
         let btnCancelCreateArticle = $('.btn-cancel-create-article');
-        
+        let btnShowEditArticle = $('.btn-show-edit-article');
+        let btnCancelEdit = $('.btn-cancel-edit-article');
+        let btnCancelDelete = $('.btn-cancel-delete-article');
+        let btnDelete = $("#btn-delete-article");
+                
         btnArticles.on('click', function() {
             me.add();
             me.list();
@@ -20,6 +23,22 @@ export default class Article {
 
         btnCancelCreateArticle.on("click", function() {
             me.cancelCreate();
+        })
+
+        btnShowEditArticle.on("click", function() {
+            me.showEdit($(this).data("id")); 
+        })
+
+        btnCancelEdit.on("click", function() {
+            me.cancelEdit();
+        })
+        
+        btnCancelDelete.on("click", function() {
+            me.cancelDelete();
+        })
+
+        btnDelete.on("click", function() {
+            me.delete();
         })
         
     }
@@ -39,6 +58,7 @@ export default class Article {
     showCreate() {
         let me = this;
         $('#modal-create-articles').show();
+        me.beforeCreate();
         
     }
 
@@ -49,18 +69,122 @@ export default class Article {
     beforeCreate() {
         let me = this;
         //TODO : récup les differentes catégories
+        $.get("categories/jsonList", function(result) {
+            let categories = result.data;
+
+            let categoriesOptions = "";
+            categories.forEach(categorie => {
+                categoriesOptions += `<option value="${categorie.id}">${categorie.nom}</option>`;
+            })
+
+            $("#select-categories").html(categoriesOptions);
+
+        })
     }
 
-    create() {
+/*     create() {
         let me = this;
-        me.beforeCreate();
-        console.log("create !")
-        let form = $("form-create-article");
-
+        let form = $("#form-create-article");
+        console.log(form.serializeArray());
+        console.log($("#image-article").val());
         $.post("/articles/create", form.serialize(), function(result) {
+            console.log("create !")
             console.log(result);
         })
         
+    }
+ */
+
+    cancelEdit() {
+        let me = this;
+        $('#form-edit-article')[0].reset();
+        $('#modal-edit-articles').hide();
+    }
+   
+    beforeEdit() {
+
+    }
+    
+    showEdit(id) {
+        let me = this;
+        console.log("showEdit()")
+        $("#modal-edit-articles").show();
+        me.beforeEdit(id);
+    }
+
+    beforeEdit(id) {
+        let me = this;
+        if (id) {
+
+            $.get("categories/jsonList", function(result) {
+                let categories = result.data;
+    
+                let categoriesOptions = "";
+                categories.forEach(categorie => {
+                    categoriesOptions += `<option value="${categorie.id}">${categorie.nom}</option>`;
+                })
+                
+                $("#select-categories-edit").html(categoriesOptions);
+    
+            })
+            
+            $.get(`/articles/view/${id}/json`, function(result) {
+                if (result.success) {
+
+                    console.log(result);
+                    $("#form-edit-article").attr("action", `/articles/update/${result.data.id}`);
+                    $("#form-edit-article").find("input[name=nom_article]").val(result.data.nom);
+                    $("#form-edit-article").find("input[name=detail_article]").val(result.data.detail);
+                    $("#form-edit-article").find("input[name=prix_article]").val(result.data.prix);
+                    $("#select-categories-edit").val(result.data.categories_id);
+
+                    /* let optionValue;
+                    if (result.data.active == true) {let optionValue = 1};
+                    if (result.data.active == false) {let optionValue = 2};
+                    $("#active-categorie").val(optionValue); */
+                }
+            })
+        }
+    }
+
+    delete() {
+        let me = this;
+        let articleID = $("#article_id").val();
+        
+        $.post(`/articles/delete/${articleID}/json`, function(result) {
+            if (result.success) {
+                me.validAlert();
+                me.list();
+            }
+            if (result.success == false) {
+                me.errorAlert();
+            }
+
+        })
+    }
+
+    beforeDelete(id) {
+        let me = this;
+        if (id) {
+            $.get(`/articles/view/${id}/json`, function(result) {
+                if (result.success) {
+                    $("#article_id").val(result.data.id);
+                    $("#article_nom").val(result.data.nom);
+                    $("#article_nom_delete").html(`<strong>${result.data.nom}</strong>`);
+                }
+            })
+        }
+    }
+    
+    showDelete(id) {
+        let me = this;
+        $("#modal-delete-articles").show();
+        me.beforeDelete(id);
+    }
+
+    cancelDelete() {
+        let me = this;
+        $('#modal-delete-articles').hide();
     }
 
     list() {
@@ -95,8 +219,8 @@ export default class Article {
                     <td>${article.image}</td>
                     <td>${article.categories_id}</td>
                     <td class="col">
-                        <a href="/articles/edit/${article.id}" class="btn btn-info btn-sm" data-id="${article.id}">Edit</a>
-                        <a href="/articles/delete/${article.id}" class="btn btn-danger btn-sm" data-id="${article.id}">Delete</a>
+                    <button class="btn btn-primary btn-sm btn-show-edit-article" data-id="${article.id}">Modifier</button>
+                    <button class="btn btn-danger btn-sm btn-show-delete-article" data-id="${article.id}">Supprimer</button>
                     </td>
                 </tr>`
                 rows += row;
@@ -106,10 +230,35 @@ export default class Article {
             me.tableResponsiveTitle();
             }
             if (articles.data == 0) $('#data-display').html('<span class="d-flex justify-content-center">Aucuns articles n\'a été trouvé');
-            console.log("done listArticles()");
+            
+            $('.btn-show-edit-article').on("click", function() {
+                me.showEdit($(this).data("id"));
+            })
+
+            $('.btn-show-delete-article').on("click", function() {
+                me.showDelete($(this).data("id"));
+            })
+            
         })
     }
 
+    validAlert() {
+        let me = this;
+        me.cancelCreate();
+        me.cancelEdit();
+        me.cancelDelete();
+        $("alert-success").show().alert();
+    }
+
+    errorAlert() {
+        let me = this;
+        me.cancelCreate();
+        me.cancelEdit();
+        me.cancelDelete();
+        $("alert-failure").show('5000', function() {
+            this.hide();
+        })
+    }
     
     //____________________________FAIRE UN TRUC MIEUX
     getUrlVars() {

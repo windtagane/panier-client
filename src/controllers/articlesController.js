@@ -112,7 +112,14 @@ articlesController.create = async(req, res) => {
         // image: req.body.image_article,
         categories_id: Number(req.body.categorie_article),
         image : fileName,
-    });
+    })
+    /* .then(res.json({"success": true}))
+    .catch((err) => {
+        res.json({
+            "success": false,
+            "message": err
+        })
+    }) */
 
     res.redirect('/admin?tab=articles');
 }
@@ -205,13 +212,81 @@ articlesController.delete = async(req, res) => {
     }
 
     await Article.destroy({
-        where: {id: req.params.id}})
-
+        where: {id: req.params.id}
+    })
+    
     res.redirect('/admin?tab=articles')
     
 }
 
+articlesController.jsonView = async(req,res) => {
 
+    article = await Article.findOne({
+        where: {id: req.params.id}
+    }).then((articles) => {
+        res.json({
+            "success": true,
+            "data": articles
+         })
+    })
+    .catch((err) => {
+        res.json({
+            "sucess": false,
+            "error": err
+        })
+    })       
+   /*  if (!article) return res.redirect('/admin');
+
+    res.render('articles/detail', {
+        title: `${article.nom}, details`,
+        article
+    }) */
+}
+
+
+/**
+ * @method POST
+ * @url /categories/delete/:id/json
+ */
+articlesController.jsonDelete = async(req, res) => {
+    if (!req.session.user || req.session.user.role !== 1) {
+        error = {status: '403',message: 'Permission non accordée'}
+        return res.status(403).render('errors/index', {
+            title:'Permission non accordée'
+        });
+    }
+
+    imageName = await Article.findOne({ // imageName.image == imageFilename
+        where: {id: req.params.id},
+        attributes:['image'],raw:true});
+
+    if (imageName){
+        imageTimesUsed = await Article.count({ // recherche le nombre de fois que l'image est utilisé par un article
+            where: {image: imageName.image},raw:true});
+
+        if (imageTimesUsed == 1) { // Si il est utiliser une fois on peut le supprimer
+            fs.exists(`public/uploads/${imageName.image}`,(exists)=> {
+                if (exists) fs.unlink(`public/uploads/${imageName.image}`, (err) => {if (err) throw err});
+            })
+            
+        }
+    }
+
+    await Article.destroy({
+        where: {id: req.params.id}
+    })
+    .then(
+        res.json({
+            "success": true,
+        })
+    )
+    .catch((err) => {
+        res.json({
+            "success": false,
+            "error": err
+        })
+    });
+}
 
 
 

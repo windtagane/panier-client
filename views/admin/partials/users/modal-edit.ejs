@@ -1,0 +1,59 @@
+<div class="modal" id="modal-edit-users" style="display: none;">
+	<div class="modal-dialog" role="document">
+
+	  	<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="">Modifier une catégorie</h5>
+				<button type="button" class="close btn-cancel-edit-user" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="modal-body">
+				<input type="number" name="user_id" id="user_id_edit" hidden>
+				<form id="form-edit-user" method="POST" action="">
+					
+					<div class="form-group">
+						<label for="nom-user">Nom  :</label>
+						<input value="<%= user.nom %>" class="form-control" type="text" name="nom_user" id="nom-user">
+						
+					</div>
+					<div class="form-group">
+						<label for="prenom-user">Prénom  :</label>
+						<input value="<%= user.prenom %>" class="form-control" type="text" name="prenom_user" id="prenom-user">
+						
+					</div>
+					<div class="form-group">
+						<label for="adresse-user">Adresse  :</label>
+						<input value="<%= user.adresse %>" class="form-control" type="text" name="adresse_user" id="adresse-user">
+						
+					</div>
+					<div class="form-group">
+						<label for="email-user">Email  :</label>
+						<input value="<%= user.email %>" class="form-control" type="text" name="email_user" id="email-user">
+						
+					</div>
+					<div class="form-group">
+						<label for="telephone-user">Téléphone  :</label>
+						<input value="<%= user.telephone %>" class="form-control" type="text" name="telephone_user" id="telephone-user">
+						
+					</div>
+				<!-- 	<div class="form-group">
+						<label for="role-user">Role :</label>
+						<select name="role_user" class="form-control" id="role-user">
+						</select>
+					</div> -->
+
+					<input type="number" name="role_user" id="role_user" hidden>
+					
+				</form>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" id="btn-edit-user" class="btn btn-primary">Modifier</button>
+				<button type="button" class="btn btn-secondary btn-cancel-edit-user" data-dismiss="modal">Annuler</button>
+			</div>
+
+		</div>
+	</div>
+</div>

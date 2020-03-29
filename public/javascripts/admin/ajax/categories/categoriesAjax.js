@@ -1,4 +1,5 @@
 export default class Categorie {
+    
     init() {
         let me = this;
         console.log("new Categorie loaded")
@@ -114,11 +115,11 @@ export default class Categorie {
         
         $.post("/categories/update/" + categorieID, form.serialize(), function(result) {
             if (result.success) {
-                me.validCreate();
+                me.validAlert();
                 me.list();
             }
             if (result.success == false) {
-                me.errorCreate();
+                me.errorAlert();
             }
 
         })
@@ -218,7 +219,7 @@ export default class Categorie {
         })
     }
 
-    validCreate() {
+    validAlert() {
         let me = this;
         me.cancelCreate();
         me.cancelEdit();
@@ -226,7 +227,7 @@ export default class Categorie {
         $("alert-success").show().alert();
     }
 
-    errorCreate() {
+    errorAlert() {
         let me = this;
         me.cancelCreate();
         me.cancelEdit();
@@ -235,7 +236,9 @@ export default class Categorie {
             this.hide();
         })
     }
-    
+
+
+    //____________________________FAIRE UN TRUC MIEUX
     getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {

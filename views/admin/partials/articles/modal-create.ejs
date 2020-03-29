@@ -9,38 +9,38 @@
 			</button>
 		  </div>
 		  
+		  <form id="form-create-article" method="POST" action="/articles/create" enctype="multipart/form-data">
 		  <div class="modal-body">
-			<form id="form-create-article" method="POST" action="" enctype="multipart/form-data">
 				<div class="form-group">
 					<label for="nom-article">Nom de l'article</label>
 					<input type="text" name="nom_article" class="form-control" id="nom-article" required/>
 				</div>
 				<div class="form-group">
-					<label for="detail-article">detail de l'article</label>
+					<label for="detail-article">Détails sur l'article</label>
 					<input type="text" name="detail_article" class="form-control" id="detail-article" required/>
 				</div>
 				<div class="form-group"> 
-					<label for="prix-article">prix de l'article</label>
-					<input type="number" name="prix_article" class="form-control" id="prix-article" required/>
+					<label for="prix-article">Prix de l'article</label>
+					<input type="number" name="prix_article" class="form-control" id="prix-article" min="0" required/>
 				</div>
 	
 				<div class="form-group">
-					<label for="categorie-article">categorie de l'article</label>
+					<label for="categorie-article">Catégorie de l'article</label>
 					<select name="categorie_article" class="form-control" id="select-categories" required>
 					</select>
 				</div>
 			
 				<div class="form-group">
-					<label for="categorie-article">Image</label>
-					<input type="file"  name="image_article" class="form-control-file" id="image-article" required>
+					<label for="categorie-article">Image de l'article</label>
+					<input type="file" name="image_article" class="form-control-file" id="image-article" required>
 				</div>
-			</form>
-		</div>
-
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-secondary btn-cancel-create-article">Annuler</button>
-			<button type="button" id="btn-create-article" class="btn btn-primary">Créer</button>
-		  </div>
+			</div>
+			
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary btn-cancel-create-article">Annuler</button>
+				<button type="submit" id="btn-create-article" class="btn btn-primary">Créer</button>
+			</div>
+		</form>
 		  
 		</div>
 	  </div>

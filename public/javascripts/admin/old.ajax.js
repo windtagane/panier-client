@@ -12,29 +12,10 @@ $(document).ready(function() {
 
         })
 
-        //$("#btn-edit-user").on("click", function() {})
-
         btnCategories.on('click', function() {
             addCategories();
             listCategories();
         })
-
-        $("#btn-show-create-categorie").on("click", function() {
-         
-        });
-        $("#btn-cancel-create-categorie").on("click", function() { });
-        $("#btn-create-categorie").on("click", function() { });
-
-        $("#btn-show-edit-categorie").on("click", function() {
-            console.log("okoko")
-            $("#modal-create-categories").show();
-        });
-        $("#btn-cancel-edit-categorie").on("click", function() { });
-        $("#btn-edit-categorie").on("click", function() { });
-
-        $("#btn-show-delete-categorie").on("click", function() { });
-        $("#btn-cancel-delete-categorie").on("click", function() { });
-        $("#btn-delete-categorie").on("click", function() { });
         
         btnArticles.on('click', function() {
             addArticles();
