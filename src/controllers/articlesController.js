@@ -108,7 +108,7 @@ articlesController.create = async(req, res) => {
     await Article.create({
         nom: req.body.nom_article,
         detail: req.body.detail_article,
-        prix: req.body.prix_article,
+        prix: Math.abs(req.body.prix_article), // valeur absolue (-9 => 9, 9 => 9)
         // image: req.body.image_article,
         categories_id: Number(req.body.categorie_article),
         image : fileName,
@@ -152,7 +152,7 @@ articlesController.update = async(req, res) => {
     updatedArticle = {
         nom: req.body.nom_article,
         detail: req.body.detail_article,
-        prix: req.body.prix_article,
+        prix: Math.abs(req.body.prix_article), // valeur absolue (-9 => 9, 9 => 9)
         categories_id: req.body.categorie_article
     };
 
