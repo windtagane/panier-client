@@ -1,9 +1,6 @@
 node_modules
 /src/env.database.js
-./config
-./migrations
-./models
+/config
+/migrations
+/models
 .env
-
-
-### https://stackoverflow.com/questions/3833561/why-doesnt-git-ignore-my-specified-file/3833675
