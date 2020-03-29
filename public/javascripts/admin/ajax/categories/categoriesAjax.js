@@ -70,11 +70,11 @@ export default class Categorie {
         
         $.post("/categories/create", form.serialize(), function(result) {
             if (result.success) {
-                me.validCreate();
+                me.validAlert();
                 me.list();
             }
             if (result.success == false) {
-                me.errorCreate();
+                me.errorAlert();
             }
 
         })
@@ -136,11 +136,11 @@ export default class Categorie {
         
         $.post(`/categories/delete/${categorieID}/json`, function(result) {
             if (result.success) {
-                me.validCreate();
+                me.validAlert();
                 me.list();
             }
             if (result.success == false) {
-                me.errorCreate();
+                me.errorAlert();
             }
 
         })

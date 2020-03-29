@@ -3,3 +3,7 @@ node_modules
 ./config
 ./migrations
 ./models
+.env
+
+
+### https://stackoverflow.com/questions/3833561/why-doesnt-git-ignore-my-specified-file/3833675

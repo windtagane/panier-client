@@ -1,4 +1,6 @@
 const categoriesArticlesController = {};
+const validator = require('validator');
+
 const Categorie = require('../models/categorie.js');
 const Article = require('../models/article.js');
 
@@ -51,7 +53,7 @@ categoriesArticlesController.add = (req, res) => {
 categoriesArticlesController.create = (req, res) => {
     // console.log(req.body)
     Categorie.create({
-        nom: req.body.nom_categorie,
+        nom: validator.escape(req.body.nom_categorie),
         active: req.body.active_categorie,
     }).then(res.json({"success": true}))
     .catch((err) => {
@@ -87,7 +89,7 @@ categoriesArticlesController.update = (req, res) => {
         where: {id: req.params.id}
         }).then(categorie => {
             Categorie.update({
-                nom: req.body.nom_categorie,
+                nom: validator.escape(req.body.nom_categorie),
                 active: req.body.active_categorie
             }, {
                 where:{

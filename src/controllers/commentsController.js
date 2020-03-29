@@ -1,4 +1,6 @@
 const commentsController = {};
+const validator = require('validator');
+
 const Comment = require('../models/comment.js');
 const Article = require('../models/article.js');
 
@@ -16,7 +18,7 @@ commentsController.list = (req, res) => { // GET : /comments/article/:id
 }
 commentsController.create = (req, res) => { // POST : /comments/article/:id/create
     Comment.create({
-        description: req.body.description_comment,
+        description: validator.escape(req.body.description_comment),
         utilisateurs_id: req.body.user_comment,
         article_id: req.body.article_comment
     }).then(res.redirect('/'))
@@ -37,7 +39,7 @@ commentsController.update = (req, res) => { // POST : /comments/update/:id
         where: {id: req.params.id}
     }).then(comment => {
         Comment.update({
-            description: req.body.description_comment,
+            description: validator.escape(req.body.description_comment),
             utilisateurs_id: req.body.user_comment,
             articleComment_id: req.body.article_comment
         }, {

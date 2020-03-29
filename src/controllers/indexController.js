@@ -1,4 +1,6 @@
 const indexController = {};
+const validator = require('validator');
+
 const User = require('../models/user.js');
 const Panier = require('../models/panier.js');
 
@@ -84,10 +86,10 @@ indexController.SaveSignup = (req, res) => { // POST : /signup
         if (!user){
             let salt = bcrypt.genSaltSync(10);
             const newUser = await User.create({
-                nom: req.body.nom_user,
-                prenom: req.body.prenom_user,
-                adresse: req.body.adresse_user,
-                email: req.body.email_user,
+                nom: validator.escape(req.body.nom_user),
+                prenom: validator.escape(req.body.prenom_user),
+                adresse: validator.escape(req.body.adresse_user),
+                email: validator.normalizeEmail(req.body.email_user),
                 password: bcrypt.hashSync(req.body.passord_user, salt),
                 telephone: req.body.telephone_user,
                 salt: salt,

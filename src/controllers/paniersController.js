@@ -1,4 +1,5 @@
 const paniersControlleur = {};
+const validator = require('validator');
 
 const Panier = require('../models/panier.js');
 const LignePanier = require('../models/articles_has_paniers.js');

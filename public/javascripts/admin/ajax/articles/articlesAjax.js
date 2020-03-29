@@ -17,9 +17,9 @@ export default class Article {
             me.list();
         })
 
-        btnCreateArticle.on("click", function() {
+      /*   btnCreateArticle.on("click", function() {
             me.create();
-        })
+        }) */
 
         btnCancelCreateArticle.on("click", function() {
             me.cancelCreate();

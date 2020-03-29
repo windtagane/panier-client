@@ -1,4 +1,6 @@
 const articlesController = {};
+const validator = require('validator');
+
 const paginate = require('express-paginate');
 const Article = require('../models/article.js');
 const Comment = require('../models/comment.js');
@@ -7,7 +9,6 @@ const mainDir = __dirname;
 const path = require('path');
 const sharp = require('sharp');
 var fs = require('fs');
-
 
 /**
  * @method GET
@@ -93,8 +94,8 @@ articlesController.create = async(req, res) => {
     let uploadedFile = req.files.image_article; // nom du champ image
 
     // il faut que le dossier upload existe... ;)
-    await uploadedFile.mv('public/uploads/'+uploadedFile.name, err => {if (err) return res.status(500).send(err)});
-    fileName = path.parse(uploadedFile.name).name + ".jpg"; // remplace l'extension originale par .jpg
+    await uploadedFile.mv('public/uploads/'+validator.escape(uploadedFile.name), err => {if (err) return res.status(500).send(err)});
+    fileName = path.parse(validator.escape(uploadedFile.name)).name + ".jpg"; // remplace l'extension originale par .jpg
 
     file = await sharp(uploadedFile.data) // resize si hauteur plus haut que 400 et converti en jpg
         .resize({
@@ -106,8 +107,8 @@ articlesController.create = async(req, res) => {
         .toFile(`public/uploads/${fileName}`);
 
     await Article.create({
-        nom: req.body.nom_article,
-        detail: req.body.detail_article,
+        nom: validator.escape(req.body.nom_article),
+        detail: validator.escape(req.body.detail_article),
         prix: Math.abs(req.body.prix_article), // valeur absolue (-9 => 9, 9 => 9)
         // image: req.body.image_article,
         categories_id: Number(req.body.categorie_article),
@@ -150,15 +151,15 @@ articlesController.update = async(req, res) => {
         where: {id: req.params.id}});
 
     updatedArticle = {
-        nom: req.body.nom_article,
-        detail: req.body.detail_article,
+        nom: validator.escape(req.body.nom_article),
+        detail: validator.escape(req.body.detail_article),
         prix: Math.abs(req.body.prix_article), // valeur absolue (-9 => 9, 9 => 9)
         categories_id: req.body.categorie_article
     };
 
     if (req.files){
         let uploadedFile = req.files.image_article;
-        await uploadedFile.mv('public/uploads/'+uploadedFile.name, err => {if (err) return res.status(500).send(err)});
+        await uploadedFile.mv('public/uploads/'+validator.escape(uploadedFile.name), err => {if (err) return res.status(500).send(err)});
         
         fileName = path.parse(uploadedFile.name).name + ".jpg"; // remplace l'extension originale par .jpg
         file = await sharp(uploadedFile.data) 
@@ -294,7 +295,7 @@ articlesController.jsonDelete = async(req, res) => {
 ///////////////////////////////////////////////////
 articlesController.addComment = async (req,res) => {
     await Comment.create({
-        description: req.body.nouveau_comentaire,
+        description: validator.escape(req.body.nouveau_comentaire),
         utilisateurs_id: req.session.user.id,
         articles_id: req.params.id
     });
@@ -325,7 +326,7 @@ articlesController.updateComment  = async(req, res) => {
         where: {id: req.params.idcomment}});
 
     updateComment = {
-        description: req.body.nouveau_comentaire,
+        description: validator.escape(req.body.nouveau_comentaire),
         
    
     };

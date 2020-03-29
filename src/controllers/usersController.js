@@ -1,4 +1,5 @@
 const usersController = {};
+const validator = require('validator');
 
 const User = require('../models/user.js');
 
@@ -14,10 +15,10 @@ usersController.list = (req, res) => {
 // POST : /users/create
 usersController.create = (req, res) => { 
     User.create({
-        nom: req.body.nom_user,
-        prenom: req.body.prenom_user,
-        adresse: req.body.adresse_user,
-        email: req.body.email_user,
+        nom: validator.escape(req.body.nom_user),
+        prenom: validator.escape(req.body.prenom_user),
+        adresse: validator.escape(req.body.adresse_user),
+        email: validator.normalizeEmail(req.body.email_user),
         password: req.body.passord_user,
         telephone: req.body.telephone_user
     }).then(res.redirect('/'))
@@ -43,10 +44,10 @@ usersController.update = (req, res) => {
     }).then(user => {
         
         User.update({
-            nom: req.body.nom_user,
-            prenom: req.body.prenom_user,
-            adresse: req.body.adresse_user,
-            email: req.body.email_user,
+            nom: validator.escape(req.body.nom_user),
+            prenom: validator.escape(req.body.prenom_user),
+            adresse: validator.escape(req.body.adresse_user),
+            email: validator.normalizeEmail(req.body.email_user),
             password: req.body.passord_user,
             telephone: req.body.telephone_user,
             role: req.body.role_user
